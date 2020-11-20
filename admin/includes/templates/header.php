@@ -7,13 +7,13 @@
         <meta name="author" content="zakaria azaraf">
         <title>Admin Zakaria</title>
         <!-- The bootstrap fraemwork -->
-        <link rel="stylesheet" href="layout/css/libs/bootstrap.min.css">
+        <link rel="stylesheet" href="<?php echo $css ?>libs/bootstrap.min.css">
         <!-- The font Awesome librery -->
-        <link rel="stylesheet" href="layout/css/all.min.css">
+        <link rel="stylesheet" href="<?php echo $css ?>all.min.css">
         <!-- The Normalize Css File -->
-        <link rel="stylesheet" href="layout/css/libs/normalize.css">
+        <link rel="stylesheet" href="<?php echo $css ?>libs/normalize.css">
         <!-- Main Css File -->
-        <link rel="stylesheet" href="layout/css/custom/main.css">
+        <link rel="stylesheet" href="<?php echo $css ?>custom/main.css">
 
 
     </head>
