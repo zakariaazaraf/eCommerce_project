@@ -1,4 +1,4 @@
-/* $(function(){ // JQUERY FUNCTION WHISH REMOVES PLACEHOLDER TEXT ON FOCUS
+$(function(){ // JQUERY FUNCTION WHISH REMOVES PLACEHOLDER TEXT ON FOCUS
 
     $('[placeholder]').focus(function(){
 
@@ -11,12 +11,12 @@
         $(this).attr('placeholder', $(this).attr('data-text'));
 
     });
-}); */
+});
 
 
 
 
-// SAME FUNCTION BUT WITH VANILA JS
+/* // SAME FUNCTION BUT WITH VANILA JS
 
 const inputs = document.querySelector('.login .form-control')
 
@@ -38,4 +38,4 @@ inputs.addEventListener('blur', (e) =>{
 
     e.target.setAttribute('placeholder', inputValue);
 
-})
+}) */
