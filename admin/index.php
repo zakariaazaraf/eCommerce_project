@@ -12,12 +12,20 @@
     // Include The Header From Template Include
     include $template . "header.php";
 
-    echo "<h2>Lang Test " . lang('GREETING') . "</h2>";
 
 ?>
 
-<div class="btn btn-dark btn-inline">buttoon test</div>
-<i class="fa fa-home fa-2x"></i>
+<form class="login">
+
+    <h3 class="text-center">Login To Forum</h3>
+
+    <input class="form-control" type="text" name="username" placeholder="Username" autocomplate="off" />
+
+    <input class="form-control" type="password" name="password" placeholder="Password" autocomplate="new-password"/> 
+
+    <input class="btn btn-primary btn-block"type="submit" value="Login"/>
+
+</form>
 
 
 

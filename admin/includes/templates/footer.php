@@ -1,5 +1,5 @@
 
-        <h1>Test the header and footer include method</h1>
+        
 
         <!-- Jquery library-->
         <script src="<?php echo $js ?>libs/jquery.js"></script>

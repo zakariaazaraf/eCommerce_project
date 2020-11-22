@@ -13,7 +13,8 @@
         <!-- The Normalize Css File -->
         <link rel="stylesheet" href="<?php echo $css ?>libs/normalize.css">
         <!-- Main Css File -->
-        <link rel="stylesheet" href="<?php echo $css ?>custom/main.css">
+        <link rel="stylesheet" href="<?php echo $css ?>custom/style.css">
+        
 
 
     </head>
