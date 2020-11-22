@@ -1,5 +1,16 @@
 <?php
 
+    // STARTING A SESSION
+    session_start();
+
+    //CHECK IF THE SESSION REGESTRED
+        if(isset($_SESSION['username'])){
+
+            // REDIRECT IF THIS USER WAS REGISTRED IN SESSION
+            header('loaction: dashboard.php');
+
+        }
+
     // Include Init.php File
     include "init.php";
 
@@ -34,11 +45,18 @@
 
         if($NumberRows > 0){
 
-            echo "<h2>Welcome " . $username . " You're Admin !!!</h2>";
+            //echo "<h2>Welcome " . $username . " You're Admin !!!</h2>";
+
+            //DEFINE A SESSION
+            $_SESSION['username'] = $username;
+
+            //REDIRECT TO DASHBOARD PAGE
+            header('location: dashboard.php');
+            exit();
 
         }
 
-        //echo "<h3>" . $username . "  " . $password . "  " . $hashedPawwsord . "</h3>";
+        
 
     }
 
