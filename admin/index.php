@@ -3,6 +3,10 @@
     // STARTING A SESSION
     session_start();
 
+    // To check the possibility of including the navbar
+    $navbar = "";
+        
+    
     //CHECK IF THE SESSION REGESTRED
         if(isset($_SESSION['username'])){
 
@@ -13,15 +17,7 @@
 
     // Include Init.php File
     include "init.php";
-
-    //Include Languages Files
-    
-    include "./includes/languages/english.php"; // English Lang
-    //include "./includes/languages/french.php"; // English Lang
-    //include "./includes/languages/arabic.php"; // English Lang 
-
-    // Include The Header From Template Include
-    include $template . "header.php";
+        
 
     //CHECK THE REQUEST METHOD
 

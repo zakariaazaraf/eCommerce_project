@@ -3,6 +3,11 @@
     //START THE SESSION, ALWAYS REMEMBER TO START IT
     session_start();
 
+    //INCLUDES
+    include 'init.php';
+
+    include $template . 'header.php';
+
     // CHECK IF THE USER HAVE THE ACCESS TO THE DASHBOARD
     if(isset($_SESSION['username'])){
 
@@ -11,6 +16,10 @@
     }else{
 
         header('location: index.php');
+        exit();
     }
+
+    //Include Footer
+    include $template . 'footer.php';
 
 ?>
