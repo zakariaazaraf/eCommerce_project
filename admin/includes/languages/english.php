@@ -5,11 +5,13 @@
     function lang($phrase){
 
         static $languages = array(
-            "HOME" => "Home",
-            "PRODUCT" => "Product",
+
+            // NAVBAR KEYS
+            "LOGO" => "ShopNow",
             "CATEGORIES" => "Categories",
-            "CAT1" => "Fashon",
-            "CAT2" => "Toys",
+            "ITEMS" => "Items",
+            "LOGOSTICS" => "Logostics",
+            "LOGS" => "Logs",
 
             "GREETING" => "Welcome",
             "ADMIN" => "administrator"

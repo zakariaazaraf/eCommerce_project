@@ -5,6 +5,7 @@
     function lang($phrase){
 
         static $languages = array(
+
             "GREETING" => "مرحبا",
             "ADMIN" => "المسؤول"
         );

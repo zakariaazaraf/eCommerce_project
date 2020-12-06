@@ -6,8 +6,6 @@
     //INCLUDES
     include 'init.php';
 
-    include $template . 'header.php';
-
     // CHECK IF THE USER HAVE THE ACCESS TO THE DASHBOARD
     if(isset($_SESSION['username'])){
 

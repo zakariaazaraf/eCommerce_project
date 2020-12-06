@@ -28,6 +28,19 @@ body {
 
 /* END FORM CUSTOMAIZE */
 
+/*******************************************************************/
+
 /* START NAVBAR CUSTUOMIZE */
 
+/* Start Editing Bootstrap */
+
+.navbar-dark .navbar-brand {
+  font-size: 1em;
+}
+
+nav .container div:last-child {
+  justify-content: end;
+}
+
+/* End Editing Bootstrap */
 /* END NAVBAR CUSTOMIZE */
