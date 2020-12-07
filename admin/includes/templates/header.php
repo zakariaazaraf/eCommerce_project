@@ -5,7 +5,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="author" content="zakaria azaraf">
-        <title>Admin Zakaria</title>
+        <title><?php echo getTitle(); ?></title>
         <!-- The bootstrap fraemwork -->
         <link rel="stylesheet" href="<?php echo $css ?>libs/bootstrap.min.css">
         <!-- The font Awesome librery -->

@@ -5,6 +5,7 @@
 
     // To check the possibility of including the navbar
     $navbar = "";
+    $titlePage = "Home";
         
     
     //CHECK IF THE SESSION REGESTRED
@@ -31,10 +32,16 @@
         // CHECK IF THE USER AN ADMIN
 
         // THIS IS FOR SECURITY RESION
-        $stmt = $db->prepare('SELECT UserName, Password, GroupID FROM users where UserName = ? AND Password = ? AND GroupID = 1');
+        $stmt = $db->prepare('SELECT 
+                                        userID, UserName, Password, GroupID 
+                                FROM users 
+                                where UserName = ? AND Password = ? AND GroupID = 1 LIMIT 1');
 
         // EXECUTE THE STATEMENT
         $stmt->execute(array($username, $hashedPawwsord));
+
+        // GET THE DATA 
+        $data = $stmt->fetch();
 
         // RETURNED ROW FROM THE DB, THIS FUNCTION IS A PDO'S ONE
         $NumberRows = $stmt->rowCount();
@@ -45,6 +52,7 @@
 
             //DEFINE A SESSION
             $_SESSION['username'] = $username;
+            $_SESSION['userID'] = $data['userID'];
 
             //REDIRECT TO DASHBOARD PAGE
             header('location: dashboard.php');
