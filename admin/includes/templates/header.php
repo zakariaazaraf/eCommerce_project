@@ -13,7 +13,7 @@
         <!-- The Normalize Css File -->
         <link rel="stylesheet" href="<?php echo $css ?>libs/normalize.css">
         <!-- Main Css File -->
-        <link rel="stylesheet" href="<?php echo $css ?>custom/style.css">
+        <link rel="stylesheet" href="<?php echo $css ?>custom/style.css?v=<?php echo time(); ?>">
         
 
 
