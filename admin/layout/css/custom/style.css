@@ -1,7 +1,18 @@
+@import url("https://fonts.googleapis.com/css?family=Lato:400,700");
+
+:root {
+  --primaryColor: #007bff;
+  --mainWhite: #fff;
+  --mainBlack: #222;
+  --mainGrey: #ececec;
+  --mainSpacing: 0.1rem;
+  --mainTransition: all 0.3s linear;
+}
 /* START MAIN RULES */
 
 body {
-  background-color: #eee;
+  background-color: var(--mainGrey);
+  font-family: "Lato", sans-serif;
   font-size: 16px;
 }
 
@@ -74,3 +85,58 @@ nav .container div:last-child {
 
 /* End Editing Bootstrap */
 /* END NAVBAR CUSTOMIZE */
+
+/**************************************************************/
+/*
+  ======================= EDIT MEMEBER ===========================
+*/
+
+/* START FORM MEMEBER */
+.form-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.75rem;
+}
+
+h1 {
+  font-size: 3.4rem;
+  text-transform: uppercase;
+}
+
+.form-container form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 40vw;
+}
+
+.form-container form .group {
+  display: flex;
+  justify-content: space-between;
+  margin: 0.8rem;
+}
+
+.form-container form input[type="submit"] {
+  width: 30%;
+  font-size: 1.5rem;
+}
+
+.form-container form input[type="password"],
+.form-container form input[type="text"],
+.form-container form input[type="email"] {
+  color: #495057;
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.form-container form input[type="password"]:focus,
+.form-container form input[type="text"]:focus,
+.form-container form input[type="email"]:focus {
+  border-color: #80bdff;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.251);
+  outline: 0;
+}
+/* END FORM MEMEBER */
