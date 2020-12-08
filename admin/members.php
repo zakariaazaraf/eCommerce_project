@@ -64,7 +64,9 @@
                             </div>
                             <div class="group">
                                 <label for="password">Password:</label>
-                                <input type="text" name="password" id="password" value="<?php echo $data["Password"] ?>" autocomplete="new-password">
+                                <!-- HIDDEN OLD PASS INPUT -->
+                                <input type="hidden" name="oldPassword" value="<?php echo $data["Password"]?>">
+                                <input type="password" name="password" id="password" value="" autocomplete="new-password">
                             </div>
                             <div class="group">
                                 <label for="email">Email:</label>
@@ -90,15 +92,25 @@
         // CHECK IF THE USER CAME BY A POST REQUEST
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             
+            echo '<h1>update member</h1>';
             // GET THE DATA FROM THE POST REQUEST
             $id = $_POST['userid'];
             $username = $_POST['username'];
             $email = $_POST['email'];
             $fullname = $_POST['fullname'];
 
+            // PASSWORD TRICK
+            $pass = "";
+
+            if(empty($_POST['password'])){
+                $pass = $_POST['oldPassword'];
+            }else{
+                $pass = sha1($_POST['password']);
+            }
+
             // UPDATE THE IFORMATION BY SEND A QUERY TO DATABASE
-            $stmt = $db->prepare("UPDATE users SET UserName = ?, Email = ?, FullName = ? WHERE userId = ?");
-            $stmt->execute(array($username, $email, $fullname, $id)); // PASS THE PARAMS AND EXECUTE THE QUERY
+            $stmt = $db->prepare("UPDATE users SET UserName = ?, Email = ?, FullName = ?, Password = ? WHERE userId = ?");
+            $stmt->execute(array($username, $email, $fullname, $pass, $id)); // PASS THE PARAMS AND EXECUTE THE QUERY
 
             $row = $stmt->rowCount();
 
