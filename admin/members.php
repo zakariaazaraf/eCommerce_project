@@ -27,32 +27,47 @@
             $do = 'Manage';
         }
 
-
+        /*
+        ================================================================================
+        == Manage SECTION
+        ================================================================================
+        */
         if($do == 'Manage'){
 
             echo 'Manage page';
             echo "<a href='members.php?do=Add'>Add New Member</a>";
 
+            /*
+            ================================================================================
+            == ADD MEMBER
+            ================================================================================
+            */
+        }elseif($do == 'Add'){
+
+
+            echo "Welcome To The Add Member"
+
+
+            /*
+            ================================================================================
+            == EDIT MEMBER
+            ================================================================================
+            */
         }elseif ($do == 'Edit'){ 
 
         
-        $userid = isset($_GET['userid']) && is_numeric($_GET['userid']) ? intval($_GET['userid'])  : 0;
+            $userid = isset($_GET['userid']) && is_numeric($_GET['userid']) ? intval($_GET['userid'])  : 0;
 
-        // GET THE INFORMATION OF THIS USER BY HIS ID
-        $stmt = $db->prepare("SELECT * FROM users WHERE userId = ? LIMIT 1"); // QUERY
-        $stmt->execute(array($userid)); // PASS THE PARAMETER AND EXECUTE THE QUEY
-        $data = $stmt->fetch(); // FETCH THE DATA 
-        $rowCount = $stmt->rowCount(); // GET THE NUMBER OF ROWS
+            // GET THE INFORMATION OF THIS USER BY HIS ID
+            $stmt = $db->prepare("SELECT * FROM users WHERE userId = ? LIMIT 1"); // QUERY
+            $stmt->execute(array($userid)); // PASS THE PARAMETER AND EXECUTE THE QUEY
+            $data = $stmt->fetch(); // FETCH THE DATA 
+            $rowCount = $stmt->rowCount(); // GET THE NUMBER OF ROWS
 
-        /* echo "Number of Rows" . $rowCount;
-        echo "<pre>";
-        print_r($data);
-        echo "</pre>"; */
-
+            // CHECK IF A CHANGE HAS MADE IN THE DATABASE
             if($rowCount > 0){
 
                 ?> 
-
 
                     <div class="form-container">
                     <h1>edit member</h1>
@@ -82,50 +97,53 @@
                         </form>
                     </div>    
 
-            <?php } 
+                <?php 
+            
+            } 
 
+            // IF SOMEONE PLAY WITH ID IN THE LINK
             else{
             echo "there's no such ID";
             }
       
-    }elseif($do == 'update'){
-        
-        // CHECK IF THE USER CAME BY A POST REQUEST
-        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            /*
+            ================================================================================
+            == UPDATE MEMBER
+            ================================================================================
+            */
+        }elseif($do == 'update'){
             
-            echo '<h1>update member</h1>';
-            // GET THE DATA FROM THE POST REQUEST
-            $id = $_POST['userid'];
-            $username = $_POST['username'];
-            $email = $_POST['email'];
-            $fullname = $_POST['fullname'];
+            // CHECK IF THE USER CAME BY A POST REQUEST
+            if($_SERVER['REQUEST_METHOD'] == 'POST'){
+                
+                echo '<h1>update member</h1>';
 
-            // PASSWORD TRICK
-            $pass = "";
+                // GET THE DATA FROM THE POST REQUEST
+                $id = $_POST['userid'];
+                $username = $_POST['username'];
+                $email = $_POST['email'];
+                $fullname = $_POST['fullname'];
 
-            // USE TERNARY OPERATOR
-            $pass = empty($_POST['password']) ? $_POST['oldPassword'] : sha1($_POST['password']) ;
+                // PASSWORD TRICK
+                $pass = "";
 
-            /* if(empty($_POST['password'])){
-                $pass = $_POST['oldPassword'];
+                // USE TERNARY OPERATOR
+                $pass = empty($_POST['password']) ? $_POST['oldPassword'] : sha1($_POST['password']) ;
+
+                // UPDATE THE IFORMATION BY SEND A QUERY TO DATABASE
+                $stmt = $db->prepare("UPDATE users SET UserName = ?, Email = ?, FullName = ?, Password = ? WHERE userId = ?");
+                $stmt->execute(array($username, $email, $fullname, $pass, $id)); // PASS THE PARAMS AND EXECUTE THE QUERY
+
+                $row = $stmt->rowCount();
+
+                echo $row . " of records updated !!" ;
+
+
             }else{
-                $pass = sha1($_POST['password']);
-            } */
-
-            // UPDATE THE IFORMATION BY SEND A QUERY TO DATABASE
-            $stmt = $db->prepare("UPDATE users SET UserName = ?, Email = ?, FullName = ?, Password = ? WHERE userId = ?");
-            $stmt->execute(array($username, $email, $fullname, $pass, $id)); // PASS THE PARAMS AND EXECUTE THE QUERY
-
-            $row = $stmt->rowCount();
-
-            echo $row . " of records updated !!" ;
-
+                echo "You Cant't Access This Page Directly ";
+            }
 
         }else{
-            echo "You Cant't Access This Page Directly ";
-        }
-
-    }else{
             echo 'default';
         }
         //Include Footer
