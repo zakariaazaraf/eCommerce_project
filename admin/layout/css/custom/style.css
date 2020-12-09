@@ -121,6 +121,7 @@ h1 {
 .form-container form input[type="submit"] {
   width: 30%;
   font-size: 1.5rem;
+  text-transform: capitalize;
 }
 
 .form-container form input[type="password"],

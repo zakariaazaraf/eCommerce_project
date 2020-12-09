@@ -34,26 +34,64 @@
         */
         if($do == 'Manage'){
 
-            echo 'Manage page';
-            echo "<a href='members.php?do=Add'>Add New Member</a>";
+            echo 'Manage page<br>';
+            echo "<a href='members.php?do=add'>Add New Member</a>";
 
             /*
             ================================================================================
             == ADD MEMBER
             ================================================================================
             */
-        }elseif($do == 'Add'){
+        }elseif($do == 'add'){
 
 
-            echo "Welcome To The Add Member"
+            
+            ?> 
 
+                    <div class="form-container">
+                    <h1>add member</h1>
+                        <form action="?do=insert" method='POST'>
+                            <div class="group">
+                                <label for="username">Username:</label>
+                                <input type="text" name="username" id="username"  required autocomplete="off" placeholder="Member Username"/>
+                            </div>
+                            <div class="group">
+                                <label for="password">Password:</label>
+                                <input type="password" name="password" id="password" required autocomplete="new-password" placeholder="Enter Strong Password"/>
+                            </div>
+                            <div class="group">
+                                <label for="email">Email:</label>
+                                <input type="email" name="email" id="email" required placeholder="Enter Valid Email"/>
+                            </div>
+                            <div class="group">
+                                <label for="fullname">Full Name:</label>
+                                <input type="text" name="fullname" id="fullname" required placeholder="Member Fullname"/>
+                            </div>
+
+                            <input type="submit" value="add member" class="btn btn-primary">
+                        </form>
+                    </div>    
+
+            <?php
+
+            /*
+            ================================================================================
+            == INSERT MEMBER
+            ================================================================================
+            */
+        }elseif($do == 'insert'){
+
+
+            echo "<pre>";
+            print_r($_POST);
+            echo "</pre>";
 
             /*
             ================================================================================
             == EDIT MEMBER
             ================================================================================
             */
-        }elseif ($do == 'Edit'){ 
+        }elseif ($do == 'edit'){ 
 
         
             $userid = isset($_GET['userid']) && is_numeric($_GET['userid']) ? intval($_GET['userid'])  : 0;
