@@ -10,8 +10,10 @@
             "LOGO" => "ShopNow",
             "CATEGORIES" => "Categories",
             "ITEMS" => "Items",
+            "MEMBERS" => "Members",
             "LOGOSTICS" => "Logostics",
             "LOGS" => "Logs",
+
 
             "GREETING" => "Welcome",
             "ADMIN" => "administrator"

@@ -31,6 +31,7 @@
         if($do == 'Manage'){
 
             echo 'Manage page';
+            echo "<a href='members.php?do=Add'>Add New Member</a>";
 
         }elseif ($do == 'Edit'){ 
 
@@ -60,7 +61,7 @@
                             <input type="hidden" name="userid" value="<?php echo $userid?>">
                             <div class="group">
                                 <label for="username">Username:</label>
-                                <input type="text" name="username" id="username"  value="<?php echo $data["UserName"]?>" autocomplete="off">
+                                <input type="text" name="username" id="username"  required value="<?php echo $data["UserName"]?>" autocomplete="off">
                             </div>
                             <div class="group">
                                 <label for="password">Password:</label>
@@ -70,11 +71,11 @@
                             </div>
                             <div class="group">
                                 <label for="email">Email:</label>
-                                <input type="email" name="email" id="email" value="<?php echo $data["Email"]?>">
+                                <input type="email" name="email" id="email" required value="<?php echo $data["Email"]?>">
                             </div>
                             <div class="group">
                                 <label for="fullname">Full Name:</label>
-                                <input type="text" name="fullname" id="fullname" value="<?php echo $data["FullName"]?>"/>
+                                <input type="text" name="fullname" id="fullname" required value="<?php echo $data["FullName"]?>"/>
                             </div>
 
                             <input type="submit" value="save" class="btn btn-primary">
@@ -102,11 +103,14 @@
             // PASSWORD TRICK
             $pass = "";
 
-            if(empty($_POST['password'])){
+            // USE TERNARY OPERATOR
+            $pass = empty($_POST['password']) ? $_POST['oldPassword'] : sha1($_POST['password']) ;
+
+            /* if(empty($_POST['password'])){
                 $pass = $_POST['oldPassword'];
             }else{
                 $pass = sha1($_POST['password']);
-            }
+            } */
 
             // UPDATE THE IFORMATION BY SEND A QUERY TO DATABASE
             $stmt = $db->prepare("UPDATE users SET UserName = ?, Email = ?, FullName = ?, Password = ? WHERE userId = ?");
