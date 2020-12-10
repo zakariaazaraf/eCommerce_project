@@ -36,10 +36,63 @@
         ================================================================================
         */
         if($do == 'Manage'){
+            ?>
 
-            echo 'Manage page<br>';
-            echo "<a href='members.php?do=add'>Add New Member</a>";
+            <h1 class="text-center">manage member</h1>
+            <div class="container">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>User Name</th>
+                                <th>Email</th>
+                                <th>Full Name</th>
+                                <th>Registred Date</th>
+                                <th>Control</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th>1</th>
+                                <td>zakaria</td>
+                                <td>zakariaazaraf@gmail.com</td>
+                                <td>zakaria azaraf</td>
+                                <td>2020/12/10</td>
+                                <td>Cotroled</td>
+                            </tr>
+                            <tr>
+                                <th>2</th>
+                                <td>zakaria</td>
+                                <td>zakariaazaraf@gmail.com</td>
+                                <td>zakaria azaraf</td>
+                                <td>2020/12/10</td>
+                                <td>Cotroled</td>
+                            </tr>
+                            <tr>
+                                <th>3</th>
+                                <td>zakaria</td>
+                                <td>zakariaazaraf@gmail.com</td>
+                                <td>zakaria azaraf</td>
+                                <td>2020/12/10</td>
+                                <td>Cotroled</td>
+                            </tr>
+                            <tr>
+                                <th>4</th>
+                                <td>zakaria</td>
+                                <td>zakariaazaraf@gmail.com</td>
+                                <td>zakaria azaraf</td>
+                                <td>2020/12/10</td>
+                                <td>Cotroled</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <a href='members.php?do=add'>Add New Member</a>
 
+            
+            <?php
             /*
             ================================================================================
             == ADD MEMBER
@@ -140,7 +193,7 @@
                         )
                     );  */
 
-                    
+
                     // INSERT A NEW MEMBER WITH THE BINDING METHOD I DATABASE
                     $stmt = $db->prepare("INSERT INTO users (UserName, Password, Email, FullName) VALUES (?, ?, ?, ?)");     
                     
