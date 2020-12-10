@@ -12,8 +12,8 @@
         if(isset($_SESSION['username'])){
 
             // REDIRECT IF THIS USER WAS REGISTRED IN SESSION
-            header('loaction: dashboard.php');
-
+            header('location:dashboard.php');
+            
         }
 
     // Include Init.php File

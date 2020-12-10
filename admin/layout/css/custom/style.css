@@ -155,5 +155,21 @@ h1 {
 
 .container .table {
   min-width: 600px;
+  box-shadow: 0 3px 8px #ced4da;
+}
+
+.container .table td,
+.container .table th {
+  vertical-align: middle;
+}
+
+.container .table .btn {
+  margin: auto 3px;
+  padding: 0.2rem 0.45rem;
+}
+
+.container .btn i {
+  position: relative;
+  right: 3px;
 }
 /* END FORM MEMEBER */

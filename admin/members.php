@@ -75,8 +75,8 @@
                                         echo "<td>" . $row['FullName'] . "</td>";
                                         echo "<td></td>";
                                         echo "<td>";
-                                            echo "<a href='?do=edit&userid=" . $row['UserId'] . "' class='btn btn-success' role='button'>Edit</a>";
-                                            echo "<a href='?do=delete&userid=" . $row['UserId'] . "' class='btn btn-danger confirm' role='button'>Delete</a>";
+                                            echo "<a href='?do=edit&userid=" . $row['UserId'] . "' class='btn btn-success' role='button'><i class='fas fa-edit'></i>Edit</a>";
+                                            echo "<a href='?do=delete&userid=" . $row['UserId'] . "' class='btn btn-danger confirm' role='button'><i class='fas fa-trash'></i>Delete</a>";
                                         echo "</td>";
                                     echo "</tr>";
 
@@ -87,7 +87,7 @@
                         </tbody>
                     </table>
                 </div>
-                <a href='members.php?do=add' class="btn btn-primary"><i class="fas fa-plus"></i> Add New Member</a>
+                <a href='members.php?do=add' class="btn btn-primary"><i class="fas fa-plus"></i>New Member</a>
             </div>
             
 
@@ -209,7 +209,8 @@
 
             }else{
 
-                echo "You Cant't Access This Page Directly ";
+                //echo "You Cant't Access This Page Directly ";
+                errorRedirect("You Cant't Access This Page Directly", 3);
             
             }
 
@@ -334,7 +335,8 @@
 
 
             }else{
-                echo "You Cant't Access This Page Directly ";
+                //echo "You Cant't Access This Page Directly ";
+                errorRedirect("You Cant't Access This Page Directly", 3);
             }
 
             /*
