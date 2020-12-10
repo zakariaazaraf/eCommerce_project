@@ -24,7 +24,16 @@ $(function(){ // JQUERY FUNCTION WHISH REMOVES PLACEHOLDER TEXT ON FOCUS
         $('.password').attr('type', 'password');
 
     });
+
+    // CONFIRM DELETION OF A MEMEBER
+    $('.confirm').click(function(){
+
+        return confirm("You're Going To Delete a Member !");
+        
+    });
+    
 });
+
 
 
 

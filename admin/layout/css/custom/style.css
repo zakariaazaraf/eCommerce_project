@@ -152,4 +152,8 @@ h1 {
   font-size: 1.5rem;
   cursor: pointer;
 }
+
+.container .table {
+  min-width: 600px;
+}
 /* END FORM MEMEBER */
