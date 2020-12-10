@@ -60,7 +60,8 @@
                             </div>
                             <div class="group">
                                 <label for="password">Password:</label>
-                                <input type="password" name="password" id="password" required autocomplete="new-password" placeholder="Enter Strong Password"/>
+                                <input class="password" type="password" name="password" id="password" required autocomplete="new-password" placeholder="Enter Strong Password"/>
+                                <i class="show-pass fas fa-eye fa-x"></i>
                             </div>
                             <div class="group">
                                 <label for="email">Email:</label>
@@ -84,6 +85,61 @@
             */
         }elseif($do == 'insert'){
 
+            // CHECK IF THE USER CAME BY A POST REQUEST
+            if($_SERVER['REQUEST_METHOD'] == 'POST'){
+                
+                echo '<h1>Insert member</h1>';
+
+                // GET THE DATA FROM THE POST REQUEST
+                $username = $_POST['username'];
+                $email = $_POST['email'];
+                $fullname = $_POST['fullname'];
+                $pass = $_POST['password'];
+
+
+                // HASH THE PASSWORD
+                $hashpassword = sha1($_POST['password']);
+
+                /*==========================================================
+                =================== Form Validation =======================*/
+
+                $validation = new UserValidator($_POST);
+                $validation->validateForm();
+                $errors = $validation->errors;
+
+                /*==========================================================*/
+
+                if(count($errors) > 0){
+
+                    // THROW THE ERRORS
+                    echo "<h3>Errors Encountered !!</h3>";
+
+                    $errors['username'] = isset($errors['username']) ? $errors['username'] : '';
+                    $errors['password'] = isset($errors['password']) ? $errors['password'] : '';
+                    $errors['email'] = isset($errors['email']) ? $errors['email'] : '';
+                    $errors['fullname'] = isset($errors['fullname']) ? $errors['fullname'] : '';
+
+                    echo "<div >" . $errors['username'] ?? '' . "</div>";
+                    echo "<div >" . $errors['password'] ?? '' . "</div>";
+                    echo "<div >" . $errors['email'] ?? '' . "</div>";
+                    echo "<div >" . $errors['fullname'] ?? '' . "</div>";
+                    
+                }else{
+
+                    // INSERT A NEW MEMBER IN DATABASE
+                    $stmt = $db->prepare("UPDATE users SET UserName = ?, Email = ?, FullName = ?, Password = ? WHERE userId = ?");
+                    // PASS THE PARAMS AND EXECUTE THE QUERY
+                    $stmt->execute(array($username, $email, $fullname, $pass, $id)); 
+
+                    $row = $stmt->rowCount();
+
+                    echo $row . " Member Inserted !!" ;
+                }
+
+
+            }else{
+                echo "You Cant't Access This Page Directly ";
+            }
 
             echo "<pre>";
             print_r($_POST);
@@ -127,7 +183,7 @@
                             </div>
                             <div class="group">
                                 <label for="email">Email:</label>
-                                <input type="text" name="email" id="email" required value="<?php echo $data["Email"]?>">
+                                <input type="email" name="email" id="email" required value="<?php echo $data["Email"]?>">
                             </div>
                             <div class="group">
                                 <label for="fullname">Full Name:</label>
@@ -178,28 +234,29 @@
                 $validation->validateForm();
                 $errors = $validation->errors;
 
-
-
                 /*==========================================================*/
 
                 if(count($errors) > 0){
+
                     // THROW THE ERRORS
-                        echo "<h3>Errors Encountered !!</h3>";
+                    echo "<h3>Errors Encountered !!</h3>";
 
-                        $errors['username'] = isset($errors['username']) ? $errors['username'] : '';
-                        $errors['password'] = isset($errors['password']) ? $errors['password'] : '';
-                        $errors['email'] = isset($errors['email']) ? $errors['email'] : '';
-                        $errors['fullname'] = isset($errors['fullname']) ? $errors['fullname'] : '';
+                    $errors['username'] = isset($errors['username']) ? $errors['username'] : '';
+                    $errors['password'] = isset($errors['password']) ? $errors['password'] : '';
+                    $errors['email'] = isset($errors['email']) ? $errors['email'] : '';
+                    $errors['fullname'] = isset($errors['fullname']) ? $errors['fullname'] : '';
 
-                        echo "<div >" . $errors['username'] ?? '' . "</div>";
-                        echo "<div >" . $errors['password'] ?? '' . "</div>";
-                        echo "<div >" . $errors['email'] ?? '' . "</div>";
-                        echo "<div >" . $errors['fullname'] ?? '' . "</div>";
+                    echo "<div >" . $errors['username'] ?? '' . "</div>";
+                    echo "<div >" . $errors['password'] ?? '' . "</div>";
+                    echo "<div >" . $errors['email'] ?? '' . "</div>";
+                    echo "<div >" . $errors['fullname'] ?? '' . "</div>";
                     
                 }else{
+
                     // UPDATE THE IFORMATION BY SENDING A QUERY TO DATABASE
                     $stmt = $db->prepare("UPDATE users SET UserName = ?, Email = ?, FullName = ?, Password = ? WHERE userId = ?");
-                    $stmt->execute(array($username, $email, $fullname, $pass, $id)); // PASS THE PARAMS AND EXECUTE THE QUERY
+                    // PASS THE PARAMS AND EXECUTE THE QUERY
+                    $stmt->execute(array($username, $email, $fullname, $pass, $id)); 
 
                     $row = $stmt->rowCount();
 

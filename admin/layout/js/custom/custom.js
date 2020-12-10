@@ -11,6 +11,19 @@ $(function(){ // JQUERY FUNCTION WHISH REMOVES PLACEHOLDER TEXT ON FOCUS
         $(this).attr('placeholder', $(this).attr('data-text'));
 
     });
+
+
+
+    // CONVERT PASSWORD TYPE TO TEXT TYPE
+    $('.show-pass').hover(function(){
+        
+        $('.password').attr('type', 'text');
+
+    }, function(){
+
+        $('.password').attr('type', 'password');
+
+    });
 });
 
 
