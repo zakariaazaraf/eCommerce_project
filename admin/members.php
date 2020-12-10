@@ -20,6 +20,9 @@
         //INCLUDES
         include 'init.php';
 
+        // Validation Class
+        require('form_validation.php');
+
         // CHECK THE GET ACTION
         if(isset($_GET['do'])){
             $do = $_GET['do'];
@@ -124,7 +127,7 @@
                             </div>
                             <div class="group">
                                 <label for="email">Email:</label>
-                                <input type="email" name="email" id="email" required value="<?php echo $data["Email"]?>">
+                                <input type="text" name="email" id="email" required value="<?php echo $data["Email"]?>">
                             </div>
                             <div class="group">
                                 <label for="fullname">Full Name:</label>
@@ -168,13 +171,40 @@
                 // USE TERNARY OPERATOR
                 $pass = empty($_POST['password']) ? $_POST['oldPassword'] : sha1($_POST['password']) ;
 
-                // UPDATE THE IFORMATION BY SEND A QUERY TO DATABASE
-                $stmt = $db->prepare("UPDATE users SET UserName = ?, Email = ?, FullName = ?, Password = ? WHERE userId = ?");
-                $stmt->execute(array($username, $email, $fullname, $pass, $id)); // PASS THE PARAMS AND EXECUTE THE QUERY
+                /*==========================================================
+                =================== Form Validation =======================*/
 
-                $row = $stmt->rowCount();
+                $validation = new UserValidator($_POST);
+                $validation->validateForm();
+                $errors = $validation->errors;
 
-                echo $row . " of records updated !!" ;
+
+
+                /*==========================================================*/
+
+                if(count($errors) > 0){
+                    // THROW THE ERRORS
+                        echo "<h3>Errors Encountered !!</h3>";
+
+                        $errors['username'] = isset($errors['username']) ? $errors['username'] : '';
+                        $errors['password'] = isset($errors['password']) ? $errors['password'] : '';
+                        $errors['email'] = isset($errors['email']) ? $errors['email'] : '';
+                        $errors['fullname'] = isset($errors['fullname']) ? $errors['fullname'] : '';
+
+                        echo "<div >" . $errors['username'] ?? '' . "</div>";
+                        echo "<div >" . $errors['password'] ?? '' . "</div>";
+                        echo "<div >" . $errors['email'] ?? '' . "</div>";
+                        echo "<div >" . $errors['fullname'] ?? '' . "</div>";
+                    
+                }else{
+                    // UPDATE THE IFORMATION BY SENDING A QUERY TO DATABASE
+                    $stmt = $db->prepare("UPDATE users SET UserName = ?, Email = ?, FullName = ?, Password = ? WHERE userId = ?");
+                    $stmt->execute(array($username, $email, $fullname, $pass, $id)); // PASS THE PARAMS AND EXECUTE THE QUERY
+
+                    $row = $stmt->rowCount();
+
+                    echo $row . " of records updated !!" ;
+                }
 
 
             }else{
