@@ -126,10 +126,26 @@
                     
                 }else{
 
-                    // INSERT A NEW MEMBER IN DATABASE
-                    $stmt = $db->prepare("UPDATE users SET UserName = ?, Email = ?, FullName = ?, Password = ? WHERE userId = ?");
+                    // INSERT A NEW MEMBER IN DATABASE WITH PREPARE STETMENT METHOS
+                    /* $stmt = $db->prepare("INSERT INTO users(UserName, Password, Email, FullName) 
+                                            VALUES (:zuser, :zpass, :zemail, :zfullname)"); */
+
                     // PASS THE PARAMS AND EXECUTE THE QUERY
-                    $stmt->execute(array($username, $email, $fullname, $pass, $id)); 
+                    /* $stmt->execute(
+                        array(
+                            'zuser' => $username,
+                            'zpass' => $hashpassword, 
+                            'zemail' => $email, 
+                            'zfullname' => $fullname
+                        )
+                    );  */
+
+                    
+                    // INSERT A NEW MEMBER WITH THE BINDING METHOD I DATABASE
+                    $stmt = $db->prepare("INSERT INTO users (UserName, Password, Email, FullName) VALUES (?, ?, ?, ?)");     
+                    
+                    $stmt->execute(array($username, $hashpassword, $email, $fullname));
+                    
 
                     $row = $stmt->rowCount();
 
