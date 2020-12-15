@@ -13,7 +13,6 @@
 
     $titlePage = 'Members';
 
-
     // CHECK IF THE USER HAVE THE ACCESS TO THIS PAGE
     if(isset($_SESSION['username'])){
 
@@ -90,8 +89,6 @@
                 <a href='members.php?do=add' class="btn btn-primary"><i class="fas fa-plus"></i>New Member</a>
             </div>
             
-
-            
             <?php
             /*
             ================================================================================
@@ -99,7 +96,6 @@
             ================================================================================
             */
         }elseif($do == 'add'){
-
 
             
             ?> 
@@ -138,17 +134,16 @@
             */
         }elseif($do == 'insert'){
 
+            echo '<div class="container"><h1 class="text-center">Insert member</h1>';
+
             // CHECK IF THE USER CAME BY A POST REQUEST
             if($_SERVER['REQUEST_METHOD'] == 'POST'){
                 
-                echo '<div class="container"><h1 class="text-center">Insert member</h1>';
-
                 // GET THE DATA FROM THE POST REQUEST
                 $username = $_POST['username'];
                 $email = $_POST['email'];
                 $fullname = $_POST['fullname'];
                 $pass = $_POST['password'];
-
 
                 // HASH THE PASSWORD
                 $hashpassword = sha1($_POST['password']);
@@ -165,7 +160,7 @@
                 if(count($errors) > 0){
 
                     // THROW THE ERRORS
-                    echo "<h3>Errors Encountered !!</h3>";
+                    echo "<h3>Errors Encountered !!</h3></div>";
 
                     $errors['username'] = isset($errors['username']) ? $errors['username'] : '';
                     $errors['password'] = isset($errors['password']) ? $errors['password'] : '';
@@ -209,20 +204,17 @@
 
                     }else{
 
-                        echo '<div class="alert alert-danger">This Name Allready Exists</div>';
+                        echo '<div class="alert alert-danger">This Name Allready Exists</div></div>';
 
                     }       
 
                 }
 
-
             }else{
-
-                //echo "You Cant't Access This Page Directly ";
-                errorRedirect("You Cant't Access This Page Directly", 3);
-            
+                
+                $msg = '<div class="alert alert-danger">You Cant\'t Access This Page Directly</div>';
+                redirectHome($msg, 'members.php',3);        
             }
-
 
             /*
             ================================================================================
@@ -288,6 +280,8 @@
             ================================================================================
             */
         }elseif($do == 'update'){
+
+            echo '<div class="container"><h1 class="text-center">update member</h1>';
             
             // CHECK IF THE USER CAME BY A POST REQUEST
             if($_SERVER['REQUEST_METHOD'] == 'POST'){
@@ -317,7 +311,7 @@
                 if(count($errors) > 0){
 
                     // THROW THE ERRORS
-                    echo "<h3>Errors Encountered !!</h3>";
+                    echo "<h3>Errors Encountered !!</h3></div>";
 
                     $errors['username'] = isset($errors['username']) ? $errors['username'] : '';
                     $errors['password'] = isset($errors['password']) ? $errors['password'] : '';
@@ -338,14 +332,14 @@
 
                     $row = $stmt->rowCount();
 
-                    echo '<div class="container"><h1 class="text-center">update member</h1>';
                     echo "<div class='alert alert-success'>" .$row . " of records updated !!</div></div>" ;
                 }
 
 
             }else{
-                //echo "You Cant't Access This Page Directly ";
-                errorRedirect("You Cant't Access This Page Directly", 3);
+                
+                $msg = "<div class='alert alert-danger'>You Cant't Access This Page Directly</div>";
+                redirectHome($msg, 'members.php', 3);
             }
 
             /*
@@ -358,30 +352,36 @@
 
             echo "<div class='container'><h1 class='text-center'>Delete Member Page</h1>";
 
-            $userid = isset($_GET['userid']) && is_numeric($_GET['userid']) ? intval($_GET['userid'])  : 0;
+            // CHECK THE BROWSING METHOD
+            if($_SERVER['REQUEST_METHOD'] === 'POST'){
 
-            // GET THE INFORMATION OF THIS USER BY HIS ID
-            $stmt = $db->prepare("SELECT * FROM users WHERE userId = ? LIMIT 1"); // QUERY
-            $stmt->execute(array($userid)); // PASS THE PARAMETER AND EXECUTE THE QUEY
-            $rowCount = $stmt->rowCount(); // GET THE NUMBER OF ROWS
+                $userid = isset($_GET['userid']) && is_numeric($_GET['userid']) ? intval($_GET['userid'])  : 0;
 
-            // CHECK IF A CHANGE HAS MADE IN THE DATABASE
-            if($rowCount > 0){     
+                // GET THE INFORMATION OF THIS USER BY HIS ID
+                $stmt = $db->prepare("SELECT * FROM users WHERE userId = ? LIMIT 1"); // QUERY
+                $stmt->execute(array($userid)); // PASS THE PARAMETER AND EXECUTE THE QUEY
+                $rowCount = $stmt->rowCount(); // GET THE NUMBER OF ROWS
 
-                // DELETE MEMBER PROCESS
-                $stmt = $db->prepare("DELETE FROM users WHERE UserId = :userID");
+                // CHECK IF A CHANGE HAS MADE IN THE DATABASE
+                if($rowCount > 0){     
 
-                $stmt->bindParam('userID', $userid);
+                    // DELETE MEMBER PROCESS
+                    $stmt = $db->prepare("DELETE FROM users WHERE UserId = :userID");
 
-                $stmt->execute();
+                    $stmt->bindParam('userID', $userid);
 
-                echo "<div class='alert alert-success'>" . $stmt->rowCount() . " Member Deleted</div></div>";
+                    $stmt->execute();
+
+                    echo "<div class='alert alert-success'>" . $stmt->rowCount() . " Member Deleted</div></div>";
+
+                }else{
+                    echo "<div class='alert alert-danger'>ID DOESN'T EXISTS !!</div></div>";
+                }
 
             }else{
-                echo "<div class='alert alert-danger'>ID DOESN'T EXISTS !!</div></div>";
+                $msg = "<div class='alert alert-danger'>You can't Browse This Page Directly</div>";
+                redirectHome($msg, 'members.php');
             }
-
-
 
         }else{
             echo 'default';

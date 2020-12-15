@@ -12,22 +12,38 @@
     }
 
 
-    /*=========================================================
-    ==============  ErrorRedirection Function  ================*/
+    /*
+      =========================================================
+      === @name : redirectHome
+      === @desc : Check After Insert A New Item, If Exists
+      === @version: v2.0
+      ========================================================= 
+    */
 
-    function ErrorRedirect($errorMsg, $seconds = 3){
-        echo "<div class='container'> <div class='alert alert-danger'>$errorMsg</div>";
-        echo "<div class='alert alert-success'>You'll Be Redirected To Home Page After $seconds Seconds</div></div>";
+    function redirectHome($msg, $url = null, $seconds = 3){
 
-        header("refresh:$seconds;url=index.php");
+        $url = $url ? $url = isset($_SERVER['HTTP_REFERER']) && $_SERVER['HTTP_REFERER'] !== '' ? $_SERVER['HTTP_REFERER'] : 'index.php' : 'index.php';
+       /*  if(!$url){
+            $url = 'index.php';
+        }else{
+
+            $url = isset($_SERVER['HTTP_REFERER']) && $_SERVER['HTTP_REFERER'] !== '' ? $_SERVER['HTTP_REFERER'] : 'index.php';
+        } */
+
+        echo $msg;
+        echo "<div class='alert alert-success'>You'll Be Redirected To $url Page After $seconds Seconds</div></div>";
+
+        header("refresh:$seconds;url=$url");
         exit();
     }
 
-    /*=========================================================
+    /*
+      =========================================================
       === @name : checkItem
       === @desc : Check After Insert A New Item, If Exists
       === @version: v1.0
-      ========================================================= */
+      ========================================================= 
+    */
 
       function checkItem($select, $from, $value){
             global $db;
