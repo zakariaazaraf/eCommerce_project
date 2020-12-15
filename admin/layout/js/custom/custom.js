@@ -29,7 +29,7 @@ $(function(){ // JQUERY FUNCTION WHISH REMOVES PLACEHOLDER TEXT ON FOCUS
     $('.confirm').click(function(){
 
         return confirm("You're Going To Delete a Member !");
-        
+
     });
     
 });
@@ -61,3 +61,5 @@ inputs.addEventListener('blur', (e) =>{
     e.target.setAttribute('placeholder', inputValue);
 
 }) */
+
+

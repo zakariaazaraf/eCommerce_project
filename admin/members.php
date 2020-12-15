@@ -179,30 +179,39 @@
                     
                 }else{
 
-                    // INSERT A NEW MEMBER IN DATABASE WITH PREPARE STETMENT METHOS
-                    /* $stmt = $db->prepare("INSERT INTO users(UserName, Password, Email, FullName) 
-                                            VALUES (:zuser, :zpass, :zemail, :zfullname)"); */
+                    // CHECK IF THE USER EXISTS IN DATABASE
+                    if(!checkItem('UserName', 'users', $username)){
 
-                    // PASS THE PARAMS AND EXECUTE THE QUERY
-                    /* $stmt->execute(
-                        array(
-                            'zuser' => $username,
-                            'zpass' => $hashpassword, 
-                            'zemail' => $email, 
-                            'zfullname' => $fullname
-                        )
-                    );  */
+                        // INSERT A NEW MEMBER IN DATABASE WITH PREPARE STETMENT METHOS
+                        /* $stmt = $db->prepare("INSERT INTO users(UserName, Password, Email, FullName) 
+                                                VALUES (:zuser, :zpass, :zemail, :zfullname)"); */
+
+                        // PASS THE PARAMS AND EXECUTE THE QUERY
+                        /* $stmt->execute(
+                            array(
+                                'zuser' => $username,
+                                'zpass' => $hashpassword, 
+                                'zemail' => $email, 
+                                'zfullname' => $fullname
+                            )
+                        );  */
 
 
-                    // INSERT A NEW MEMBER WITH THE BINDING METHOD I DATABASE
-                    $stmt = $db->prepare("INSERT INTO users (UserName, Password, Email, FullName) VALUES (?, ?, ?, ?)");     
-                    
-                    $stmt->execute(array($username, $hashpassword, $email, $fullname));
-                    
+                        // INSERT A NEW MEMBER WITH THE BINDING METHOD I DATABASE
+                        $stmt = $db->prepare("INSERT INTO users (UserName, Password, Email, FullName) VALUES (?, ?, ?, ?)");     
+                        
+                        $stmt->execute(array($username, $hashpassword, $email, $fullname));
+                        
 
-                    $row = $stmt->rowCount();
+                        $row = $stmt->rowCount();
 
-                    echo "<div class='alert alert-success'>" .$row . " Member Inserted !!</div></div>" ;
+                        echo "<div class='alert alert-success'>" .$row . " Member Inserted !!</div></div>" ;
+
+                    }else{
+
+                        echo '<div class="alert alert-danger">This Name Allready Exists</div>';
+
+                    }       
 
                 }
 

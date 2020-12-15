@@ -22,3 +22,16 @@
         header("refresh:$seconds;url=index.php");
         exit();
     }
+
+    /*=========================================================
+      === @name : checkItem
+      === @desc : Check After Insert A New Item, If Exists
+      === @version: v1.0
+      ========================================================= */
+
+      function checkItem($select, $from, $value){
+            global $db;
+            $stetment = $db->prepare("SELECT $select FROM $from WHERE $select = ?"); 
+            $stetment->execute(array($value));
+            return $stetment->rowCount();
+      }
