@@ -63,3 +63,18 @@
             $stetment->execute(array($value));
             return $stetment->rowCount();
       }
+
+    /*
+      =========================================================
+      === @name : countColumns
+      === @desc : Get The Columns's Number From Passed Table
+      === @version: v1.0
+      ========================================================= 
+    */
+
+    function countColumns($column, $table){
+      global $db;
+      $stem = $db->prepare("SELECT COUNT($column) FROM $table");
+      $stem->execute();
+      return $stem->fetchColumn();
+    }
