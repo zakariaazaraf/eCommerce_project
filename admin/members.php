@@ -364,13 +364,13 @@
 
             $userid = isset($_GET['userid']) && is_numeric($_GET['userid']) ? intval($_GET['userid'])  : 0;
 
-            // GET THE INFORMATION OF THIS USER BY HIS ID
+            /* // GET THE INFORMATION OF THIS USER BY HIS ID
             $stmt = $db->prepare("SELECT * FROM users WHERE userId = ? LIMIT 1"); // QUERY
             $stmt->execute(array($userid)); // PASS THE PARAMETER AND EXECUTE THE QUEY
-            $rowCount = $stmt->rowCount(); // GET THE NUMBER OF ROWS
+            $rowCount = $stmt->rowCount(); // GET THE NUMBER OF ROWS */
 
             // CHECK IF A CHANGE HAS MADE IN THE DATABASE
-            if($rowCount > 0){     
+            if(checkItem('UserId', 'users', $userid) > 0){     
 
                 // DELETE MEMBER PROCESS
                 $stmt = $db->prepare("DELETE FROM users WHERE UserId = :userID");
