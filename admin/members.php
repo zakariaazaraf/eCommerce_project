@@ -80,7 +80,7 @@
                                         echo "<td>";
                                             echo "<a href='?do=edit&userid=" . $row['UserId'] . "' class='btn btn-success' role='button'><i class='fas fa-edit'></i>Edit</a>";
                                             echo "<a href='?do=delete&userid=" . $row['UserId'] . "' class='btn btn-danger confirm' role='button'><i class='fas fa-trash'></i>Delete</a>";
-                                            echo !$row['RegStatus'] ? "<a href='?do=Mange&page=panding' class='btn btn-info' role='button'><i class='fas fa-pen-fancy'></i>Activate</a>" : '';
+                                            echo !$row['RegStatus'] ? "<a href='?do=activate&userid=" . $row['UserId'] . "' class='btn btn-info' role='button'><i class='fas fa-pen-fancy'></i>Activate</a>" : '';
                                         echo "</td>";
                                     echo "</tr>";
 
@@ -393,6 +393,28 @@
             }
 
 
+        }elseif($do == 'activate'){
+            
+            echo "<div class='container'><h1 class='text-center'>Activate Member Page</h1>";
+
+            $userid = isset($_GET['userid']) && is_numeric($_GET['userid']) ? intval($_GET['userid'])  : 0;
+
+            // CHECK IF A CHANGE HAS MADE IN THE DATABASE
+            if(checkItem('UserId', 'users', $userid) > 0){     
+
+                // DELETE MEMBER PROCESS
+                $stmt = $db->prepare("UPDATE users SET RegStatus = 1 WHERE UserId = ?"); // :userID
+                //$stmt->bindParam('userID', $userid);
+
+                $stmt->execute(array($userid));
+
+                $msg = "<div class='alert alert-success'>" . $stmt->rowCount() . " Member Activated</div>";
+                redirectHome($msg, 'members.php');
+
+            }else{
+                $msg = "<div class='alert alert-danger'>ID DOESN'T EXISTS !!</div>";
+                redirectHome($msg);
+            }
         }else{
             echo 'default';
         }
