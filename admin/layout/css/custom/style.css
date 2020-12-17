@@ -85,8 +85,22 @@ nav .container div:last-child {
 
 /* End Editing Bootstrap */
 /* END NAVBAR CUSTOMIZE */
-
 /**************************************************************/
+
+/* START DASHBOARD */
+.home-static .static {
+  font-size: 1.5rem;
+  background-color: #eee;
+  border: 1px solid slategray;
+  padding: 1rem;
+}
+
+.home-static .static span {
+  font-size: 3rem;
+}
+
+/* END DASHBOARD */
+
 /*
   ======================= EDIT MEMEBER ===========================
 */
