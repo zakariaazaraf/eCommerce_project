@@ -200,11 +200,13 @@
 
                         $row = $stmt->rowCount();
 
-                        echo "<div class='alert alert-success'>" .$row . " Member Inserted !!</div></div>" ;
+                        $msg = "<div class='alert alert-success'>" .$row . " Member Inserted !!</div>";
+                        redirectHome($msg, 'members.php');
 
                     }else{
 
-                        echo '<div class="alert alert-danger">This Name Allready Exists</div></div>';
+                        $msg = '<div class="alert alert-danger">This Name Allready Exists</div></div>';
+                        redirectHome($msg, 'back');
 
                     }       
 
@@ -213,7 +215,7 @@
             }else{
                 
                 $msg = '<div class="alert alert-danger">You Cant\'t Access This Page Directly</div>';
-                redirectHome($msg, 'members.php',3);        
+                redirectHome($msg);        
             }
 
             /*
@@ -267,11 +269,11 @@
 
                 <?php 
             
-            } 
+            }else{ // IF SOMEONE PLAY WITH ID IN THE LINK
 
-            // IF SOMEONE PLAY WITH ID IN THE LINK
-            else{
-            echo "there's no such ID";
+                $msg = "<div class='alert alert-danger'>there's no such ID<div>";
+                redirectHome($msg);
+            
             }
       
             /*
@@ -311,17 +313,24 @@
                 if(count($errors) > 0){
 
                     // THROW THE ERRORS
-                    echo "<h3>Errors Encountered !!</h3></div>";
+                    echo "<h3>Errors Encountered !!</h3>";
 
                     $errors['username'] = isset($errors['username']) ? $errors['username'] : '';
                     $errors['password'] = isset($errors['password']) ? $errors['password'] : '';
                     $errors['email'] = isset($errors['email']) ? $errors['email'] : '';
                     $errors['fullname'] = isset($errors['fullname']) ? $errors['fullname'] : '';
 
+                    echo "<div class='alert alert-danger'>";
+
                     echo "<div >" . $errors['username'] ?? '' . "</div>";
                     echo "<div >" . $errors['password'] ?? '' . "</div>";
                     echo "<div >" . $errors['email'] ?? '' . "</div>";
                     echo "<div >" . $errors['fullname'] ?? '' . "</div>";
+
+                    echo "</div>";
+
+                    $msg = "<div class='alert alert-danger'>Reinter Your Infos</div>";
+                    redirectHome($msg, 'members.php', 50);
                     
                 }else{
 
@@ -332,14 +341,15 @@
 
                     $row = $stmt->rowCount();
 
-                    echo "<div class='alert alert-success'>" .$row . " of records updated !!</div></div>" ;
+                    $msg = "<div class='alert alert-success'>" .$row . " of records updated !!</div>" ;
+                    redirectHome($msg, 'members.php');
                 }
 
 
             }else{
                 
                 $msg = "<div class='alert alert-danger'>You Cant't Access This Page Directly</div>";
-                redirectHome($msg, 'members.php', 3);
+                redirectHome($msg);
             }
 
             /*
@@ -352,40 +362,36 @@
 
             echo "<div class='container'><h1 class='text-center'>Delete Member Page</h1>";
 
-            // CHECK THE BROWSING METHOD
-            if($_SERVER['REQUEST_METHOD'] === 'POST'){
+            $userid = isset($_GET['userid']) && is_numeric($_GET['userid']) ? intval($_GET['userid'])  : 0;
 
-                $userid = isset($_GET['userid']) && is_numeric($_GET['userid']) ? intval($_GET['userid'])  : 0;
+            // GET THE INFORMATION OF THIS USER BY HIS ID
+            $stmt = $db->prepare("SELECT * FROM users WHERE userId = ? LIMIT 1"); // QUERY
+            $stmt->execute(array($userid)); // PASS THE PARAMETER AND EXECUTE THE QUEY
+            $rowCount = $stmt->rowCount(); // GET THE NUMBER OF ROWS
 
-                // GET THE INFORMATION OF THIS USER BY HIS ID
-                $stmt = $db->prepare("SELECT * FROM users WHERE userId = ? LIMIT 1"); // QUERY
-                $stmt->execute(array($userid)); // PASS THE PARAMETER AND EXECUTE THE QUEY
-                $rowCount = $stmt->rowCount(); // GET THE NUMBER OF ROWS
+            // CHECK IF A CHANGE HAS MADE IN THE DATABASE
+            if($rowCount > 0){     
 
-                // CHECK IF A CHANGE HAS MADE IN THE DATABASE
-                if($rowCount > 0){     
+                // DELETE MEMBER PROCESS
+                $stmt = $db->prepare("DELETE FROM users WHERE UserId = :userID");
 
-                    // DELETE MEMBER PROCESS
-                    $stmt = $db->prepare("DELETE FROM users WHERE UserId = :userID");
+                $stmt->bindParam('userID', $userid);
 
-                    $stmt->bindParam('userID', $userid);
+                $stmt->execute();
 
-                    $stmt->execute();
-
-                    echo "<div class='alert alert-success'>" . $stmt->rowCount() . " Member Deleted</div></div>";
-
-                }else{
-                    echo "<div class='alert alert-danger'>ID DOESN'T EXISTS !!</div></div>";
-                }
+                $msg = "<div class='alert alert-success'>" . $stmt->rowCount() . " Member Deleted</div>";
+                redirectHome($msg, 'members.php');
 
             }else{
-                $msg = "<div class='alert alert-danger'>You can't Browse This Page Directly</div>";
-                redirectHome($msg, 'members.php');
+                $msg = "<div class='alert alert-danger'>ID DOESN'T EXISTS !!</div>";
+                redirectHome($msg);
             }
+
 
         }else{
             echo 'default';
         }
+
         //Include Footer
         include $template . 'footer.php';
 

@@ -1,8 +1,14 @@
 <?php
 
 
-    /*==============================================
-    ==============  Title Function  ================*/
+    /*
+      =========================================================
+      === @name : getTitle
+      === @desc : Display Page Title
+      === @version: v1.0
+      ========================================================= 
+    */
+
     function getTitle(){
 
         global $titlePage;
@@ -22,13 +28,19 @@
 
     function redirectHome($msg, $url = null, $seconds = 3){
 
-        $url = $url ? $url = isset($_SERVER['HTTP_REFERER']) && $_SERVER['HTTP_REFERER'] !== '' ? $_SERVER['HTTP_REFERER'] : 'index.php' : 'index.php';
+        
        /*  if(!$url){
             $url = 'index.php';
         }else{
 
             $url = isset($_SERVER['HTTP_REFERER']) && $_SERVER['HTTP_REFERER'] !== '' ? $_SERVER['HTTP_REFERER'] : 'index.php';
         } */
+
+        if($url === 'back'){
+          $url = $_SERVER['HTTP_REFERER'];
+        }else{
+          $url = $url ? $url = isset($_SERVER['HTTP_REFERER']) && $_SERVER['HTTP_REFERER'] !== '' ? $_SERVER['HTTP_REFERER'] : 'index.php' : 'index.php';
+        }
 
         echo $msg;
         echo "<div class='alert alert-success'>You'll Be Redirected To $url Page After $seconds Seconds</div></div>";
