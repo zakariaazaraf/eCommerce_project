@@ -92,7 +92,33 @@ nav .container div:last-child {
   font-size: 1.5rem;
   background-color: #eee;
   border: 1px solid slategray;
+  color: #f4d2d2eb;
   padding: 1rem;
+  border-radius: 8px;
+}
+
+.home-static .static a {
+  color: #f4d2d2eb;
+}
+
+.home-static .static a:hover {
+  text-decoration: none;
+}
+
+.home-static .st-members {
+  background-color: #eb59c7;
+}
+
+.home-static .st-panding {
+  background-color: #b955fa;
+}
+
+.home-static .st-items {
+  background-color: #d4466b;
+}
+
+.home-static .st-comments {
+  background-color: #c146d4;
 }
 
 .home-static .static span {

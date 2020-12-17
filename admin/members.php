@@ -40,7 +40,11 @@
             ==================================================================================
             ====================== BRING THE USERS FROM THE DATABASE =========================*/
 
-            $stmt = $db->prepare("SELECT * FROM users WHERE GroupID != 1");
+            // ADD ANOTHER OPTION : IF THE ADMIN WANT THE UNACTIVATE MEMBERS
+            $panding = isset($_GET['page']) && $_GET['page'] == 'panding' ? 'AND RegStatus = 0' : '';
+
+            
+            $stmt = $db->prepare("SELECT * FROM users WHERE GroupID != 1 $panding");
             $stmt->execute();
             $rows = $stmt->fetchAll();
 
@@ -76,6 +80,7 @@
                                         echo "<td>";
                                             echo "<a href='?do=edit&userid=" . $row['UserId'] . "' class='btn btn-success' role='button'><i class='fas fa-edit'></i>Edit</a>";
                                             echo "<a href='?do=delete&userid=" . $row['UserId'] . "' class='btn btn-danger confirm' role='button'><i class='fas fa-trash'></i>Delete</a>";
+                                            echo !$row['RegStatus'] ? "<a href='?do=Mange&page=panding' class='btn btn-info' role='button'><i class='fas fa-pen-fancy'></i>Activate</a>" : '';
                                         echo "</td>";
                                     echo "</tr>";
 
@@ -193,7 +198,7 @@
 
 
                         // INSERT A NEW MEMBER WITH THE BINDING METHOD I DATABASE
-                        $stmt = $db->prepare("INSERT INTO users (UserName, Password, Email, FullName, Date) VALUES (?, ?, ?, ?, now())");     
+                        $stmt = $db->prepare("INSERT INTO users (UserName, Password, Email, FullName, RegStatus, Date) VALUES (?, ?, ?, ?, 1, now())");     
                         
                         $stmt->execute(array($username, $hashpassword, $email, $fullname));
                         
