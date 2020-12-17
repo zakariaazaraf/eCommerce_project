@@ -12,6 +12,10 @@
     if(isset($_SESSION['username'])){
 
         echo "<div class='container'><h1 class='text-center'>Welcome " . $_SESSION['username'] . " To Dashboard !!!</h1></div>";
+
+        // GET THE LATEST USERS
+        $limit = 5;
+        $latestUsers = getLatest('*', 'users', 'UserId', $limit);
         
     }else{
 
@@ -37,9 +41,9 @@
             <div class="col-sm-6">
 
                 <div class="card my-4">
-                    <h4 class="card-header"><i class='fas fa-users'></i> Latest Registred Users</h4>
+                    <h4 class="card-header"><i class='fas fa-users'></i> Latest <?php echo $limit ?> Registred Users</h4>
                     <div class="card-body">
-                        <p class="card-text">Some Text here !!</p>
+                        <p class="card-text"><?php foreach($latestUsers as $last){echo $last['UserName'] . '<br />';}?></p>
                     </div>
                 </div>
                 

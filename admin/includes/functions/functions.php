@@ -78,3 +78,18 @@
       $stem->execute();
       return $stem->fetchColumn();
     }
+
+    /*
+      =========================================================
+      === @name : getLatest
+      === @desc : Get The last records iserted, it could be {users, categories, comment, ...}
+      === @version: v1.0
+      ========================================================= 
+    */
+
+    function getLatest($select, $table, $orderBy, $limit = 5){
+      global $db;
+      $stetment = $db->prepare("SELECT $select FROM $table ORDER BY $orderBy DESC LIMIT $limit");
+      $stetment->execute();
+      return $stetment->fetchAll();
+    }
