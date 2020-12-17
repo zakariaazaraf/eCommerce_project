@@ -72,7 +72,7 @@
                                         echo "<td>" . $row['UserName'] . "</td>";
                                         echo "<td>" . $row['Email'] . "</td>";
                                         echo "<td>" . $row['FullName'] . "</td>";
-                                        echo "<td></td>";
+                                        echo "<td>" . $row['Date'] . "</td>";
                                         echo "<td>";
                                             echo "<a href='?do=edit&userid=" . $row['UserId'] . "' class='btn btn-success' role='button'><i class='fas fa-edit'></i>Edit</a>";
                                             echo "<a href='?do=delete&userid=" . $row['UserId'] . "' class='btn btn-danger confirm' role='button'><i class='fas fa-trash'></i>Delete</a>";
@@ -193,14 +193,14 @@
 
 
                         // INSERT A NEW MEMBER WITH THE BINDING METHOD I DATABASE
-                        $stmt = $db->prepare("INSERT INTO users (UserName, Password, Email, FullName) VALUES (?, ?, ?, ?)");     
+                        $stmt = $db->prepare("INSERT INTO users (UserName, Password, Email, FullName, Date) VALUES (?, ?, ?, ?, now())");     
                         
                         $stmt->execute(array($username, $hashpassword, $email, $fullname));
                         
 
                         $row = $stmt->rowCount();
 
-                        $msg = "<div class='alert alert-success'>" .$row . " Member Inserted !!</div>";
+                        $msg = "<div class='alert alert-success'>" . $row . " Member Inserted !!</div>";
                         redirectHome($msg, 'members.php');
 
                     }else{
@@ -322,15 +322,15 @@
 
                     echo "<div class='alert alert-danger'>";
 
-                    echo "<div >" . $errors['username'] ?? '' . "</div>";
-                    echo "<div >" . $errors['password'] ?? '' . "</div>";
-                    echo "<div >" . $errors['email'] ?? '' . "</div>";
-                    echo "<div >" . $errors['fullname'] ?? '' . "</div>";
+                    echo  $errors['username'] ?? '' . "<br />";
+                    echo  $errors['password'] ?? '' . "<br />";
+                    echo  $errors['email'] ?? '' . "<br />";
+                    echo  $errors['fullname'] ?? '' . "<br />";
 
                     echo "</div>";
 
                     $msg = "<div class='alert alert-danger'>Reinter Your Infos</div>";
-                    redirectHome($msg, 'members.php', 50);
+                    redirectHome($msg, 'back');
                     
                 }else{
 
