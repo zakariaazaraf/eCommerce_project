@@ -39,48 +39,53 @@
             /*
             ==================================================================================
             ====================== BRING THE USERS FROM THE DATABASE =========================*/
+            $stmt = $db->prepare('SELECT * FROM categories');
+            $stmt->execute();
+            $categories = $stmt->fetchAll();
 
             /*================================================================================*/
             ?>
 
             <h1 class="text-center">manage categories</h1>
-            <div class="container">
-                <div class="table-responsive">
-                    <table class="table table-striped table-bordered text-center">
-                        <thead class="thead-dark">
-                            <tr>
-                                <th>ID</th>
-                                <th>Category</th>
-                                <th>Email</th>
-                                <th>Full Name</th>
-                                <th>Registred Date</th>
-                                <th>Control</th>
-                            </tr>
-                        </thead>
-                        <tbod>
+            <div class="container categories">
+                <div class="row justify-content-center">
+                
+                <!-- START A PHP CODE WHISH BRIGN CATEGORIES FROM DB -->
+                <?php  
 
-                            <!-- START A PHP CODE WHISH BRIGN USERS FROM DB -->
-                            <?php
+                    foreach($categories as $category){
 
-                                echo "<tr>";
-                                    echo "<th></th>";
-                                    echo "<td></td>";
-                                    echo "<td></td>";
-                                    echo "<td></td>";
-                                    echo "<td></td>";
-                                    echo "<td>";
-                                        echo "<a href='?do=edit&userid=' class='btn btn-success' role='button'><i class='fas fa-edit'></i>Edit</a>";
-                                        echo "<a href='?do=delete&userid=' class='btn btn-danger confirm' role='button'><i class='fas fa-trash'></i>Delete</a>";
-                                    echo "</td>";
-                                echo "</tr>";
+                        echo "<div class='card border-secondary col-11 col-sm-10 col-md-8 col-lg-7 px-0 my-3'>";
 
+                            echo "<div class='card-header d-flex justify-content-between py-0'>";
+                                echo "<h5 class='card-title my-1 text-capitalize font-weight-bold'>" . $category['Name']. "</h5>";
+                                echo "<div>";
+                                    echo "<a href='?do=edit&userid=' class='btn btn-success m-1' role='button'><i class='fas fa-edit'></i>Edit</a>";
+                                    echo "<a href='?do=delete&userid=' class='btn btn-danger m-1 confirm' role='button'><i class='fas fa-trash'></i>Delete</a>";
+                                echo "</div>";
                                 
-                            ?>
-                            <!-- END A PHP CODE WHISH BRIGN USERS FROM DB -->
-                            
-                        </tbody>
-                    </table>
+                            echo "</div>";
+
+                            echo "<div class='card-body text-secondary'>";
+                                echo "<p class='card-text'>" . $category['Description']. "</p>";
+                            echo "</div>";
+
+                            echo "<div class='card-footer bg-transparent border-secondary'>";
+                                echo "<span class='m-1 p-2 alert alert-";  echo $category['Visibility'] ? 'success' : 'danger'; echo "'>Visibility</span>";
+                                echo "<span class='m-1 p-2 alert alert-";  echo $category['Allow_Comments'] ? 'success' : 'danger'; echo "'>Comments</span>";
+                                echo "<span class='m-1 p-2 alert alert-";  echo $category['Add_Ads'] ? 'success' : 'danger'; echo "'>Advertise</span>";
+                                
+                            echo "</div>";
+
+                        echo "</div>";
+
+                    }
+                    
+                ?>
+
                 </div>
+                <!-- END A PHP CODE WHISH BRIGN CATEGORIES FROM DB -->
+                            
                 <a href='categories.php?do=add' class="btn btn-primary"><i class="fas fa-plus"></i>New Category</a>
             </div>
             

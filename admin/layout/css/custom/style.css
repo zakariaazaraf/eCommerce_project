@@ -231,3 +231,31 @@ input[type="email"]:focus {
   right: 3px;
 }
 /* END FORM MEMEBER */
+
+/* START CATEGORIES PAGE */
+.card {
+  min-height: 220px;
+  overflow: hidden;
+}
+
+.categories .card .btn {
+  padding: 0.3rem 0.5rem;
+  line-height: 1.2;
+}
+
+.categories .card .btn-danger {
+  transform: translateX(140px);
+  transition: all 0.7s ease-in-out 0.5s;
+}
+
+.categories .card .btn-success {
+  transform: translateX(215px);
+  transition: all 0.7s ease-in-out;
+}
+
+.categories .card:hover .btn-success,
+.categories .card:hover .btn-danger {
+  transform: translateX(0px);
+  transition: all 0.7s ease-in-out;
+}
+/* START CATEGORIES PAGE */
