@@ -8,7 +8,7 @@
     <div class="collapse navbar-collapse" id="zakaria">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item">
-          <a class="nav-link" href="#"><?php echo lang("CATEGORIES") ?></a>
+          <a class="nav-link" href="categories.php"><?php echo lang("CATEGORIES") ?></a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#"><?php echo lang("ITEMS") ?></a>
