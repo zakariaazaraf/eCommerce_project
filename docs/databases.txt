@@ -1,0 +1,14 @@
+// CREATION categories's TABLE
+
+CREATE TABLE categories (
+    ID TINYINT PRIMARY KEY AUTO_INCREMENT,
+    Name VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_general_ci,
+    Description VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_general_ci,
+    Ordering TINYINT,
+    Visibility TINYINT DEFAULT 0,
+    Allow_Comments TINYINT DEFAULT 0,
+    Add_Ads TINYINT DEFAULT 0,
+    UNIQUE (Name)
+);
+
+ALTER TABLE categories CONVERT TO CHARACTER SET utf8;
