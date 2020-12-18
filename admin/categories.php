@@ -60,8 +60,8 @@
                             echo "<div class='card-header d-flex justify-content-between py-0'>";
                                 echo "<h5 class='card-title my-1 text-capitalize font-weight-bold'>" . $category['Name']. "</h5>";
                                 echo "<div>";
-                                    echo "<a href='?do=edit&userid=' class='btn btn-success m-1' role='button'><i class='fas fa-edit'></i>Edit</a>";
-                                    echo "<a href='?do=delete&userid=' class='btn btn-danger m-1 confirm' role='button'><i class='fas fa-trash'></i>Delete</a>";
+                                    echo "<a href='?do=edit&ID=".$category['ID']."' class='btn btn-success m-1' role='button'><i class='fas fa-edit'></i>Edit</a>";
+                                    echo "<a href='?do=delete&ID=".$category['ID']."' class='btn btn-danger m-1 confirm' role='button'><i class='fas fa-trash'></i>Delete</a>";
                                 echo "</div>";
                                 
                             echo "</div>";
