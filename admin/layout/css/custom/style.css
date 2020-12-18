@@ -125,6 +125,10 @@ nav .container div:last-child {
   font-size: 3rem;
 }
 
+.latest .list-group .list-group-item:nth-child(odd) {
+  background-color: #eee;
+}
+
 /* END DASHBOARD */
 
 /*

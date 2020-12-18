@@ -43,7 +43,24 @@
                 <div class="card my-4">
                     <h4 class="card-header"><i class='fas fa-users'></i> Latest <?php echo $limit ?> Registred Users</h4>
                     <div class="card-body">
-                        <p class="card-text"><?php foreach($latestUsers as $last){echo $last['UserName'] . '<br />';}?></p>
+                        <div class="card-text">
+                            <ul class="list-group">
+                                <?php
+                                    // BRING LATEST USERS 
+                                    foreach($latestUsers as $last){
+                                        echo '<li class="list-group-item py-2 px-2 d-flex col justify-content-between">';
+                                            echo '<p class="m-0 p-0 font-weight-bold text-capitalize">' .$last['UserName']. '</p>';
+                                            echo '<div class="p-0 d-flex justify-content-between">';
+                                                echo '<a href="members.php?do=edit&userid='.$last['UserId'].'" class="btn btn-success mx-1 py-1 px-2"><i class="fas fa-edit"></i>Edit</a>';
+                                                // DISPLAY ACTIVATE BUTTON CONDTION
+                                                echo !$last['RegStatus'] ? '<a href="members.php?do=activate&userid='.$last['UserId'].'" class="btn btn-info mx-1 py-1 px-2"><i class="fas fa-pen-fancy">Activate</i></a>' : '';
+                                            echo '</div>';
+                                        echo '</li>';
+                                        
+                                    }
+                                ?>
+                            </ul>                     
+                        </div>
                     </div>
                 </div>
                 
