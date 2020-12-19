@@ -26,7 +26,7 @@ DELETE FROM categories WHERE ID = ?
 
 
 CREATE TABLE items (
-    ID INT(11) PRIMARY KEY AUTO_INCREMENT,
+    Item_ID INT(11) PRIMARY KEY AUTO_INCREMENT,
     NAME VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_general_ci,
     Description TEXT CHARACTER SET utf8 COLLATE utf8_general_ci,
     Price VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_general_ci,
@@ -35,10 +35,8 @@ CREATE TABLE items (
     Image VARCHAR(255),
     Status VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_general_ci,
     Rating SMALLINT,
-    ID TINYINT(4),
-    User_Id INT(11),
-    FOREIGN KEY (ID) REFERENCES categories(ID),
-    FOREIGN KEY (User_Id) REFERENCES users(User_Id)
+    ID TINYINT(4) NOT NULL,
+    User_Id INT(11) NOT NULL
 )
 
 ALTER TABLE TableName MODIFY FieldName .....;
