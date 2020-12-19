@@ -40,6 +40,10 @@
             ==================================================================================
             ====================== BRING THE USERS FROM THE DATABASE =========================*/
             $order = 'ASC'; // DESC
+            $sort_array = array('ASC', 'DESC');
+            if(isset($_GET['sort']) && in_array($_GET['sort'], $sort_array)){
+                $order = $_GET['sort'];
+            }
             $stmt = $db->prepare("SELECT * FROM categories ORDER BY ID $order");
             $stmt->execute();
             $categories = $stmt->fetchAll();
