@@ -415,7 +415,35 @@
             */
         }elseif($do == 'delete'){
 
-            echo "<div class='container'><h1 class='text-center'>Delete Member Page</h1>";
+            echo "<div class='container'><h1 class='text-center'>Delete Category</h1>";
+
+            $ID = (isset($_GET['ID']) && is_numeric($_GET['ID'])) ? intval($_GET['ID']) : 0;
+
+            if($ID){
+
+                if(checkItem('ID', 'categories', $ID)){
+
+                    $stmt = $db->prepare("DELETE FROM categories WHERE ID = ?");
+                    $stmt->execute(array($ID));
+                    $row = $stmt->rowCount();
+
+                    if($row){
+                        $msg = "<div class='alert alert-success'>Category Seleted :) :) !!!!</div>";
+                        redirectHome($msg, 'categories.php');
+                    }else{
+                        $msg = "<div class='alert alert-danger'>We Encountered Some Issues</div>";
+                        redirectHome($msg);
+                    }
+                 
+                }else{
+                    $msg = "<div class='alert alert-danger'>ID Doesn\'t Exists :( :( !!!!</div>";
+                    redirectHome($msg);
+                }
+
+            }else{
+                $msg = "<div class='alert alert-danger'>ID Doesn\'t Match The Type :( :( !!</div>";
+                redirectHome($msg);
+            }
 
         }else{
             echo 'default';
