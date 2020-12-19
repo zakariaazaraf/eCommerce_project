@@ -97,12 +97,11 @@
             <?php
             /*
             ================================================================================
-            == ADD MEMBER
+            == ADD Category
             ================================================================================
             */
         }elseif($do == 'add'){
-
-            
+        
             ?> 
 
                     <div class="container categories">
@@ -190,7 +189,7 @@
 
             /*
             ================================================================================
-            == INSERT MEMBER
+            == INSERT Category
             ================================================================================
             */
         }elseif($do == 'insert'){
@@ -271,19 +270,12 @@
             ================================================================================
             */
         }elseif ($do == 'edit'){       
-            /*
-            ================================================================================
-            == UPDATE MEMBER
-            ================================================================================
-            */
 
-            
             $ID = isset($_GET['ID']) && is_numeric($_GET['ID']) ? intval($_GET['ID'])  : 0;
             $stmt = $db->prepare("SELECT * FROM categories WHERE ID = ?");
             $stmt->execute(array($ID));
             $category = $stmt->fetch();
             $rowCount = $stmt->rowCount();
-
 
             if($rowCount > 0){
                 ?>
@@ -291,7 +283,7 @@
                     <h1 class="text-center">Edit category</h1>
                         <form action="?do=update" method='POST'>
                             <!-- Hidden Input For Id -->
-                            <input type="hidden" value="<?php echo $ID ?>">
+                            <input type="hidden" name="ID" value="<?php echo $ID ?>">
                             <div class="form-group row justify-content-center">
                                 <label class="col col-sm-4 col-md-3 col-lg-2" for="category">Category:</label>
                                 <input class="col col-sm-7 col-md-6 col-lg-5" type="text" name="category" id="category" required autocomplete="off" placeholder="Category Name" value="<?php echo $category['Name'] ?>"/>
@@ -361,6 +353,7 @@
                                     </div>
                                 </div>
                             </fieldset>
+
                             <div class="form-group row justify-content-center">
                                 <div class="col-12 col-sm-11 col-md-9 col-lg-7">    
                                     <button type="submit" class="btn btn-primary"><i class="fas fa-plus"></i>Save Categoy</button>
@@ -370,22 +363,56 @@
                         </form>
                     </div>
                 <?php
+
             }else{
-                $msg = "<div class='alert alert-danger'>there's no such ID<div>";
+                $msg = "<div class='container mt-4'><div class='col-6 mx-auto alert alert-danger'>there's no such ID</div>";
+                redirectHome($msg);
+            }
+
+            /*
+            ================================================================================
+            == UPDATE Category
+            ================================================================================
+            */    
+        }elseif($do == 'update'){
+
+            echo '<div class="container"><h1 class="text-center">update category</h1>';
+
+            if($_SERVER['REQUEST_METHOD'] === 'POST'){
+                
+                
+
+                if(!checkItem('Name', 'categories', $_POST['category'])){
+
+                    $stmt = $db->prepare("UPDATE categories SET Name = ?, Description = ?, Ordering = ?, Visibility = ?, Allow_Comments = ?, Add_Ads = ? WHERE ID = ?");
+                    $stmt->execute(array($_POST['category'], $_POST['description'], $_POST['ordering'], $_POST['visibility'], $_POST['comments'], $_POST['ads'], $_POST['ID']));
+                    $rowCount = $stmt->rowCount();
+
+                    if($rowCount){
+                        $msg = "<div class='alert alert-success'>Category Updated Bye Bye :) :) !!</div>";
+                        redirectHome($msg, 'categories.php');
+                    }else{
+                        $msg = "<div class='alert alert-danger'>Error Encountred :( :( !!</div>";
+                        redirectHome($msg, 'categories.php');
+                    }
+
+                }else{
+                    $msg = "<div class='alert alert-danger'>Name Already Exists :( :( !!</div>";
+                    redirectHome($msg, 'back');
+                }
+
+                
+                
+            }else{
+                $msg = "<div class='alert alert-danger'>Method denied :( :(</div>";
                 redirectHome($msg);
             }
             
-
-        }elseif($do == 'update'){
-
-            echo '<div class="container"><h1 class="text-center">update member</h1>';
-            
             /*
             ================================================================================
-            == DELETE MEMBER
+            == DELETE Category
             ================================================================================
             */
-
         }elseif($do == 'delete'){
 
             echo "<div class='container'><h1 class='text-center'>Delete Member Page</h1>";
