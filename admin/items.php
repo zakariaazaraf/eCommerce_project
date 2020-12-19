@@ -64,7 +64,8 @@
                             </div>
                             <div class="form-group row justify-content-center">
                                 <label class="col col-sm-4 col-md-3 col-lg-2" for="description">Description:</label>
-                                <input class="col col-sm-7 col-md-6 col-lg-5" type="text" name="description" id="description" placeholder="Item Description"/>
+                                <textarea class="col col-sm-7 col-md-6 col-lg-5" name="description" id="description"  rows="4" placeholder="Some Text here"></textarea>
+                                <!-- <input class="col col-sm-7 col-md-6 col-lg-5" type="text" name="description" id="description" placeholder="Item Description"/> -->
                             </div>
                             <div class="form-group row justify-content-center">
                                 <label class="col col-sm-4 col-md-3 col-lg-2" for="price">Price:</label>
@@ -83,7 +84,7 @@
                                 </select>        
                             </div>
                             <div class="form-group row justify-content-center">
-                                <label class="col col-sm-4 col-md-3 col-lg-2" for="status">Category:</label>
+                                <label class="col col-sm-4 col-md-3 col-lg-2" for="category">Category:</label>
                                 <select class="custom-select col col-sm-7 col-md-6 col-lg-5" name="category" id="category" required>
                                     <option value="cate 1">cate 1</option>
                                     <option value="cate 2">cate 2</option>
