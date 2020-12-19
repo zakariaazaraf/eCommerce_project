@@ -18,3 +18,8 @@ INSERT INTO
                 (Name, Description, Ordering, Visibility, Allow_Comments, Add_Ads) 
             VALUES 
                 ('cate name', 'description text', 3, '1', '1',0);
+
+
+UPDATE categories SET Name = ?, Description = ?, Ordering = ?, Visibility = ?, Allow_Comments = ?, Add_Ads = ? WHERE ID = ?
+
+DELETE FROM categories WHERE ID = ?
