@@ -258,4 +258,12 @@ input[type="email"]:focus {
   transform: translateX(0px);
   transition: all 0.7s ease-in-out;
 }
+
+.categories .card .card-footer {
+  padding: 0.6rem 1.25rem;
+}
+.categories .card .card-footer span {
+  padding: 0.4rem;
+  font-weight: bold;
+}
 /* START CATEGORIES PAGE */

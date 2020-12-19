@@ -39,7 +39,8 @@
             /*
             ==================================================================================
             ====================== BRING THE USERS FROM THE DATABASE =========================*/
-            $stmt = $db->prepare('SELECT * FROM categories');
+            $order = 'ASC'; // DESC
+            $stmt = $db->prepare("SELECT * FROM categories ORDER BY ID $order");
             $stmt->execute();
             $categories = $stmt->fetchAll();
 
@@ -71,9 +72,9 @@
                             echo "</div>";
 
                             echo "<div class='card-footer bg-transparent border-secondary'>";
-                                echo "<span class='m-1 p-2 alert alert-";  echo $category['Visibility'] ? 'success' : 'danger'; echo "'>Visibility</span>";
-                                echo "<span class='m-1 p-2 alert alert-";  echo $category['Allow_Comments'] ? 'success' : 'danger'; echo "'>Comments</span>";
-                                echo "<span class='m-1 p-2 alert alert-";  echo $category['Add_Ads'] ? 'success' : 'danger'; echo "'>Advertise</span>";
+                                echo "<span class='m-1 alert alert-";  echo $category['Visibility'] ? 'success' : 'danger'; echo "'>Visibility</span>";
+                                echo "<span class='m-1 alert alert-";  echo $category['Allow_Comments'] ? 'success' : 'danger'; echo "'>Comments</span>";
+                                echo "<span class='m-1 alert alert-";  echo $category['Add_Ads'] ? 'success' : 'danger'; echo "'>Advertise</span>";
                                 
                             echo "</div>";
 
@@ -271,6 +272,106 @@
             == UPDATE MEMBER
             ================================================================================
             */
+
+            
+            $ID = isset($_GET['ID']) && is_numeric($_GET['ID']) ? intval($_GET['ID'])  : 0;
+            $stmt = $db->prepare("SELECT * FROM categories WHERE ID = ?");
+            $stmt->execute(array($ID));
+            $category = $stmt->fetch();
+            $rowCount = $stmt->rowCount();
+
+
+            if($rowCount > 0){
+                ?>
+                    <div class="container categories">
+                    <h1 class="text-center">Edit category</h1>
+                        <form action="?do=update" method='POST'>
+                            <!-- Hidden Input For Id -->
+                            <input type="hidden" value="<?php echo $ID ?>">
+                            <div class="form-group row justify-content-center">
+                                <label class="col col-sm-4 col-md-3 col-lg-2" for="category">Category:</label>
+                                <input class="col col-sm-7 col-md-6 col-lg-5" type="text" name="category" id="category" required autocomplete="off" placeholder="Category Name" value="<?php echo $category['Name'] ?>"/>
+                            </div>
+                            <div class="form-group row justify-content-center">
+                                <label class="col col-sm-4 col-md-3 col-lg-2" for="description">Description:</label>
+                                <input class="col col-sm-7 col-md-6 col-lg-5" type="text" name="description" id="description" placeholder="Category Description" value="<?php echo  $category['Description'] ?>"/>
+                            </div>
+                            <div class="form-group row justify-content-center">
+                                <label class="col col-sm-4 col-md-3 col-lg-2" for="ordering" class="col-sm-2">Ordering:</label>
+                                <input class="col col-sm-7 col-md-6 col-lg-5" type="text" name="ordering" id="ordering" placeholder="Arrange Order Number" value="<?php echo $category['Ordering']?>"/>
+                            </div>
+
+                            <fieldset class="form-group">
+                                <div class="row justify-content-center">
+                                    <legend class="col-form-label col col-sm-4 col-md-3 col-lg-2">Visibility:</legend>
+                                    <div class="col col-sm-7 col-md-6 col-lg-5">
+
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="visibility" id="visibility-yes" value="1" <?php echo $category['Visibility'] ? 'checked' : '' ?>>
+                                            <label class="form-check-label" for="visibility-yes">Yes</label>
+                                        </div>
+
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="visibility" id="visibility-no" value="0" <?php echo !$category['Visibility'] ? 'checked' : '' ?>>
+                                            <label class="form-check-label" for="visibility-no">No</label>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </fieldset>
+
+                            <fieldset class="form-group">
+                                <div class="row justify-content-center">
+                                    <legend class="col-form-label col col-sm-4 col-md-3 col-lg-2">Comments:</legend>
+                                    <div class="col col-sm-7 col-md-6 col-lg-5">
+
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="comments" id="comments-yes" value="1" <?php echo $category['Allow_Comments'] ? 'checked' : '' ?>>
+                                            <label class="form-check-label" for="comments-yes">Yes</label>
+                                        </div>
+
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="comments" id="comments-no" value="0" <?php echo !$category['Allow_Comments'] ? 'checked' : '' ?>>
+                                            <label class="form-check-label" for="comments-no">No</label>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </fieldset>
+
+                            <fieldset class="form-group">
+                                <div class="row justify-content-center">
+                                    <legend class="col-form-label col col-sm-4 col-md-3 col-lg-2">Advertisements:</legend>
+                                    <div class="col col-sm-7 col-md-6 col-lg-5">
+
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="ads" id="ads-yes" value="1" <?php echo $category['Add_Ads'] ? 'checked' : '' ?>>
+                                            <label class="form-check-label" for="ads-yes">Yes</label>
+                                        </div>
+
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="ads" id="ads-no" value="0" <?php echo !$category['Add_Ads'] ? 'checked' : '' ?>>
+                                            <label class="form-check-label" for="ads-no">No</label>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <div class="form-group row justify-content-center">
+                                <div class="col-12 col-sm-11 col-md-9 col-lg-7">    
+                                    <button type="submit" class="btn btn-primary"><i class="fas fa-plus"></i>Save Categoy</button>
+                                </div>
+                            </div>
+                            
+                        </form>
+                    </div>
+                <?php
+            }else{
+                $msg = "<div class='alert alert-danger'>there's no such ID<div>";
+                redirectHome($msg);
+            }
+            
+
         }elseif($do == 'update'){
 
             echo '<div class="container"><h1 class="text-center">update member</h1>';
