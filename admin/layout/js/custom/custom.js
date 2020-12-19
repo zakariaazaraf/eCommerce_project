@@ -25,11 +25,16 @@ $(function(){ // JQUERY FUNCTION WHISH REMOVES PLACEHOLDER TEXT ON FOCUS
 
     });
 
-    // CONFIRM DELETION OF A MEMEBER
+    // CONFIRM DELETION OF A {MEMBER, CATEGORY, ...}
     $('.confirm').click(function(){
 
         return confirm("You're Going To Delete a Member !");
 
+    });
+
+    $('.card-header').click(function () {
+
+        $(this).next('div').toggle('hide');
     });
     
 });

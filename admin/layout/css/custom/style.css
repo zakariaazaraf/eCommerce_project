@@ -233,8 +233,8 @@ input[type="email"]:focus {
 /* END FORM MEMEBER */
 
 /* START CATEGORIES PAGE */
-.card {
-  min-height: 220px;
+.categories .card {
+  /* min-height: 220px; */
   overflow: hidden;
 }
 
@@ -265,5 +265,12 @@ input[type="email"]:focus {
 .categories .card .card-footer span {
   padding: 0.4rem;
   font-weight: bold;
+}
+
+.categories .card-header {
+  cursor: pointer;
+}
+.hide {
+  height: 0;
 }
 /* START CATEGORIES PAGE */

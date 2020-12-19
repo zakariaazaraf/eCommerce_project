@@ -67,11 +67,10 @@
                                 echo "<div>";
                                     echo "<a href='?do=edit&ID=".$category['ID']."' class='btn btn-success m-1' role='button'><i class='fas fa-edit'></i>Edit</a>";
                                     echo "<a href='?do=delete&ID=".$category['ID']."' class='btn btn-danger m-1 confirm' role='button'><i class='fas fa-trash'></i>Delete</a>";
-                                echo "</div>";
-                                
+                                echo "</div>";         
                             echo "</div>";
 
-                            echo "<div class='card-body text-secondary'>";
+                            echo "<div><div class='card-body text-secondary my-3'>";
                                 echo "<p class='card-text'>" . $category['Description']. "</p>";
                             echo "</div>";
 
@@ -80,7 +79,7 @@
                                 echo "<span class='m-1 alert alert-";  echo $category['Allow_Comments'] ? 'success' : 'danger'; echo "'>Comments</span>";
                                 echo "<span class='m-1 alert alert-";  echo $category['Add_Ads'] ? 'success' : 'danger'; echo "'>Advertise</span>";
                                 
-                            echo "</div>";
+                            echo "</div></div>";
 
                         echo "</div>";
 

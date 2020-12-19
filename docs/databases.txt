@@ -23,3 +23,23 @@ INSERT INTO
 UPDATE categories SET Name = ?, Description = ?, Ordering = ?, Visibility = ?, Allow_Comments = ?, Add_Ads = ? WHERE ID = ?
 
 DELETE FROM categories WHERE ID = ?
+
+
+CREATE TABLE items (
+    ID INT(11) PRIMARY KEY AUTO_INCREMENT,
+    NAME VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_general_ci,
+    Description TEXT CHARACTER SET utf8 COLLATE utf8_general_ci,
+    Price VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_general_ci,
+    Add_Date DATE,
+    Made_In VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_general_ci,
+    Image VARCHAR(255),
+    Status VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_general_ci,
+    Rating SMALLINT,
+    ID TINYINT(4),
+    User_Id INT(11),
+    FOREIGN KEY (ID) REFERENCES categories(ID),
+    FOREIGN KEY (User_Id) REFERENCES users(User_Id)
+)
+
+ALTER TABLE TableName MODIFY FieldName .....;
+
