@@ -64,7 +64,7 @@
                             </div>
                             <div class="form-group row justify-content-center">
                                 <label class="col col-sm-4 col-md-3 col-lg-2" for="description">Description:</label>
-                                <textarea class="col col-sm-7 col-md-6 col-lg-5" name="description" id="description"  rows="4" placeholder="Some Text here"></textarea>
+                                <textarea class="col col-sm-7 col-md-6 col-lg-5" name="description" id="description"  rows="4" placeholder="Write Item Description"></textarea>
                                 <!-- <input class="col col-sm-7 col-md-6 col-lg-5" type="text" name="description" id="description" placeholder="Item Description"/> -->
                             </div>
                             <div class="form-group row justify-content-center">
