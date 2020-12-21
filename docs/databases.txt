@@ -1,7 +1,7 @@
 // CREATION categories's TABLE
 
 CREATE TABLE categories (
-    ID TINYINT PRIMARY KEY AUTO_INCREMENT,
+    Cat_Id TINYINT PRIMARY KEY AUTO_INCREMENT,
     Name VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_general_ci,
     Description VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_general_ci,
     Ordering TINYINT,
@@ -35,9 +35,42 @@ CREATE TABLE items (
     Image VARCHAR(255),
     Status VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_general_ci,
     Rating SMALLINT,
-    ID TINYINT(4) NOT NULL,
+    Cat_Id TINYINT(4) NOT NULL,
     User_Id INT(11) NOT NULL
 )
 
 ALTER TABLE TableName MODIFY FieldName .....;
+ALTER TABLE TableName CHANGE COLUMN OldColumn NewColumn Defenition;
+ toys       
+ shoes      
+ games      
+ carton     
+ t-shirt    
+ Clothes    
+ Application
+
+
+   ALTER TABLE items ADD CONSTRAINT category_foreign_key FOREIGN KEY (Cat_Id) REFERENCES categories(Cat_Id) ON UPDATE CASCADE ON DELETE CASCADE;
+
+CREATE TABLE `users` (                         
+  `UserId` int(11) NOT NULL AUTO_INCREMENT,              
+  `UserName` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,                      
+  `Password` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,                      
+  `Email` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,                         
+  `FullName` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,                      
+  `GroupID` int(11) NOT NULL DEFAULT '0',                
+  `TrustStatus` int(11) NOT NULL DEFAULT '0',            
+  `RegStatus` int(11) NOT NULL DEFAULT '0',              
+  `Date` date NOT NULL,                                  
+  PRIMARY KEY (`UserId`)                                 
+);
+
+ALTER TABLE CONVERT TO CHARACTER SET utf8;
+
+INSERT INTO 
+    `users` 
+        (`UserId`, `UserName`, `Password`, `Email`, `FullName`, `GroupID`, `TrustStatus`, `RegStatus`, `Date`) 
+    VALUES 
+        (NULL, 'zakaria', '123123', 'zakariabensalek@gmail.com', 'zakaria azaraf', '1', '1', '1', '2020-12-22');
+
 
