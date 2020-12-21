@@ -111,7 +111,31 @@
         }elseif($do == 'insert'){
 
             echo '<div class="container"><h1 class="text-center">Insert member</h1>';
-    
+            require('fields_validation.php');
+            $validate = new Validation($_POST);
+            $validate->showData();
+            $validate->validateName($_POST['item']);
+            $validate->validateName($_POST['description']);
+            $validate->validateName($_POST['category']);
+
+            
+            if($validate->errors){
+                foreach($validate->errors as $error){
+                    echo $error ;
+                }
+            }
+            
+
+           /*  echo '<pre>';
+            print_r($_POST);
+            echo '</pre>';
+            foreach($_POST as $item){
+                if(empty($item)){
+                    redirectHome('FILL ALL FIELDS', 'back');
+                }
+                echo $item . "<br />";
+            } */
+            
             /*
             ================================================================================
             == EDIT MEMBER
