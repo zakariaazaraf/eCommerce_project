@@ -19,8 +19,9 @@
         //INCLUDES
         include 'init.php';
 
-        // Validation Class
+        // Validation Classes
         require('form_validation.php');
+        require('fields_validation.php');
 
         // CHECK THE GET ACTION
         if(isset($_GET['do'])){
@@ -86,9 +87,9 @@
                             <div class="form-group row justify-content-center">
                                 <label class="col col-sm-4 col-md-3 col-lg-2" for="category">Category:</label>
                                 <select class="custom-select col col-sm-7 col-md-6 col-lg-5" name="category" id="category" required>
-                                    <option value="cate 1">cate 1</option>
-                                    <option value="cate 2">cate 2</option>
-                                    <option value="cate 3">cate 3</option>
+                                    <option value="category1">cate 1</option>
+                                    <option value="category1">cate 2</option>
+                                    <option value="category1">cate 3</option>
                                 </select>        
                             </div>
                             
@@ -111,21 +112,19 @@
         }elseif($do == 'insert'){
 
             echo '<div class="container"><h1 class="text-center">Insert member</h1>';
-            require('fields_validation.php');
+            
             $validate = new Validation($_POST);
-            $validate->showData();
-            $validate->validateName($_POST['item']);
-            $validate->validateName($_POST['description']);
-            $validate->validateName($_POST['category']);
+            $validate->validateName($_POST['item'], 'Item');
+            $validate->validateString($_POST['description'], 'Desc');
+            $validate->validateName($_POST['category'], 'Category');
 
             
             if($validate->errors){
                 foreach($validate->errors as $error){
-                    echo $error ;
+                    echo '<div class="alert alert-danger">' .$error. '</div>';
                 }
             }
             
-
            /*  echo '<pre>';
             print_r($_POST);
             echo '</pre>';
