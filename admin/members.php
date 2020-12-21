@@ -105,28 +105,34 @@
             
             ?> 
 
-                    <div class="form-container">
-                    <h1>add member</h1>
+                    <div class="container members">
+                    <h1 class="text-center">add member</h1>
                         <form action="?do=insert" method='POST'>
-                            <div class="group">
-                                <label for="username">Username:</label>
-                                <input type="text" name="username" id="username"  required autocomplete="off" placeholder="Member Username"/>
+                            <div class="form-group row justify-content-center">
+                                <label class="col col-sm-4 col-md-3 col-lg-2" for="username">Username:</label>
+                                <input class="col col-sm-7 col-md-6 col-lg-5" type="text" name="username" id="username"  required autocomplete="off" placeholder="Member Username"/>
                             </div>
-                            <div class="group">
-                                <label for="password">Password:</label>
-                                <input class="password" type="password" name="password" id="password" required autocomplete="new-password" placeholder="Enter Strong Password"/>
+                            <div class="form-group row justify-content-center">
+                                <label class="col col-sm-4 col-md-3 col-lg-2" for="password">Password:</label>
+                                <input class="col col-sm-7 col-md-6 col-lg-5 password" type="password" name="password" id="password" required autocomplete="new-password" placeholder="Enter Strong Password"/>
                                 <i class="show-pass fas fa-eye fa-x"></i>
                             </div>
-                            <div class="group">
-                                <label for="email">Email:</label>
-                                <input type="email" name="email" id="email" required placeholder="Enter Valid Email"/>
+                            <div class="form-group row justify-content-center">
+                                <label class="col col-sm-4 col-md-3 col-lg-2" for="email">Email:</label>
+                                <input class="col col-sm-7 col-md-6 col-lg-5" type="email" name="email" id="email" required placeholder="Enter Valid Email"/>
                             </div>
-                            <div class="group">
-                                <label for="fullname">Full Name:</label>
-                                <input type="text" name="fullname" id="fullname" required placeholder="Member Fullname"/>
+                            <div class="form-group row justify-content-center">
+                                <label class="col col-sm-4 col-md-3 col-lg-2" for="fullname">Full Name:</label>
+                                <input class="col col-sm-7 col-md-6 col-lg-5" type="text" name="fullname" id="fullname" required placeholder="Member Fullname"/>
                             </div>
 
-                            <input type="submit" value="add member" class="btn btn-primary">
+                            <div class="form-group row justify-content-center">
+                                <div class="col-12 col-sm-11 col-md-9 col-lg-7">    
+                                    <button type="submit" class="btn btn-primary"><i class="fas fa-plus"></i>add member</button>
+                                </div>
+                            </div>
+
+                            <!-- <input type="submit" value="add member" class="btn btn-primary"> -->
                         </form>
                     </div>    
 
@@ -244,31 +250,36 @@
 
                 ?> 
 
-                    <div class="form-container">
-                    <h1>edit member</h1>
+                    <div class="container members">
+                    <h1 class="text-center">edit member</h1>
                         <form action="?do=update" method='POST'>
                             <!-- HIDDEN INPUT FIELD TO SEND userid -->
                             <input type="hidden" name="userid" value="<?php echo $userid?>">
-                            <div class="group">
-                                <label for="username">Username:</label>
-                                <input type="text" name="username" id="username"  required value="<?php echo $data["UserName"]?>" autocomplete="off">
+                            <div class="form-group row justify-content-center">
+                                <label class="col col-sm-4 col-md-3 col-lg-2" for="username">Username:</label>
+                                <input class="col col-sm-7 col-md-6 col-lg-5" type="text" name="username" id="username"  required value="<?php echo $data["UserName"]?>" autocomplete="off">
                             </div>
-                            <div class="group">
-                                <label for="password">Password:</label>
+                            <div class="form-group row justify-content-center">
+                                <label class="col col-sm-4 col-md-3 col-lg-2" for="password">Password:</label>
                                 <!-- HIDDEN OLD PASS INPUT -->
                                 <input type="hidden" name="oldPassword" value="<?php echo $data["Password"]?>">
-                                <input type="password" name="password" id="password" value="" autocomplete="new-password">
+                                <input class="col col-sm-7 col-md-6 col-lg-5" type="password" name="password" id="password" value="" autocomplete="new-password">
                             </div>
-                            <div class="group">
-                                <label for="email">Email:</label>
-                                <input type="email" name="email" id="email" required value="<?php echo $data["Email"]?>">
+                            <div class="form-group row justify-content-center">
+                                <label class="col col-sm-4 col-md-3 col-lg-2" for="email">Email:</label>
+                                <input class="col col-sm-7 col-md-6 col-lg-5" type="email" name="email" id="email" required value="<?php echo $data["Email"]?>">
                             </div>
-                            <div class="group">
-                                <label for="fullname">Full Name:</label>
-                                <input type="text" name="fullname" id="fullname" required value="<?php echo $data["FullName"]?>"/>
+                            <div class="form-group row justify-content-center">
+                                <label class="col col-sm-4 col-md-3 col-lg-2" for="fullname">Full Name:</label>
+                                <input class="col col-sm-7 col-md-6 col-lg-5" type="text" name="fullname" id="fullname" required value="<?php echo $data["FullName"]?>"/>
                             </div>
 
-                            <input type="submit" value="save" class="btn btn-primary">
+                            <div class="form-group row justify-content-center">
+                                <div class="col-12 col-sm-11 col-md-9 col-lg-7">    
+                                    <button type="submit" class="btn btn-primary"><i class="fas fa-plus"></i>Add Item</button>
+                                </div>
+                            </div>
+                            <!-- <input type="submit" value="save" class="btn btn-primary"> -->
                         </form>
                     </div>    
 
@@ -428,4 +439,3 @@
         exit();
     }
 
-    

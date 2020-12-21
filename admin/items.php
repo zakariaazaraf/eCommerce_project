@@ -55,7 +55,7 @@
             
             ?> 
 
-                <div class="container categories">
+                <div class="container items">
                     <h1 class="text-center">add item</h1>
                         <form action="?do=insert" method='POST'>
                             <div class="form-group row justify-content-center">

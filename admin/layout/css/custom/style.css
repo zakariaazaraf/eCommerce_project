@@ -129,8 +129,20 @@ nav .container div:last-child {
   background-color: #eee;
 }
 
-.categories form {
+.categories form,
+.members form,
+.items form {
+  font-size: 1.5rem;
+}
+
+form .form-group button {
   font-size: 1.25rem;
+  border-radius: 0.4rem;
+  text-transform: capitalize;
+}
+
+.form-group {
+  margin-bottom: 2rem;
 }
 
 .categories form fieldset {
@@ -150,36 +162,10 @@ input[type="radio"] {
 */
 
 /* START FORM MEMEBER */
-.form-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  font-size: 1.75rem;
-}
 
 h1 {
   font-size: 3.4rem;
   text-transform: uppercase;
-}
-
-.form-container form {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  width: 40vw;
-}
-
-.form-container form .group {
-  display: flex;
-  justify-content: space-between;
-  margin: 0.8rem;
-}
-
-.form-container form input[type="submit"] {
-  width: 30%;
-  font-size: 1.5rem;
-  text-transform: capitalize;
 }
 
 form input[type="password"],
@@ -201,14 +187,14 @@ form textarea:focus {
   outline: 0;
 }
 
-.form-container form .group {
+.members form .form-group:nth-of-type(2) {
   position: relative;
 }
 
-.form-container form .group i.show-pass {
+.members form .form-group:nth-child(2) i.show-pass {
   position: absolute;
-  top: 15px;
-  right: 8px;
+  top: 5px;
+  right: 60px;
   font-size: 1.5rem;
   cursor: pointer;
 }
