@@ -124,44 +124,51 @@
                 $price = $_POST['price'];
                 $made = $_POST['made'];
                 $status = $_POST['status'];
-                $category = $_POST['category'];
+                //$category = $_POST['category'];
 
                 // CALL VAIDATE FUNCTIONS
                 $validate->validateName($item, 'Item');
                 $validate->validateString($desc, 'Desc');
-                $validate->validateName($category, 'Category');
+                //$validate->validateName($category, 'Category');
 
                 // ERRORS ARRAY
                 $errors = $validate->errors;
-
-                echo count($errors);
                 
                 if($errors){
+
                     foreach($errors as $error){
                         echo '<div class="alert alert-danger">' .$error. '</div>';
                     }
                 }else{
                     $stmt = $db->prepare("INSERT INTO
                                             items
-                                                (Name, Description, Price, now(), Made_In, Status)
+                                                (Name, Description, Price, Add_Date, Made_In, Status)
                                             values
-                                                (:pitem, :pdesc, :pprice, :pmade, :pstatus, :pcategory)");
+                                                (:pitem, :pdesc, :pprice, now(), :pmade, :pstatus)");
 
-                    $stmt->bindParam(array(
+                    
+
+                    $stmt->execute(array(
                         "pitem" => $item,
                         "pdesc" => $desc,
                         "pprice" => $price,
                         "pmade" => $made,
-                        "pstatus" => $status,
-                        "pcategory" => $category
+                        "pstatus" => $status
                     ));
 
-                    $stmt->execute();
                     $row = $stmt->rowCount();
+
+                    if($row){
+                        $msg = "<div class='alert alert-success'>" . $row . " Member Inserted !!</div>";
+                        redirectHome($msg, 'back');
+                    }else{
+                        $msg = "<div class='alert alert-success'>" . $row . " Member Inserted !!</div>";
+                        redirectHome($msg, 'back');
+                    }
                 }
 
             }else{
-                $msg = "";
+                $msg = '<div class="alert alert-danger">You Can\'t Access This Page Directly</div></div>';
                 redirectHome($msg);
             }
             

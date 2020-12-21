@@ -30,8 +30,8 @@
             $field = trim($field);
             
             if(!empty($field)){
-                if(!preg_match('/^[a-zA-Z0-9@_!\' \'\.+-]{5,40}$/', $field)){
-                    $err = "This <strong>$name</strong> Field Must Contain Only 5-40 Chrs and {@ _-+!}!!";
+                if(!preg_match('/^[a-zA-Z0-9@_!\' \'\.+-]{5,80}$/', $field)){
+                    $err = "This <strong>$name</strong> Field Must Contain Only 5-80 Chrs and {@ _-+!}!!";
                     $this->addError($err);
                 }
             }else{
