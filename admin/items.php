@@ -85,11 +85,38 @@
                                 </select>        
                             </div>
                             <div class="form-group row justify-content-center">
+                                <label class="col col-sm-4 col-md-3 col-lg-2" for="user">Category:</label>
+                                <select class="custom-select col col-sm-7 col-md-6 col-lg-5" name="user" id="user" required>
+                                    
+                                    <?php
+                                        //FETCH CATEGOORIES
+                                        $statUser = $db->prepare("SELECT UserId, UserName FROM users");
+                                        $statUser->execute();
+                                        $users = $statUser->fetchAll();
+                                        if($statUser->rowCount()){
+                                            foreach($users as $user){
+                                                echo "<option value='".$user['UserId']."'>".$user['UserName']."</option>";
+                                            }
+                                        }
+                                    ?>
+                                </select>        
+                            </div>
+
+                            <div class="form-group row justify-content-center">
                                 <label class="col col-sm-4 col-md-3 col-lg-2" for="category">Category:</label>
                                 <select class="custom-select col col-sm-7 col-md-6 col-lg-5" name="category" id="category" required>
-                                    <option value="category1">cate 1</option>
-                                    <option value="category1">cate 2</option>
-                                    <option value="category1">cate 3</option>
+                                    
+                                    <?php
+                                        //FETCH CATEGOORIES
+                                        $statCat = $db->prepare("SELECT ID, Name FROM categories");
+                                        $statCat->execute();
+                                        $categories = $statCat->fetchAll();
+                                        if($statCat->rowCount()){
+                                            foreach($categories as $cat){
+                                                echo "<option value='".$cat['ID']."'>".$cat['Name']."</option>";
+                                            }
+                                        }
+                                    ?>
                                 </select>        
                             </div>
                             
@@ -124,7 +151,8 @@
                 $price = $_POST['price'];
                 $made = $_POST['made'];
                 $status = $_POST['status'];
-                //$category = $_POST['category'];
+                $category = $_POST['category'];
+                $user = $_POST['user'];
 
                 // CALL VAIDATE FUNCTIONS
                 $validate->validateName($item, 'Item');
@@ -142,18 +170,19 @@
                 }else{
                     $stmt = $db->prepare("INSERT INTO
                                             items
-                                                (Name, Description, Price, Add_Date, Made_In, Status)
+                                                (Name, Description, Price, Add_Date, Made_In, Status, ID, User_Id)
                                             values
-                                                (:pitem, :pdesc, :pprice, now(), :pmade, :pstatus)");
+                                                (:pitem, :pdesc, :pprice, now(), :pmade, :pstatus, :pid, :puser)");
 
                     
-
                     $stmt->execute(array(
                         "pitem" => $item,
                         "pdesc" => $desc,
                         "pprice" => $price,
                         "pmade" => $made,
-                        "pstatus" => $status
+                        "pstatus" => $status,
+                        "pid" => $category,
+                        "puser" => $user
                     ));
 
                     $row = $stmt->rowCount();
