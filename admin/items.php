@@ -112,28 +112,59 @@
         }elseif($do == 'insert'){
 
             echo '<div class="container"><h1 class="text-center">Insert member</h1>';
-            
-            $validate = new Validation($_POST);
-            $validate->validateName($_POST['item'], 'Item');
-            $validate->validateString($_POST['description'], 'Desc');
-            $validate->validateName($_POST['category'], 'Category');
 
+            if($_SERVER['REQUEST_METHOD'] === 'POST'){
             
-            if($validate->errors){
-                foreach($validate->errors as $error){
-                    echo '<div class="alert alert-danger">' .$error. '</div>';
+                // INSTANCIATE THE VAALIDATION CLASS
+                $validate = new Validation($_POST);
+
+                // GETING THE DATA THROUGH 'POST' METHOD
+                $item = $_POST['item'];
+                $desc = $_POST['description'];
+                $price = $_POST['price'];
+                $made = $_POST['made'];
+                $status = $_POST['status'];
+                $category = $_POST['category'];
+
+                // CALL VAIDATE FUNCTIONS
+                $validate->validateName($item, 'Item');
+                $validate->validateString($desc, 'Desc');
+                $validate->validateName($category, 'Category');
+
+                // ERRORS ARRAY
+                $errors = $validate->errors;
+
+                echo count($errors);
+                
+                if($errors){
+                    foreach($errors as $error){
+                        echo '<div class="alert alert-danger">' .$error. '</div>';
+                    }
+                }else{
+                    $stmt = $db->prepare("INSERT INTO
+                                            items
+                                                (Name, Description, Price, now(), Made_In, Status)
+                                            values
+                                                (:pitem, :pdesc, :pprice, :pmade, :pstatus, :pcategory)");
+
+                    $stmt->bindParam(array(
+                        "pitem" => $item,
+                        "pdesc" => $desc,
+                        "pprice" => $price,
+                        "pmade" => $made,
+                        "pstatus" => $status,
+                        "pcategory" => $category
+                    ));
+
+                    $stmt->execute();
+                    $row = $stmt->rowCount();
                 }
+
+            }else{
+                $msg = "";
+                redirectHome($msg);
             }
             
-           /*  echo '<pre>';
-            print_r($_POST);
-            echo '</pre>';
-            foreach($_POST as $item){
-                if(empty($item)){
-                    redirectHome('FILL ALL FIELDS', 'back');
-                }
-                echo $item . "<br />";
-            } */
             
             /*
             ================================================================================
