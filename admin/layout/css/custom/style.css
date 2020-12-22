@@ -131,16 +131,21 @@ nav .container div:last-child {
 
 .categories form,
 .members form,
-.items form {
+.items form,
+.custom-select {
   font-size: 1.5rem;
 }
 
 form .form-group button {
-  font-size: 1.25rem;
+  font-size: 1.4rem;
   border-radius: 0.4rem;
   text-transform: capitalize;
+  padding: 0.4rem 1.25rem;
 }
 
+form .form-group button i {
+  padding-right: 0.3rem;
+}
 .form-group {
   margin-bottom: 2rem;
 }

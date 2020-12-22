@@ -99,3 +99,17 @@
       $stetment->execute();
       return $stetment->fetchAll();
     }
+
+    /*
+      =========================================================
+      === @name : ThroughErrors
+      === @desc : Pass An Array Of Errors And Print Them
+      === @version: v1.0
+      ========================================================= 
+    */
+
+    function throughErrors($errors){
+        foreach($errors as $error){
+          echo "<div class='alert alert-danger'>".$error."</div>";
+        }
+    }
