@@ -38,14 +38,68 @@
         if($do == 'Manage'){
 
             /*
+             **
+             * Fetch All Items
+             * 
+             *    
+             **/
+            /*
             ==================================================================================
             ====================== BRING THE USERS FROM THE DATABASE =========================*/
             
-
+            $statemnt = $db->prepare("SELECT * FROM items");
+            $statemnt->execute();
+            $items = $statemnt->fetchAll();
 
             /*================================================================================*/
+            ?>
+
+            <h1 class="text-center">manage items</h1>
+            <div class="container">
+                <div class="table-responsive">
+                    <table class="table table-striped table-bordered text-center">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Description</th>
+                                <th>Price</th>
+                                <th>Add Date</th>
+                                <th>Made In</th>
+                                <th>Control</th>
+                            </tr>
+                        </thead>
+                        <tbod>
+
+                            <!-- START A PHP CODE WHISH BRIGN USERS FROM DB -->
+                            <?php
+                                foreach($items as $item){
+
+                                    echo "<tr>";
+                                        echo "<th>" . $item['Item_ID'] . "</th>";
+                                        echo "<td>" . $item['Name'] . "</td>";
+                                        echo "<td>" . $item['Description'] . "</td>";
+                                        echo "<td>" . $item['Price'] . "</td>";
+                                        echo "<td>" . $item['Add_Date'] . "</td>";
+                                        echo "<td>" . $item['Made_In'] . "</td>";
+                                        echo "<td>";
+                                            echo "<a href='?do=edit&userid=" . $item['UserId'] . "' class='btn btn-success' role='button'><i class='fas fa-edit'></i>Edit</a>";
+                                            echo "<a href='?do=delete&userid=" . $item['UserId'] . "' class='btn btn-danger confirm' role='button'><i class='fas fa-trash'></i>Delete</a>";
+                                        echo "</td>";
+                                    echo "</tr>";
+
+                                }
+                            ?>
+                            <!-- END A PHP CODE WHISH BRIGN USERS FROM DB -->
+                            
+                        </tbody>
+                    </table>
+                </div>
+                <a href='members.php?do=add' class="btn btn-primary"><i class="fas fa-plus"></i>New Item</a>
+            </div>
             
-            echo "<h1 class='alert alert-success'>Welcome To Items Page</h1>";
+            <?php
+        
             /*
             ================================================================================
             == ADD MEMBER
@@ -85,7 +139,7 @@
                                 </select>        
                             </div>
                             <div class="form-group row justify-content-center">
-                                <label class="col col-sm-4 col-md-3 col-lg-2" for="user">Category:</label>
+                                <label class="col col-sm-4 col-md-3 col-lg-2" for="user">User:</label>
                                 <select class="custom-select col col-sm-7 col-md-6 col-lg-5" name="user" id="user" required>
                                     
                                     <?php
@@ -108,12 +162,12 @@
                                     
                                     <?php
                                         //FETCH CATEGOORIES
-                                        $statCat = $db->prepare("SELECT ID, Name FROM categories");
+                                        $statCat = $db->prepare("SELECT Cat_Id, Name FROM categories");
                                         $statCat->execute();
                                         $categories = $statCat->fetchAll();
                                         if($statCat->rowCount()){
                                             foreach($categories as $cat){
-                                                echo "<option value='".$cat['ID']."'>".$cat['Name']."</option>";
+                                                echo "<option value='".$cat['Cat_Id']."'>".$cat['Name']."</option>";
                                             }
                                         }
                                     ?>
@@ -170,7 +224,7 @@
                 }else{
                     $stmt = $db->prepare("INSERT INTO
                                             items
-                                                (Name, Description, Price, Add_Date, Made_In, Status, ID, User_Id)
+                                                (Name, Description, Price, Add_Date, Made_In, Status, Cat_Id, UserId)
                                             values
                                                 (:pitem, :pdesc, :pprice, now(), :pmade, :pstatus, :pid, :puser)");
 

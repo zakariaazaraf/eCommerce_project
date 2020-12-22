@@ -304,7 +304,6 @@
             // CHECK IF THE USER CAME BY A POST REQUEST
             if($_SERVER['REQUEST_METHOD'] == 'POST'){
                 
-
                 // GET THE DATA FROM THE POST REQUEST
                 $id = $_POST['userid'];
                 $username = $_POST['username'];

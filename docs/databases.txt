@@ -27,7 +27,7 @@ DELETE FROM categories WHERE ID = ?
 
 CREATE TABLE items (
     Item_ID INT(11) PRIMARY KEY AUTO_INCREMENT,
-    NAME VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_general_ci,
+    Name VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_general_ci,
     Description TEXT CHARACTER SET utf8 COLLATE utf8_general_ci,
     Price VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_general_ci,
     Add_Date DATE,
@@ -72,5 +72,8 @@ INSERT INTO
         (`UserId`, `UserName`, `Password`, `Email`, `FullName`, `GroupID`, `TrustStatus`, `RegStatus`, `Date`) 
     VALUES 
         (NULL, 'zakaria', '123123', 'zakariabensalek@gmail.com', 'zakaria azaraf', '1', '1', '1', '2020-12-22');
+
+// UPDATE A FIELD 
+UPDATE TableName Set ColumnName = Value [Condition]
 
 
