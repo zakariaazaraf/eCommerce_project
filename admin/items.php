@@ -91,6 +91,7 @@
                                         echo "<td>";
                                             echo "<a href='?do=edit&itemid=" . $item['Item_ID'] . "' class='btn btn-success' role='button'><i class='fas fa-edit'></i>Edit</a>";
                                             echo "<a href='?do=delete&itemid=" . $item['Item_ID'] . "' class='btn btn-danger confirm' role='button'><i class='fas fa-trash'></i>Delete</a>";
+                                            echo !$item['Approved'] ? "<a href='?do=approve&itemid=" . $item['Item_ID'].  "' class='btn btn-info' role='button'><i class='fas fa-check'></i>Approve</a>" : '';
                                         echo "</td>";
                                     echo "</tr>";
 
