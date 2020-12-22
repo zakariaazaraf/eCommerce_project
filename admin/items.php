@@ -469,13 +469,24 @@
             }
 
         }elseif($do == 'approve'){
-            echo '<div class="container"><h1 clas="text-center">You\'re In Approved Page</h1></div>';
+            echo '<div class="container"><h1 class="text-center">You\'re In Approved Page</h1>';
             $itemid = isset($_GET['itemid']) && is_numeric($_GET['itemid']) ? intval($_GET['itemid']) : 0 ;
 
             if(checkItem('Item_ID', 'items', $itemid)){
-                echo "This Id Is There";
+                $statement = $db->prepare('UPDATE items SET Approved = 1 WHERE Item_ID = ?');
+                $statement->bindParam(1, $itemid);
+                $statement->execute();
+                $row = $statement->rowCount();
+                if($row){
+                    $msg = "<div class='alert alert-success'>$row Item Approved</div>";
+                    redirectHome($msg, 'back');
+                }else{
+                    $msg = "<div class='alert alert-danger'>$row Item Approved</div>";
+                    redirectHome($msg);
+                }
             }else{
-                echo "This Aren't Exists In Database";
+                $msg = "<div class='alert alert-danger'>This ID Aren't Exists In Database</div>";
+                redirectHome($msg);
             }
         }else{
             echo 'default';
