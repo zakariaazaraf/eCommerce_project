@@ -31,7 +31,7 @@
         <div class="row">
             <div class="col-md-3"><div class='static st-members'>total members<a href="members.php"><span class='d-block'><?php echo countColumns('UserId', 'users')?></span></a></div></div>
             <div class="col-md-3"><div class='static st-panding'>panding memebers<a href='members.php?do=Manage&page=panding'><span class='d-block'><?php echo checkItem('RegStatus', 'users', 0)?></span></a></div></div>
-            <div class="col-md-3"><div class='static st-items'>total items<span class='d-block'>1500</span></div></div>
+            <div class="col-md-3"><div class='static st-items'>total items<span class='d-block'><?php echo countColumns('Item_ID', 'items')?></span></div></div>
             <div class="col-md-3"><div class='static st-comments'>total comments<span class='d-block'>3300</span></div></div>
         </div>
     </div>
@@ -39,7 +39,6 @@
     <div class="container latest">
         <div class="row">
             <div class="col-sm-6">
-
                 <div class="card my-4">
                     <h4 class="card-header"><i class='fas fa-users'></i> Latest <?php echo $limit ?> Registred Users</h4>
                     <div class="card-body">
@@ -62,8 +61,7 @@
                             </ul>                     
                         </div>
                     </div>
-                </div>
-                
+                </div>   
             </div>
 
             <div class="col-sm-6">

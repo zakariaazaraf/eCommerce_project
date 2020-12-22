@@ -76,4 +76,18 @@ INSERT INTO
 // UPDATE A FIELD 
 UPDATE TableName Set ColumnName = Value [Condition]
 
+// join two wtables
+SELECT Name from users inner join items on users.UserId = items.UserId WHERE items.UserId = 4;
+
+
+SELECT items.*, users.UserName as User, categories.Name as Category 
+        FROM 
+            items 
+        inner join 
+            users
+        on items.UserId = users.UserId
+        inner join 
+            categories
+        on items.Cat_Id = categories.Cat_Id
+
 

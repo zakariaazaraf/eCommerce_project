@@ -41,7 +41,15 @@
             ==================================================================================
             ====================== BRING THE USERS FROM THE DATABASE =========================*/
             
-            $statemnt = $db->prepare("SELECT * FROM items");
+            $statemnt = $db->prepare("SELECT items.*, users.UserName as User, categories.Name as Category 
+                                        FROM 
+                                            items 
+                                        inner join 
+                                            users
+                                        on items.UserId = users.UserId
+                                        inner join 
+                                            categories
+                                        on items.Cat_Id = categories.Cat_Id");
             $statemnt->execute();
             $items = $statemnt->fetchAll();
 
@@ -58,6 +66,8 @@
                                 <th>Name</th>
                                 <th>Description</th>
                                 <th>Price</th>
+                                <th>User</th>
+                                <th>Category</th>
                                 <th>Add Date</th>
                                 <th>Made In</th>
                                 <th>Control</th>
@@ -74,6 +84,9 @@
                                         echo "<td>" . $item['Name'] . "</td>";
                                         echo "<td>" . $item['Description'] . "</td>";
                                         echo "<td>" . $item['Price'] . "</td>";
+                                        //JOIN TO MAKE USER AND CATEGORY NAMES
+                                        echo "<td>" . $item['User']. "</td>";
+                                        echo "<td>" . $item['Category']. "</td>";
                                         echo "<td>" . $item['Add_Date'] . "</td>";
                                         echo "<td>" . $item['Made_In'] . "</td>";
                                         echo "<td>";
@@ -257,87 +270,94 @@
             */
         }elseif ($do == 'edit'){    
 
-            
+            echo '<div class="container mt-5">';
 
             $itemId = isset($_GET['itemid']) && is_numeric($_GET['itemid']) ? intval($_GET['itemid']): 0;
-            $statement = $db->prepare("SELECT * FROM items WHERE Item_Id = ?");
-            $statement->bindParam(1, $itemId);
-            $statement->execute();
-            $item = $statement->fetch();
-        
-            ?> 
-                <div class="container items">
-                    <h1 class="text-center">add item</h1>
-                        <form action="?do=update" method='POST'>
-                            <div class="form-group row justify-content-center">
-                                <label class="col col-sm-4 col-md-3 col-lg-2" for="item">Item:</label>
-                                <input class="col col-sm-7 col-md-6 col-lg-5" type="text" name="item" id="item"  required placeholder="Item Name" value="<?php echo $item['Name']?>"/>
-                                <input type='hidden' name='item_Id' value="<?php echo $itemId?>"/>
-                            </div>
-                            <div class="form-group row justify-content-center">
-                                <label class="col col-sm-4 col-md-3 col-lg-2" for="description">Description:</label>
-                                <textarea class="col col-sm-7 col-md-6 col-lg-5" name="description" id="description"  rows="4" placeholder="Write Item Description" required><?php echo $item['Description']?></textarea>
-                                <!-- <input class="col col-sm-7 col-md-6 col-lg-5" type="text" name="description" id="description" placeholder="Item Description"/> -->
-                            </div>
-                            <div class="form-group row justify-content-center">
-                                <label class="col col-sm-4 col-md-3 col-lg-2" for="price">Price:</label>
-                                <input class="col col-sm-7 col-md-6 col-lg-5" type="text" name="price" id="price" placeholder="Item Price" required value="<?php echo $item['Price']?>"/>
-                            </div>
-                            <div class="form-group row justify-content-center">
-                                <label class="col col-sm-4 col-md-3 col-lg-2" for="made">Made In:</label>
-                                <input class="col col-sm-7 col-md-6 col-lg-5" type="text" name="made" id="made" placeholder="Made Country" required value="<?php echo $item['Made_In']?>"/>
-                            </div>
-                            <div class="form-group row justify-content-center">
-                                <label class="col col-sm-4 col-md-3 col-lg-2" for="status">Status:</label>
-                                <select class="custom-select col col-sm-7 col-md-6 col-lg-5" name="status" id="status" required>
-                                    <option value="new">new</option>
-                                    <option value="like new">like new</option>
-                                    <option value="used">used</option>
-                                </select>        
-                            </div>
-                            <div class="form-group row justify-content-center">
-                                <label class="col col-sm-4 col-md-3 col-lg-2" for="user">User:</label>
-                                <select class="custom-select col col-sm-7 col-md-6 col-lg-5" name="user" id="user" required>                               
-                                    <?php
-                                        //FETCH CATEGOORIES
-                                        $statUser = $db->prepare("SELECT UserId, UserName FROM users");
-                                        $statUser->execute();
-                                        $users = $statUser->fetchAll();
-                                        if($statUser->rowCount()){
-                                            foreach($users as $user){
-                                                echo "<option value='".$user['UserId']."'>".$user['UserName']."</option>";
-                                            }
-                                        }
-                                    ?>
-                                </select>        
-                            </div>
 
-                            <div class="form-group row justify-content-center">
-                                <label class="col col-sm-4 col-md-3 col-lg-2" for="category">Category:</label>
-                                <select class="custom-select col col-sm-7 col-md-6 col-lg-5" name="category" id="category" required>                                   
-                                    <?php
-                                        //FETCH CATEGOORIES
-                                        $statCat = $db->prepare("SELECT Cat_Id, Name FROM categories");
-                                        $statCat->execute();
-                                        $categories = $statCat->fetchAll();
-                                        if($statCat->rowCount()){
-                                            foreach($categories as $cat){
-                                                echo "<option value='".$cat['Cat_Id']."'>".$cat['Name']."</option>";
-                                            }
-                                        }
-                                    ?>
-                                </select>        
-                            </div>
-                            
-                            <div class="form-group row justify-content-center">
-                                <div class="col-12 col-sm-11 col-md-9 col-lg-7">    
-                                    <button type="submit" class="btn btn-primary"><i class="fas fa-plus"></i>Save Item</button>
+            if(checkItem('Item_ID', 'items', $itemId)){
+                $statement = $db->prepare("SELECT * FROM items WHERE Item_Id = ?");
+                $statement->bindParam(1, $itemId);
+                $statement->execute();
+                $item = $statement->fetch();
+            
+                ?> 
+                    <div class="container items">
+                        <h1 class="text-center">edit item</h1>
+                            <form action="?do=update" method='POST'>
+                                <div class="form-group row justify-content-center">
+                                    <label class="col col-sm-4 col-md-3 col-lg-2" for="item">Item:</label>
+                                    <input class="col col-sm-7 col-md-6 col-lg-5" type="text" name="item" id="item"  required placeholder="Item Name" value="<?php echo $item['Name']?>"/>
+                                    <input type='hidden' name='item_Id' value="<?php echo $itemId?>"/>
                                 </div>
-                            </div>
-                            
-                        </form>
-                    </div>
-            <?php
+                                <div class="form-group row justify-content-center">
+                                    <label class="col col-sm-4 col-md-3 col-lg-2" for="description">Description:</label>
+                                    <textarea class="col col-sm-7 col-md-6 col-lg-5" name="description" id="description"  rows="4" placeholder="Write Item Description" required><?php echo $item['Description']?></textarea>
+                                    <!-- <input class="col col-sm-7 col-md-6 col-lg-5" type="text" name="description" id="description" placeholder="Item Description"/> -->
+                                </div>
+                                <div class="form-group row justify-content-center">
+                                    <label class="col col-sm-4 col-md-3 col-lg-2" for="price">Price:</label>
+                                    <input class="col col-sm-7 col-md-6 col-lg-5" type="text" name="price" id="price" placeholder="Item Price" required value="<?php echo $item['Price']?>"/>
+                                </div>
+                                <div class="form-group row justify-content-center">
+                                    <label class="col col-sm-4 col-md-3 col-lg-2" for="made">Made In:</label>
+                                    <input class="col col-sm-7 col-md-6 col-lg-5" type="text" name="made" id="made" placeholder="Made Country" required value="<?php echo $item['Made_In']?>"/>
+                                </div>
+                                <div class="form-group row justify-content-center">
+                                    <label class="col col-sm-4 col-md-3 col-lg-2" for="status">Status:</label>
+                                    <select class="custom-select col col-sm-7 col-md-6 col-lg-5" name="status" id="status" required>
+                                        <option value="new">new</option>
+                                        <option value="like new">like new</option>
+                                        <option value="used">used</option>
+                                    </select>        
+                                </div>
+                                <div class="form-group row justify-content-center">
+                                    <label class="col col-sm-4 col-md-3 col-lg-2" for="user">User:</label>
+                                    <select class="custom-select col col-sm-7 col-md-6 col-lg-5" name="user" id="user" required>                               
+                                        <?php
+                                            //FETCH CATEGOORIES
+                                            $statUser = $db->prepare("SELECT UserId, UserName FROM users");
+                                            $statUser->execute();
+                                            $users = $statUser->fetchAll();
+                                            if($statUser->rowCount()){
+                                                foreach($users as $user){
+                                                    echo "<option value='".$user['UserId']."' "; echo $user['UserId'] === $item['UserId'] ? 'selected' : ''; echo ">".$user['UserName']."</option>";
+                                                }
+                                            }
+                                        ?>
+                                    </select>        
+                                </div>
+
+                                <div class="form-group row justify-content-center">
+                                    <label class="col col-sm-4 col-md-3 col-lg-2" for="category">Category:</label>
+                                    <select class="custom-select col col-sm-7 col-md-6 col-lg-5" name="category" id="category" required>                                   
+                                        <?php
+                                            //FETCH CATEGOORIES
+                                            $statCat = $db->prepare("SELECT Cat_Id, Name FROM categories");
+                                            $statCat->execute();
+                                            $categories = $statCat->fetchAll();
+                                            if($statCat->rowCount()){
+                                                foreach($categories as $cat){
+                                                    echo "<option value='".$cat['Cat_Id']."' "; echo $cat['Cat_Id'] === $item['Cat_Id'] ? 'selected' : ''; echo ">".$cat['Name']."</option>";
+                                                }
+                                            }
+                                        ?>
+                                    </select>        
+                                </div>
+                                
+                                <div class="form-group row justify-content-center">
+                                    <div class="col-12 col-sm-11 col-md-9 col-lg-7">    
+                                        <button type="submit" class="btn btn-primary"><i class="fas fa-plus"></i>Save Item</button>
+                                    </div>
+                                </div>
+                                
+                            </form>
+                        </div>
+                <?php
+            }else{
+                $msg = "<div class='alert alert-danger'>There's No ID Like This</div>";
+                redirectHome($msg);
+            }
+            
 
             
 
