@@ -44,7 +44,7 @@
             if(isset($_GET['sort']) && in_array($_GET['sort'], $sort_array)){
                 $order = $_GET['sort'];
             }
-            $stmt = $db->prepare("SELECT * FROM categories ORDER BY ID $order");
+            $stmt = $db->prepare("SELECT * FROM categories ORDER BY Cat_Id $order");
             $stmt->execute();
             $categories = $stmt->fetchAll();
 
@@ -65,8 +65,8 @@
                             echo "<div class='card-header d-flex justify-content-between py-0'>";
                                 echo "<h5 class='card-title my-1 text-capitalize font-weight-bold'>" . $category['Name']. "</h5>";
                                 echo "<div>";
-                                    echo "<a href='?do=edit&ID=".$category['ID']."' class='btn btn-success m-1' role='button'><i class='fas fa-edit'></i>Edit</a>";
-                                    echo "<a href='?do=delete&ID=".$category['ID']."' class='btn btn-danger m-1 confirm' role='button'><i class='fas fa-trash'></i>Delete</a>";
+                                    echo "<a href='?do=edit&ID=".$category['Cat_Id']."' class='btn btn-success m-1' role='button'><i class='fas fa-edit'></i>Edit</a>";
+                                    echo "<a href='?do=delete&ID=".$category['Cat_Id']."' class='btn btn-danger m-1 confirm' role='button'><i class='fas fa-trash'></i>Delete</a>";
                                 echo "</div>";         
                             echo "</div>";
 
@@ -271,7 +271,7 @@
         }elseif ($do == 'edit'){       
 
             $ID = isset($_GET['ID']) && is_numeric($_GET['ID']) ? intval($_GET['ID'])  : 0;
-            $stmt = $db->prepare("SELECT * FROM categories WHERE ID = ?");
+            $stmt = $db->prepare("SELECT * FROM categories WHERE Cat_Id = ?");
             $stmt->execute(array($ID));
             $category = $stmt->fetch();
             $rowCount = $stmt->rowCount();
@@ -379,11 +379,13 @@
 
             if($_SERVER['REQUEST_METHOD'] === 'POST'){
                 
-                
 
-                if(!checkItem('Name', 'categories', $_POST['category'])){
+                if(!checkItem('Name', 'categories', $_POST['category'], 'Cat_Id', $_POST['ID'])){
 
-                    $stmt = $db->prepare("UPDATE categories SET Name = ?, Description = ?, Ordering = ?, Visibility = ?, Allow_Comments = ?, Add_Ads = ? WHERE ID = ?");
+                    
+                    echo '<h2>This Item Doesn\'t exists</h2>';
+
+                    $stmt = $db->prepare("UPDATE categories SET Name = ?, Description = ?, Ordering = ?, Visibility = ?, Allow_Comments = ?, Add_Ads = ? WHERE Cat_Id = ?");
                     $stmt->execute(array($_POST['category'], $_POST['description'], $_POST['ordering'], $_POST['visibility'], $_POST['comments'], $_POST['ads'], $_POST['ID']));
                     $rowCount = $stmt->rowCount();
 
@@ -398,6 +400,7 @@
                 }else{
                     $msg = "<div class='alert alert-danger'>Name Already Exists :( :( !!</div>";
                     redirectHome($msg, 'back');
+                    
                 }
 
                 

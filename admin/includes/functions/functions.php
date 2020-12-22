@@ -52,13 +52,19 @@
     /*
       =========================================================
       === @name : checkItem
-      === @desc : Check After Insert A New Item, If Exists
-      === @version: v1.0
+      === @desc : Check After Insert A New Item, If Exists + Give Him Possibility To Override On Update
+      === @version: v2.0
       ========================================================= 
     */
 
-      function checkItem($select, $from, $value){
+      function checkItem($select, $from, $value, $update = false, $ID = 1){
             global $db;
+            // IF THE USER WANT TO UPDATE THE COLUMN, WE SHOULDN'T DENIED THE POSSIBLITY OF OVERRIDE THE CURRENT COLUMN
+            if($update !== false){ 
+              $stetment = $db->prepare("SELECT $select FROM $from WHERE $select = ? AND $update != ?"); 
+              $stetment->execute(array($value, $ID));
+              return $stetment->rowCount();
+            }
             $stetment = $db->prepare("SELECT $select FROM $from WHERE $select = ?"); 
             $stetment->execute(array($value));
             return $stetment->rowCount();
