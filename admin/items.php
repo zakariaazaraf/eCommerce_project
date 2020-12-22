@@ -74,7 +74,6 @@
                             </tr>
                         </thead>
                         <tbod>
-
                             <!-- START A PHP CODE WHISH BRIGN USERS FROM DB -->
                             <?php
                                 foreach($items as $item){
@@ -97,19 +96,18 @@
 
                                 }
                             ?>
-                            <!-- END A PHP CODE WHISH BRIGN USERS FROM DB -->
-                            
+                            <!-- END A PHP CODE WHISH BRIGN USERS FROM DB -->          
                         </tbody>
                     </table>
                 </div>
-                <a href='members.php?do=add' class="btn btn-primary"><i class="fas fa-plus"></i>New Item</a>
+                <a href='items.php?do=add' class="btn btn-primary"><i class="fas fa-plus"></i>New Item</a>
             </div>
             
             <?php
         
             /*
             ================================================================================
-            == ADD MEMBER
+            == ADD ITEM
             ================================================================================
             */
         }elseif($do == 'add'){
@@ -446,7 +444,38 @@
         }elseif($do == 'delete'){
 
             echo "<div class='container'><h1 class='text-center'>Delete Member Page</h1>";
+            $itemid = isset($_GET['itemid']) && is_numeric($_GET['itemid']) ? intval($_GET['itemid']) : 0;
+            
 
+            if(checkItem('Item_ID', 'items',$itemid)){
+
+                $statement = $db->prepare('DELETE FROM items WHERE Item_ID = ?');
+                $statement->bindParam(1, $itemid);
+                $statement->execute();
+                $row = $statement->rowCount();
+
+                if($row){ 
+                    $msg = "<div class='alert alert-success'>$row Item Deleted !</div>";
+                    redirectHome($msg, 'back');
+                }else{
+                    $msg = "<div class='alert alert-danger'>$row Item Deleted ! </div>";
+                    redirectHome($msg, 'back');
+                }
+
+            }else{
+                $msg = "<div class='alert alert-danger'>THIS ITEM DOES\'T EXISTS</div>";
+                redirectHome($msg);
+            }
+
+        }elseif($do == 'approve'){
+            echo '<div class="container"><h1 clas="text-center">You\'re In Approved Page</h1></div>';
+            $itemid = isset($_GET['itemid']) && is_numeric($_GET['itemid']) ? intval($_GET['itemid']) : 0 ;
+
+            if(checkItem('Item_ID', 'items', $itemid)){
+                echo "This Id Is There";
+            }else{
+                echo "This Aren't Exists In Database";
+            }
         }else{
             echo 'default';
         }
