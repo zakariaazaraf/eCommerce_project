@@ -93,7 +93,7 @@ nav .container div:last-child {
   background-color: #eee;
   border: 1px solid slategray;
   color: #f4d2d2eb;
-  padding: 1rem;
+  padding: 0.5rem;
   border-radius: 8px;
 }
 
@@ -103,6 +103,10 @@ nav .container div:last-child {
 
 .home-static .static a:hover {
   text-decoration: none;
+}
+
+.home-static .static i {
+  font-size: 4rem;
 }
 
 .home-static .st-members {
