@@ -32,9 +32,22 @@ $(function(){ // JQUERY FUNCTION WHISH REMOVES PLACEHOLDER TEXT ON FOCUS
 
     });
 
-    $('.card-header').click(function () {
+    $('.categories').find('.card-header').click(function () {
 
         $(this).next('div').toggle('hide');
+           
+    });
+
+    $('.latest').find('.card-header').click(function(){
+        $(this).next('div').toggle('hide')
+
+          if($(this).hasClass('selected')){
+            $(this).find('.plus').html('<i class="fas fa-minus"></i>');
+            $(this).removeClass('selected');
+        }else{
+            $(this).find('.plus').html('<i class="fas fa-plus"></i>');
+            $(this).addClass('selected');
+        }
     });
     
 });

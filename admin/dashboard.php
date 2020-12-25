@@ -36,8 +36,8 @@
     <div class="container home-static text-center text-capitalize">
         <div class="row">
 
-            <div class="col-md-3 px-md-1">              
-                <div class='static st-members d-flex align-items-center justify-content-center'>
+            <div class="col-md-6 col-lg-3 px-lg-1 my-1">              
+                <div class='static st-members d-flex align-items-center justify-content-around'>
                     <i class="fas fa-users"></i>
                     <div>
                         total members<a href="members.php"><span class='d-block'><?php echo countColumns('UserId', 'users')?></span></a>
@@ -45,8 +45,8 @@
                 </div>
             </div>
 
-            <div class="col-md-3 px-md-1">
-                <div class='static st-panding d-flex align-items-center justify-content-center'>
+            <div class="col-md-6 col-lg-3 px-lg-1 my-1">
+                <div class='static st-panding d-flex align-items-center justify-content-around'>
                         <i class="fas fa-plane-arrival"></i>
                         <div>
                             panding memebers<a href='members.php?do=Manage&page=panding'><span class='d-block'><?php echo checkItem('RegStatus', 'users', 0)?></span></a>
@@ -54,8 +54,8 @@
                 </div>
             </div>
             
-            <div class="col-md-3 px-md-1">
-                <div class='static st-items d-flex align-items-center justify-content-center'>
+            <div class="col-md-6 col-lg-3 px-lg-1 my-1">
+                <div class='static st-items d-flex align-items-center justify-content-around'>
                     <i class="fas fa-gopuram"></i>
                     <div>
                         total items<span class='d-block'><?php echo countColumns('Item_ID', 'items')?></span>
@@ -63,8 +63,8 @@
                 </div>
             </div>
 
-            <div class="col-md-3 px-md-1">
-                <div class='static st-comments d-flex align-items-center justify-content-center'>
+            <div class="col-md-6 col-lg-3 px-lg-1 my-1">
+                <div class='static st-comments d-flex align-items-center justify-content-around'>
                     <i class="fas fa-comments"></i>
                     <div>
                         total comments<span class='d-block'>3300</span>
@@ -77,9 +77,9 @@
 
     <div class="container latest">
         <div class="row">
-            <div class="col-sm-6">
+            <div class="col-sm-6 px-lg-1">
                 <div class="card my-4">
-                    <h4 class="card-header"><i class='fas fa-users'></i> Latest <?php echo $limitUsers ?> Registred Users</h4>
+                    <h4 class="card-header selected"><i class='fas fa-users'></i> Latest <?php echo $limitUsers ?> Registred Users <span class="plus"><i class="plus fas fa-plus"></i></span></h4>
                     <div class="card-body">
                         <div class="card-text">
                             <ul class="list-group">
@@ -103,9 +103,9 @@
                 </div>   
             </div>
 
-            <div class="col-sm-6">
+            <div class="col-sm-6  px-lg-1">
                 <div class="card my-4">
-                    <h4 class="card-header"><i class='fas fa-sitemap'></i> Latest <?php echo $limitItems?> Registred Items</h4>
+                    <h4 class="card-header selected"><i class='fas fa-sitemap'></i> Latest <?php echo $limitItems?> Registred Items<span class="plus"><i class="plus fas fa-plus"></i></span></h4>
                     <div class="card-body">
                         <div class="card-text">
                             <ul class="list-group">
