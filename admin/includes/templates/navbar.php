@@ -20,7 +20,7 @@
           <a class="nav-link" href="#"><?php echo lang("LOGOSTICS") ?></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#"><?php echo lang("LOGS") ?></a>
+          <a class="nav-link" href="comments.php"><?php echo lang("COMMENTS") ?></a>
         </li>
       </ul>
     </div>

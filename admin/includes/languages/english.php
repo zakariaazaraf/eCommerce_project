@@ -11,6 +11,7 @@
             "CATEGORIES" => "Categories",
             "ITEMS" => "Items",
             "MEMBERS" => "Members",
+            "COMMENTS" => "Comments",
             "LOGOSTICS" => "Logostics",
             "LOGS" => "Logs",
 
