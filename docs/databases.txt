@@ -90,4 +90,21 @@ SELECT items.*, users.UserName as User, categories.Name as Category
             categories
         on items.Cat_Id = categories.Cat_Id
 
+// CREATE COMMENTS TABLE
+CREATE TABLE comments(
+    Comment_Id INT PRIMARY KEY AUTO_INCREMENT,
+    Comment TEXT CHARACTER SET utf8 COLLATE utf8_general_ci,
+    Status TINYINT DEFAULT 0,
+    Comment_Date DATE,
+    Item_Id INT(11),
+    User_Id INT(11)
+)
+
+// CHANGE THE CHARACTER SET OF THE TABLE
+ALTER TABLE CONVERT TO CHARACTER SET utf8
+
+// ADD CONSTARINTS TO THE TABLE
+ALTER TABLE comments ADD CONSTRAINT comment_Item FOREIGN KEY (Item_Id) REFERENCES items(Item_ID) ON UPDATE CASCADE ON DELETE CASCADE;
+ALTER TABLE comments ADD CONSTRAINT comment_User FOREIGN KEY (User_Id) REFERENCES users(UserId) ON UPDATE CASCADE ON DELETE CASCADE;
+
 

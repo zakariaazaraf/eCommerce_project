@@ -79,7 +79,15 @@
         <div class="row">
             <div class="col-sm-6 px-lg-1">
                 <div class="card my-4">
-                    <h4 class="card-header selected"><i class='fas fa-users'></i> Latest <?php echo $limitUsers ?> Registred Users <span class="plus"><i class="plus fas fa-plus"></i></span></h4>
+                    <h4 class="card-header selected">
+                        <i class='fas fa-users'></i> 
+                        Latest 
+                        <?php echo $limitUsers ?> 
+                        Registred Users 
+                        <span class="plus">
+                            <i class="plus fas fa-plus"></i>
+                        </span>
+                    </h4>
                     <div class="card-body">
                         <div class="card-text">
                             <ul class="list-group">
@@ -105,7 +113,15 @@
 
             <div class="col-sm-6  px-lg-1">
                 <div class="card my-4">
-                    <h4 class="card-header selected"><i class='fas fa-sitemap'></i> Latest <?php echo $limitItems?> Registred Items<span class="plus"><i class="plus fas fa-plus"></i></span></h4>
+                    <h4 class="card-header selected">
+                        <i class='fas fa-sitemap'></i> 
+                        Latest 
+                        <?php echo $limitItems?> 
+                        Registred Items
+                        <span class="plus">
+                            <i class="plus fas fa-plus"></i>
+                        </span>
+                    </h4>
                     <div class="card-body">
                         <div class="card-text">
                             <ul class="list-group">
@@ -128,7 +144,6 @@
                     </div>
                 </div>        
             </div>
-
         </div>
     </div>
     <!-- END DASHBOARD BODY -->
