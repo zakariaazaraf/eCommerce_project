@@ -40,7 +40,10 @@
                 <div class='static st-members d-flex align-items-center justify-content-around'>
                     <i class="fas fa-users"></i>
                     <div>
-                        total members<a href="members.php"><span class='d-block'><?php echo countColumns('UserId', 'users')?></span></a>
+                        total members
+                        <a href="members.php">
+                            <span class='d-block'><?php echo countColumns('UserId', 'users')?></span>
+                        </a>
                     </div>                   
                 </div>
             </div>
@@ -49,7 +52,10 @@
                 <div class='static st-panding d-flex align-items-center justify-content-around'>
                         <i class="fas fa-plane-arrival"></i>
                         <div>
-                            panding memebers<a href='members.php?do=Manage&page=panding'><span class='d-block'><?php echo checkItem('RegStatus', 'users', 0)?></span></a>
+                            panding memebers
+                            <a href='members.php?do=Manage&page=panding'>
+                                <span class='d-block'><?php echo checkItem('RegStatus', 'users', 0)?></span>
+                            </a>
                         </div>                   
                 </div>
             </div>
@@ -58,7 +64,10 @@
                 <div class='static st-items d-flex align-items-center justify-content-around'>
                     <i class="fas fa-gopuram"></i>
                     <div>
-                        total items<span class='d-block'><?php echo countColumns('Item_ID', 'items')?></span>
+                        total items
+                        <a href='items.php?do=Manage'>
+                            <span class='d-block'><?php echo countColumns('Item_ID', 'items')?></span>
+                        </a>
                     </div>                   
                 </div>
             </div>
@@ -67,7 +76,10 @@
                 <div class='static st-comments d-flex align-items-center justify-content-around'>
                     <i class="fas fa-comments"></i>
                     <div>
-                        total comments<span class='d-block'>3300</span>
+                        total comments
+                        <a href='comments.php?do=Manage'>
+                            <span class='d-block'><?php echo countColumns('Comment_Id', 'comments')?></span>
+                        </a>
                     </div>                   
                 </div>
             </div>

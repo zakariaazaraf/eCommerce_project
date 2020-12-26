@@ -39,7 +39,7 @@
         if($url === 'back'){
           $url = $_SERVER['HTTP_REFERER'];
         }else{
-          $url = $url ? $url = isset($_SERVER['HTTP_REFERER']) && $_SERVER['HTTP_REFERER'] !== '' ? $_SERVER['HTTP_REFERER'] : 'index.php' : 'index.php';
+          $url = $url ?  $url : 'index.php';
         }
 
         echo $msg;
