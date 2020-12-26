@@ -108,3 +108,17 @@ ALTER TABLE comments ADD CONSTRAINT comment_Item FOREIGN KEY (Item_Id) REFERENCE
 ALTER TABLE comments ADD CONSTRAINT comment_User FOREIGN KEY (User_Id) REFERENCES users(UserId) ON UPDATE CASCADE ON DELETE CASCADE;
 
 
+
+SELECT comments.*, items.Name, users.UserName 
+FROM 
+    comments 
+inner join 
+    items 
+on 
+    comments.Item_Id = items.Item_ID
+inner join 
+    users
+on
+    comments.User_Id = users.UserId
+
+
