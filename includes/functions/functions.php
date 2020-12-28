@@ -2,6 +2,27 @@
 
 
     /*
+     *******************************************************************
+     ********************** FRONTEND FUNCTIONS *************************
+     **/
+
+    /*
+      =========================================================
+      === @name : getCategories
+      === @desc : get the categories And Return Them As Array
+      === @version: v1.0
+      ========================================================= 
+    */
+
+    function getCategories(){
+      global $db;
+      $statement = $db->prepare("select * FROM categories ORDER BY Cat_Id");
+      $statement->execute();
+      $categories = $statement->fetchAll();
+      return $categories;
+    }
+
+    /*
       =========================================================
       === @name : getTitle
       === @desc : Display Page Title

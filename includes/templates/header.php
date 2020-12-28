@@ -38,7 +38,17 @@
 
             <div class="collapse navbar-collapse navbar-right">
                 <ul class="navbar-nav mr-auto">
-                    <li class="nav-item">
+
+                    <?php
+                        // CALL getCategories FUNCTION
+                        $categories = getCategories();
+                        foreach($categories as $category){
+                            echo '<li>';
+                                echo '<a class="nav-link" href="categories.php?categoryid='.$category['Cat_Id'].'">'.$category['Name'].'</a>';
+                            echo '</li>';
+                        }      
+                    ?>
+                    <!-- <li class="nav-item">
                     <a class="nav-link" href="#">Link 1</a>
                     </li>
                     <li class="nav-item">
@@ -52,7 +62,7 @@
                     </li>
                     <li class="nav-item">
                     <a class="nav-link" href="#">Link 5</a>
-                    </li>
+                    </li> -->
                 </ul>
             </div>
       
