@@ -425,6 +425,8 @@
                 $msg = "<div class='alert alert-danger'>ID DOESN'T EXISTS !!</div>";
                 redirectHome($msg);
             }
+        }else{
+            echo 'default';
         }
 
         //Include Footer

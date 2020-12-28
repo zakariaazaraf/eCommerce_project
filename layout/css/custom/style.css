@@ -1,0 +1,287 @@
+@import url("https://fonts.googleapis.com/css?family=Lato:400,700");
+
+:root {
+  --primaryColor: #007bff;
+  --mainWhite: #fff;
+  --mainBlack: #222;
+  --mainGrey: #ececec;
+  --mainSpacing: 0.1rem;
+  --mainTransition: all 0.3s linear;
+}
+/* START MAIN RULES */
+
+body {
+  background-color: var(--mainGrey);
+  font-family: "Lato", sans-serif;
+  font-size: 16px;
+}
+
+/* END MAIN RULES */
+
+/* START FORM CUSTOMAIZE */
+
+.login {
+  width: 400px;
+  margin: 100px auto;
+}
+
+.login input {
+  margin-bottom: 10px;
+}
+
+.login input.form-control {
+  background-color: #eaeaea;
+}
+
+.login .btn {
+  background-color: #0008dd;
+}
+
+/* END FORM CUSTOMAIZE */
+
+/*******************************************************************/
+
+/* START NAVBAR CUSTUOMIZE */
+
+/* Start Editing Bootstrap */
+
+.navbar-dark .navbar-brand {
+  font-size: 1em;
+}
+
+nav .container div:last-child {
+  justify-content: end;
+}
+
+.nav:last-child > .nav-item,
+.nav:last-child > .nav-item .dropdown-menu {
+  background-color: #3498db;
+}
+
+.nav:last-child > .nav-item > .nav-link,
+.nav:last-child > .nav-item .dropdown-menu .dropdown-item {
+  color: #fff;
+  font-size: 1em;
+}
+
+.nav:last-child > .nav-item .dropdown-menu {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: unset;
+  min-width: 13rem;
+}
+
+.nav:last-child > .nav-item .dropdown-menu .dropdown-item {
+  padding: 0.5rem 1.25rem;
+  transition: padding 0.4s ease;
+}
+
+.nav:last-child > .nav-item .dropdown-menu .dropdown-item:hover {
+  color: #111;
+  background-color: #fff;
+  padding: 0.5rem 1.75rem;
+}
+
+/* End Editing Bootstrap */
+/* END NAVBAR CUSTOMIZE */
+/**************************************************************/
+
+/* START DASHBOARD */
+.home-static .static {
+  font-size: 1.5rem;
+  background-color: #eee;
+  border: 1px solid slategray;
+  color: #f4d2d2eb;
+  padding: 0.5rem;
+  border-radius: 8px;
+}
+
+/* SPECFIE THE MIN HEIGHT */
+@media (min-width: 992px) {
+  .static {
+    min-height: 160px;
+  }
+}
+.home-static .static a {
+  color: #f4d2d2eb;
+}
+
+.home-static .static a:hover {
+  text-decoration: none;
+}
+
+.home-static .static i {
+  font-size: 4rem;
+}
+
+.home-static .st-members {
+  background-color: #eb59c7;
+}
+
+.home-static .st-panding {
+  background-color: #b955fa;
+}
+
+.home-static .st-items {
+  background-color: #d4466b;
+}
+
+.home-static .st-comments {
+  background-color: #c146d4;
+}
+
+.home-static .static span {
+  font-size: 3rem;
+}
+
+.latest .card-header {
+  cursor: pointer;
+}
+
+.latest .card .card-header .plus {
+  float: right;
+}
+
+.latest .list-group .list-group-item:nth-child(odd) {
+  background-color: #eee;
+}
+
+.categories form,
+.members form,
+.items form,
+.custom-select {
+  font-size: 1.5rem;
+}
+
+form .form-group button {
+  font-size: 1.4rem;
+  border-radius: 0.4rem;
+  text-transform: capitalize;
+  padding: 0.4rem 1.25rem;
+}
+
+form .form-group button i {
+  padding-right: 0.3rem;
+}
+.form-group {
+  margin-bottom: 2rem;
+}
+
+.categories form fieldset {
+  padding: 0.35em 0em 0.625em;
+  margin: 0;
+}
+
+input[type="checkbox"],
+input[type="radio"] {
+  margin-top: 10px;
+}
+
+/* END DASHBOARD */
+
+/*
+  ======================= EDIT MEMEBER ===========================
+*/
+
+/* START FORM MEMEBER */
+
+h1 {
+  font-size: 3.4rem;
+  text-transform: uppercase;
+}
+
+form input[type="password"],
+form input[type="text"],
+form input[type="email"],
+form textarea {
+  color: #495057;
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+form input[type="password"]:focus,
+form input[type="text"]:focus,
+input[type="email"]:focus,
+form textarea:focus {
+  border-color: #80bdff;
+  box-shadow: 0 0 0 0.1rem rgba(0, 123, 255, 0.251);
+  outline: 0;
+}
+
+.members form .form-group:nth-of-type(2) {
+  position: relative;
+}
+
+.members form .form-group:nth-child(2) i.show-pass {
+  position: absolute;
+  top: 5px;
+  right: 60px;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.container .table {
+  min-width: 600px;
+  box-shadow: 0 3px 8px #ced4da;
+}
+
+.container .table td,
+.container .table th {
+  vertical-align: middle;
+}
+
+.container .table .btn {
+  margin: auto 3px;
+  padding: 0.2rem 0.45rem;
+}
+
+.container .btn i {
+  position: relative;
+  right: 3px;
+}
+/* END FORM MEMEBER */
+
+/* START CATEGORIES PAGE */
+.categories .card {
+  /* min-height: 220px; */
+  overflow: hidden;
+}
+
+.categories .card .btn {
+  padding: 0.3rem 0.5rem;
+  line-height: 1.2;
+}
+
+.categories .card .btn-danger {
+  transform: translateX(140px);
+  transition: all 0.7s ease-in-out 0.5s;
+}
+
+.categories .card .btn-success {
+  transform: translateX(215px);
+  transition: all 0.7s ease-in-out;
+}
+
+.categories .card:hover .btn-success,
+.categories .card:hover .btn-danger {
+  transform: translateX(0px);
+  transition: all 0.7s ease-in-out;
+}
+
+.categories .card .card-footer {
+  padding: 0.6rem 1.25rem;
+}
+.categories .card .card-footer span {
+  padding: 0.4rem;
+  font-weight: bold;
+}
+
+.categories .card-header {
+  cursor: pointer;
+}
+.hide {
+  height: 0;
+}
+/* START CATEGORIES PAGE */
