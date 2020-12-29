@@ -10,13 +10,14 @@
       =========================================================
       === @name : getCategories
       === @desc : get the categories And Return Them As Array
-      === @version: v1.0
+                  Add The Limit Categories
+      === @version: v2.0
       ========================================================= 
     */
 
-    function getCategories(){
+    function getCategories($limit = 4){
       global $db;
-      $statement = $db->prepare("select * FROM categories ORDER BY Cat_Id");
+      $statement = $db->prepare("select * FROM categories ORDER BY Cat_Id LIMIT $limit");
       $statement->execute();
       $categories = $statement->fetchAll();
       return $categories;

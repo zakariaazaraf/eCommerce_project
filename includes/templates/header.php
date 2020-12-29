@@ -41,7 +41,7 @@
 
                     <?php
                         // CALL getCategories FUNCTION
-                        $categories = getCategories();
+                        $categories = getCategories(5);
                         foreach($categories as $category){
                             echo '<li>';
                                 echo '<a class="nav-link" href="categories.php?categoryid='.$category['Cat_Id'].'&catname='.$category['Name'].'">'.$category['Name'].'</a>';
@@ -53,7 +53,7 @@
                     </li>
                     <li class="nav-item">
                     <a class="nav-link" href="#">Link 2</a>
-                    </li>
+                    </li> 
                     <li class="nav-item">
                     <a class="nav-link" href="#">Link 3</a>
                     </li>
