@@ -285,11 +285,3 @@ form textarea:focus {
   height: 0;
 }
 /* START CATEGORIES PAGE */
-
-/* START THE FRONTEND */
-
-/* Customize The Navbar */
-
-nav .container .collapse {
-  flex-grow: 0;
-}

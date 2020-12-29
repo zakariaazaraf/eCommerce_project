@@ -1,0 +1,70 @@
+/* START THE FRONTEND */
+
+/* Customize The Navbar */
+
+nav .container .collapse {
+  flex-grow: 0;
+}
+
+/* Display Items */
+
+/* .card-group .card {
+  max-width: 250px;
+} */
+
+.cards {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  flex-wrap: wrap;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.card {
+  max-width: 300px;
+}
+
+@media (min-width: 576px) {
+  .cards {
+    max-width: 540px;
+    align-items: baseline;
+    margin-left: auto;
+    margin-right: auto;
+    flex-direction: row;
+  }
+  .card {
+    flex-basis: 45%;
+    margin: 0.7rem 2%;
+    min-width: 240px;
+  }
+}
+
+@media (min-width: 768px) {
+  .cards {
+    max-width: 720px;
+  }
+
+  .card {
+    flex-basis: 32%;
+    margin: 0.7rem 1%;
+  }
+}
+
+@media (min-width: 992px) {
+  .cards {
+    max-width: 960px;
+  }
+
+  .card {
+    flex-basis: 24%;
+    margin: 0.7rem 0.4%;
+  }
+}
+
+@media (min-width: 1200px) {
+  .cards {
+    max-width: 1120px;
+  }
+}

@@ -25,6 +25,23 @@
 
     /*
       =========================================================
+      === @name : getItems
+      === @desc : get the items relaited to a categoryby passing the categori ID
+      === @version: v1.0
+      ========================================================= 
+    */
+
+    function getItems($category_Id){
+      global $db;
+      $statement = $db->prepare("SELECT * FROM Items WHERE Cat_Id = ? ORDER BY Item_Id DESC");
+      $statement->bindParam(1, $category_Id);
+      $statement->execute();
+      $items = $statement->fetchAll();
+      return $items;
+    }
+
+    /*
+      =========================================================
       === @name : getTitle
       === @desc : Display Page Title
       === @version: v1.0

@@ -13,7 +13,8 @@
         <!-- The Normalize Css File -->
         <link rel="stylesheet" href="<?php echo $css ?>libs/normalize.css">
         <!-- Main Css File -->
-        <link rel="stylesheet" href="<?php echo $css ?>custom/style.css?v=<?php echo time(); ?>">
+        
+        <link rel="stylesheet" href="<?php echo $css ?>custom/frontend.css?v=<?php echo time(); ?>">
         
 
     </head>
@@ -48,21 +49,7 @@
                             echo '</li>';
                         }      
                     ?>
-                    <!-- <li class="nav-item">
-                    <a class="nav-link" href="#">Link 1</a>
-                    </li>
-                    <li class="nav-item">
-                    <a class="nav-link" href="#">Link 2</a>
-                    </li> 
-                    <li class="nav-item">
-                    <a class="nav-link" href="#">Link 3</a>
-                    </li>
-                    <li class="nav-item">
-                    <a class="nav-link" href="#">Link 4</a>
-                    </li>
-                    <li class="nav-item">
-                    <a class="nav-link" href="#">Link 5</a>
-                    </li> -->
+                    
                 </ul>
             </div>
       
