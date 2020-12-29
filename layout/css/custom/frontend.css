@@ -81,10 +81,81 @@ nav .container .collapse {
 }
 
 /* Start Login Page */
+body {
+  background-color: #f0f2f5;
+}
 
 form.login,
 form.signup {
   display: flex;
   flex-direction: column;
   align-items: center;
+  max-width: 420px;
+  background-color: #fff;
+  margin: 2rem auto;
+  border-radius: 10px;
+  box-shadow: 1px 1px 10px #cacaca, -1px -1px 10px #cacaca;
+}
+
+.login h1,
+.signup h1 {
+  color: #111;
+  font-weight: 500;
+  font-size: 3rem;
+  margin: 1.4rem auto;
+  text-transform: capitalize;
+}
+
+form input[type="email"],
+form input[type="password"] {
+  min-width: 300px;
+  height: 50px;
+  border: none;
+  border-bottom: 2px solid #777;
+  font-size: 1.4rem;
+}
+
+form input[type="email"]:focus,
+form input[type="password"]:focus {
+  border: none;
+  border-bottom: 2px solid #111;
+  outline: none;
+}
+
+input::placeholder {
+  color: #111;
+  font-weight: 500;
+  font-size: 1.2rem;
+}
+
+input,
+p {
+  margin-bottom: 1rem;
+}
+
+form p {
+  font-size: 1.2rem;
+  color: #111;
+}
+
+form p a {
+  color: black;
+  margin-left: 0.3rem;
+  font-weight: bold;
+  text-transform: capitalize;
+}
+
+form p a:hover {
+  color: #111;
+}
+
+form input[type="submit"] {
+  padding: 0.7rem 5rem;
+  margin: 0.4rem auto 2rem auto;
+  background-color: #111;
+  color: #fff;
+  font-size: 1.4rem;
+  text-transform: capitalize;
+  border: none;
+  border-radius: 1.2rem;
 }

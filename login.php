@@ -8,7 +8,7 @@
             <h1>Log In</h1>
             <input type="email" name="email" autocomplate="off" placeholder="Email" required/>
             <input type="password" name="password" autocomplate="new-password" placeholder="Password" required/>
-            <p>create new acount?<a>sign up</a></p>
+            <p>create new acount?<a href="#">sign up</a></p>
             <input type="submit" value="log in"/>
 
         </form>
