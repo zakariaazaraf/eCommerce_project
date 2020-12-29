@@ -3,7 +3,7 @@
     // Include Init.php File
     include "init.php";
     
-    
+        echo "<div class='container'>";
     
         echo "<h1 class='text-center'>Welcome To ".$_GET['catname']." Category !! :)</h1>";
         $cat_Id = $_GET['categoryid'];
@@ -21,7 +21,7 @@
             }
         echo "</div>";
 
-    
+    echo "</div>";
 
 
     // Include The Footer From Template Include
