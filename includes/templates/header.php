@@ -44,7 +44,7 @@
                         $categories = getCategories();
                         foreach($categories as $category){
                             echo '<li>';
-                                echo '<a class="nav-link" href="categories.php?categoryid='.$category['Cat_Id'].'">'.$category['Name'].'</a>';
+                                echo '<a class="nav-link" href="categories.php?categoryid='.$category['Cat_Id'].'&catname='.$category['Name'].'">'.$category['Name'].'</a>';
                             echo '</li>';
                         }      
                     ?>

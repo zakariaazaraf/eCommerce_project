@@ -216,8 +216,8 @@
                 if(empty($var)){
                     $errors = 'The Name field Cannot Be Empty';
                 }else{
-                    if(!preg_match('/^[a-zA-Z]{3,25}$/', $var)){
-                        $errors = 'The Name Field Must Be 2-25 Characters';
+                    if(!preg_match('/^[a-zA-Z\' \']{3,25}$/', $var)){
+                        $errors = '<div class="alert alert-daner">The Name Field Must Be 2-25 Characters</div>';
                     }
                 }              
 
@@ -226,8 +226,8 @@
                 if($errors){
 
                     // THROW THE ERRORS
-                    echo "<h3>Errors Encountered !!</h3></div>";
-                    echo "<div >" . isset($errors) ? $errors : '' . "</div>";
+                    echo "<h3 class='alert alert-danger'>Errors Encountered !!</h3>";
+                    echo isset($errors) ? $errors : '' ;
                     
                 }else{
 
@@ -252,7 +252,7 @@
 
                     }else{
 
-                        $msg = '<div class="alert alert-danger">This Name Allready Exists</div></div>';
+                        $msg = '<div class="alert alert-danger">This Name Allready Exists</div>';
                         redirectHome($msg, 'dashboard.php');
 
                     }       
