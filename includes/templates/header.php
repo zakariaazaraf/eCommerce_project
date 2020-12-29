@@ -19,7 +19,15 @@
 
     </head>
     <body>
-
+        <div class="container">
+            <div class="log-bar d-flex justify-content-between">
+                <a href="#" class="logo">Logoo</a>
+                <div>
+                    <a href="login.php" class="login">Login</a>
+                    <a href="login.php" class="signup">Siginup</a>
+                </div>
+            </div>
+        </div>
     <!-- BRING THE NAVBAR -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container justify-content-between">
