@@ -138,15 +138,17 @@ form p {
   color: #111;
 }
 
-form p a {
+form p span {
   color: black;
   margin-left: 0.3rem;
   font-weight: bold;
   text-transform: capitalize;
+  cursor: pointer;
 }
 
-form p a:hover {
+form p span:hover {
   color: #111;
+  text-decoration: underline;
 }
 
 form input[type="submit"] {
@@ -158,4 +160,7 @@ form input[type="submit"] {
   text-transform: capitalize;
   border: none;
   border-radius: 1.2rem;
+}
+.hide {
+  display: none !important;
 }
