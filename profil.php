@@ -8,7 +8,14 @@
 
     if($sessionUser){
 
+        // FETCH THE DATA RELATED TO THIS USER
+        $stat = $db->prepare("SELECT * FROM users WHERE UserName = ?");
+        $stat->bindParam(1, $sessionUser);
+        $stat->execute();
+        $userInfo = $stat->fetch();
+
         echo "<h1 class='text-center'>Welcome " . $sessionUser . " </h1>";
+
         ?>
             <div class="inforamtion-card profil-cards">
                 <div class="container">
@@ -16,15 +23,19 @@
                         <h5 class="card-header">Personal Info</h5>
                         <div class="card-body">                     
                             <h4 class="card-title">
-                                your info
+                                Your Infotmation:  
                             </h4>
                             <p class="card-text">
-                                Body Of Information
+                                Name: <?php echo $userInfo['UserName'] . "<br />"?>
+                                Full Name: <?php echo $userInfo['FullName'] . "<br />"?>
+                                Email: <?php echo $userInfo['Email'] . "<br />"?>
+                                Registred Date: <?php echo $userInfo['Date'] . "<br />"?>
+                                Favorite Category: Games
                             </p>                
                         </div>
-                        <div class="card-footer text-center text-muted">    
+                       <!--  <div class="card-footer text-center text-muted">    
                             2 Days
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>
@@ -41,9 +52,7 @@
                                 Body Of Information
                             </p>                
                         </div>
-                        <div class="card-footer text-center text-muted">    
-                            2 Days
-                        </div>
+                        
                     </div>
                 </div>
             </div>
@@ -60,9 +69,7 @@
                                 Body Of Information
                             </p>                
                         </div>
-                        <div class="card-footer text-center text-muted">    
-                            2 Days
-                        </div>
+                        
                     </div>
                 </div>
             </div>
