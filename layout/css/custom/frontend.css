@@ -107,7 +107,8 @@ form.signup {
 }
 
 form input[type="email"],
-form input[type="password"] {
+form input[type="password"],
+form input[type="text"] {
   min-width: 300px;
   height: 50px;
   border: none;
@@ -116,7 +117,8 @@ form input[type="password"] {
 }
 
 form input[type="email"]:focus,
-form input[type="password"]:focus {
+form input[type="password"]:focus,
+form input[type="text"]:focus {
   border: none;
   border-bottom: 2px solid #111;
   outline: none;

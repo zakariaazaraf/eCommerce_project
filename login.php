@@ -1,12 +1,52 @@
-<?php include "init.php"?>
+<?php 
+
+    // STARTING THE SESSION
+    session_start();
+
+    // CHECK THE SESSIONS OF THE USER
+    if(isset($_SESSION['user'])){
+        header('Location: index.php');
+    }
+
+    include "init.php";
+
+    if($_SERVER['REQUEST_METHOD'] == 'POST'){
+
+        $user = $_POST['user'];
+        $userPassword = sha1($_POST['password']); // HASHING THE PASSWORD
+
+        $statement = $db->prepare("SELECT UserId, UserName, Password 
+                                        FROM 
+                                            users 
+                                        WHERE 
+                                            UserName = ? AND Password = ? LIMIT 1");
+
+        $statement->execute(array($user, $userPassword));
+        $data = $statement->fetch();
+
+        if($data){
+
+            // CREATE A SESSION FOR THIS USER
+            $_SESSION['user'] = $user;
+            $_SESSION['Id'] = $data['UserId'];
+            header('Location: index.php');
+            exit();
+
+        }else{
+            echo 'There\'s no Data matched those values';
+        }
+    }
+
+    
+?>
 
     <div class="container">
         
 
-        <form action="" class="login">
+        <form action="<?php echo $_SERVER['PHP_SELF'] ?>" class="login" method='post'>
 
             <h1>Log In</h1>
-            <input type="email" name="email" autocomplate="off" placeholder="Email" required/>
+            <input type="text" name="user" autocomplate="off" placeholder="Username" required/>
             <input type="password" name="password" autocomplate="new-password" placeholder="Password" required/>
             <p>create new acount?<span data-class='login'>sign up</span></p>
             <input type="submit" value="log in"/>
