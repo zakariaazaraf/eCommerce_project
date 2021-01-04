@@ -1,3 +1,8 @@
+<?php
+
+    // START THE SESSION 
+    //session_start();
+?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -19,15 +24,20 @@
 
     </head>
     <body>
-        <!-- <div class="container">
+        <div class="container">
             <div class="log-bar d-flex justify-content-between">
                 <a href="#" class="logo">Logoo</a>
+
+                <!-- CHECK THE PERMISSION OF THE USER -->
+                <?php echo !checkUserStatus($_SESSION['user']) ? '<a href="profil.php" class="logo">Profil</a>' : '' ?> 
+                
+                <a href="logout.php" class="logo">LogOut</a>
                 <div>
                     <a href="login.php" class="login">Login</a>
-                    <a href="login.php" class="signup">Siginup</a>
+                    <a href="login.php" class="signup">Sigin up</a>
                 </div>
             </div>
-        </div> -->
+        </div>
     <!-- BRING THE NAVBAR -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container justify-content-between">

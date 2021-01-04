@@ -29,8 +29,7 @@
         if($data){
 
             // CREATE A SESSION FOR THIS USER
-            $_SESSION['user'] = $user;
-            $_SESSION['Id'] = $data['UserId'];
+            $_SESSION['user'] = $user; // FOR A USER YOU SOULD GET HIS DATA OR EDIT IT BY THE SESSION
             header('Location: index.php');
             exit();
 
@@ -55,7 +54,7 @@
 
         </form>
 
-        <form action="" class="signup hide">
+        <form action="" class="signup hide" method="POST">
 
             <h1>Sign Up</h1>
             <input type="email" name="email" autocomplate="on" placeholder="Email" required />

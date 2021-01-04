@@ -3,8 +3,12 @@
     // START THE SESSION TO CHECK IF THIS USER WAS REGISTRED
     session_start();
 
+    $titlePage = "Home";
+
     // Include Init.php File
     include "init.php";
+
+    
 
     if(isset($_SESSION['user'])){
         echo '<h1 class="bg-primary d-flex justify-content-center mh-100 align-items-center">Hello From The Outside !!! :)</h1>';
