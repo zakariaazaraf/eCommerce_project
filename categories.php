@@ -9,7 +9,7 @@
         $cat_Id = $_GET['categoryid'];
 
         echo "<div class='cards'>";
-            foreach(getItems($cat_Id) as $item){
+            foreach(getItems('Cat_Id', $cat_Id) as $item){
                 echo "<div class='card'>";
                     echo "<img class='card-img-top img-fluid' src='./layout/images/item1.jpg' alt='".$item['Name']."'/>";
                     echo "<div class='card-body'>";

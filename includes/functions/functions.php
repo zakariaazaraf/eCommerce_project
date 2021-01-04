@@ -31,10 +31,10 @@
       ========================================================= 
     */
 
-    function getItems($category_Id){
+    function getItems($where, $value){
       global $db;
-      $statement = $db->prepare("SELECT * FROM Items WHERE Cat_Id = ? ORDER BY Item_Id DESC");
-      $statement->bindParam(1, $category_Id);
+      $statement = $db->prepare("SELECT * FROM Items WHERE $where = ? ORDER BY Item_Id DESC");
+      $statement->bindParam(1, $value);
       $statement->execute();
       $items = $statement->fetchAll();
       return $items;

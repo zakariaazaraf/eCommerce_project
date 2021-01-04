@@ -174,7 +174,8 @@ form input[type="submit"] {
   color: #fff;
 }
 
-.profil-cards .text-muted {
+.profil-cards .text-muted,
+.card-header {
   color: #fff !important;
 }
 
