@@ -22,7 +22,7 @@ nav .container .collapse {
   padding-right: 15px;
 }
 
-.card {
+.cards .card {
   max-width: 300px;
 }
 
@@ -45,7 +45,7 @@ nav .container .collapse {
     margin-right: auto;
     flex-direction: row;
   }
-  .card {
+  .cards .card {
     flex-basis: 45%;
     margin: 0.7rem 2%;
     min-width: 240px;
@@ -57,7 +57,7 @@ nav .container .collapse {
     max-width: 720px;
   }
 
-  .card {
+  .cards .card {
     flex-basis: 32%;
     margin: 0.7rem 1%;
   }
@@ -68,7 +68,7 @@ nav .container .collapse {
     max-width: 960px;
   }
 
-  .card {
+  .cards .card {
     flex-basis: 24%;
     margin: 0.7rem 0.4%;
   }
@@ -163,6 +163,19 @@ form input[type="submit"] {
   border: none;
   border-radius: 1.2rem;
 }
+
 .hide {
   display: none !important;
 }
+
+/* START THE PROFIL */
+.profil-cards {
+  margin-bottom: 1rem;
+  color: #fff;
+}
+
+.profil-cards .text-muted {
+  color: #fff !important;
+}
+
+/* END THE PROFIL */

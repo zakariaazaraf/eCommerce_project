@@ -9,6 +9,8 @@
         exit();
     }
 
+    $titlePage = "Login";
+
 
     include "init.php";
 

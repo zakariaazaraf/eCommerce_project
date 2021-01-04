@@ -3,6 +3,10 @@
     // DATABASE CONNECTION
     include 'connect.php';
 
+    // SESSION USER VALUE
+    $sessionUser = isset($_SESSION['user']) ? $_SESSION['user'] : '';
+    
+
     // Routes
     
     $template = './includes/templates/'; // Template Directory

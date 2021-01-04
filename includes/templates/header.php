@@ -29,13 +29,15 @@
                 <a href="#" class="logo">Logoo</a>
 
                 <!-- CHECK THE PERMISSION OF THE USER -->
-                <?php echo !checkUserStatus($_SESSION['user']) ? '<a href="profil.php" class="logo">Profil</a>' : '' ?> 
+                <?php echo !checkUserStatus($sessionUser) && ($sessionUser) ? '<a href="profil.php" class="logo">Profil</a>' : ''?> 
                 
                 <a href="logout.php" class="logo">LogOut</a>
                 <div>
                     <a href="login.php" class="login">Login</a>
                     <a href="login.php" class="signup">Sigin up</a>
                 </div>
+
+                
             </div>
         </div>
     <!-- BRING THE NAVBAR -->
