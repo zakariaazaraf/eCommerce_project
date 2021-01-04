@@ -8,9 +8,17 @@
 
     if(isset($_SESSION['user'])){
         echo '<h1 class="bg-primary d-flex justify-content-center mh-100 align-items-center">Hello From The Outside !!! :)</h1>';
+
+        if(!checkUserStatus($_SESSION['user'])){
+            echo "<div class='aler alert-success'>You Have All The Functionalies !! :)</div>";
+        }else{
+            echo "<div class='alert alert-danger'>You Haven't All Functionalties !! :(</div>";
+        } 
         /* session_unset();
         session_destroy();
-        exit(); */
+        exit();*/
+
+       
     }else{
         header('Location: login.php');
         exit();

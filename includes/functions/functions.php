@@ -42,11 +42,33 @@
 
     /*
       =========================================================
-      === @name : getTitle
-      === @desc : Display Page Title
+      === @name : getCategories
+      === @desc : get the categories And Return Them As Array
+                  Add The Limit Categories
+      === @version: v2.0
+      ========================================================= 
+    */
+
+    /*
+      =========================================================
+      === @name : checkUserStatus
+      === @desc : Check If The User Has The Ability To User All Functionalty
       === @version: v1.0
       ========================================================= 
     */
+
+    function checkUserStatus($user){
+      global $db;
+      $stat = $db->prepare("SELECT UserId FROM users WHERE UserName = ? AND RegStatus = 0");
+      $stat->bindParam(1, $user);
+      $stat->execute();
+      return $stat->rowCount();
+    }
+
+    /*
+     *******************************************************************
+     ********************** FRONTEND FUNCTIONS *************************
+     **/
 
     function getTitle(){
 
