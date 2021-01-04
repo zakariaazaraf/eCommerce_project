@@ -72,11 +72,20 @@
                         <h5 class="card-header">Latest Comments</h5>
                         <div class="card-body">                     
                             <h4 class="card-title">
-                                your info
+                                User Comments
                             </h4>
-                            <p class="card-text">
-                                Body Of Information
-                            </p>                
+                            <?php 
+                                $stat = $db->prepare("SELECT * FROM comments WHERE User_Id = ?");
+                                $stat->execute(array($userInfo['UserId']));
+                                $userComments = $stat->fetchAll();
+
+                                if($userComments){
+                                    foreach($userComments as $comment){
+                                        echo "<p class='card-text'>" . $comment['Comment'] . "</p>";
+                                        echo "<p class='card-text'><small class='text-muted'>".$comment['Comment_Date']."</small></p>";
+                                    }    
+                                }
+                            ?>               
                         </div>
                         
                     </div>
