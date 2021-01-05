@@ -16,28 +16,45 @@
 
     if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
-        $user = $_POST['user'];
-        $userPassword = sha1($_POST['password']); // HASHING THE PASSWORD
+        
 
-        $statement = $db->prepare("SELECT UserId, UserName, Password 
-                                        FROM 
-                                            users 
-                                        WHERE 
-                                            UserName = ? AND Password = ? LIMIT 1");
+        if(in_array('Log In', $_POST)){
 
-        $statement->execute(array($user, $userPassword));
-        $data = $statement->fetch();
+            $user = $_POST['user'];
+            $userPassword = sha1($_POST['password']); // HASHING THE PASSWORD
 
-        if($data){
+            $statement = $db->prepare("SELECT UserId, UserName, Password 
+                                            FROM 
+                                                users 
+                                            WHERE 
+                                                UserName = ? AND Password = ? LIMIT 1");
 
-            // CREATE A SESSION FOR THIS USER
-            $_SESSION['user'] = $user; // FOR A USER YOU SOULD GET HIS DATA OR EDIT IT BY THE SESSION
-            header('Location: index.php');
-            exit();
+            $statement->execute(array($user, $userPassword));
+            $data = $statement->fetch();
+
+            if($data){
+
+                // CREATE A SESSION FOR THIS USER
+                $_SESSION['user'] = $user; // FOR A USER YOU SOULD GET HIS DATA OR EDIT IT BY THE SESSION
+                header('Location: index.php');
+                exit();
+
+            }else{
+                echo 'There\'s no Data matched those values';
+            }
+
+        }elseif(in_array('Sign Up', $_POST)){
+
+            echo 'Came Form The Signup Form';
 
         }else{
-            echo 'There\'s no Data matched those values';
+
+            echo 'We Dont Knew Where You Came From';
+
         }
+        
+
+        
     }
 
     
@@ -52,7 +69,7 @@
             <input type="text" name="user" autocomplate="off" placeholder="Username" required/>
             <input type="password" name="password" autocomplate="new-password" placeholder="Password" required/>
             <p>create new acount?<span data-class='login'>sign up</span></p>
-            <input type="submit" value="log in"/>
+            <input type="submit" value="log in" name="login"/>
 
         </form>
 
@@ -63,7 +80,7 @@
             <input type="password" name="password" autocomplate="new-password" placeholder="password" required/>
             <input type="password" name="valid-password" autocomplate="newèpassword" placeholder="retype password" required/>
             <p>already a member?<span data-class='signup'>log in</span></p>
-            <input type="submit" value="Sign Up"/>
+            <input type="submit" value="Sign Up" name="signup"/>
 
         </form>
     </div>

@@ -1,5 +1,8 @@
 <?php
 
+    // STARTING THE SESSION
+    session_start();
+
     // Include Init.php File
     include "init.php";
     
