@@ -112,8 +112,8 @@
                     $password = $_POST['password'];
                     $validPassword = $_POST['valid-password'];
 
-                    $validation->validateEmail($username, 'User Name');
-                    $validation->validateEmail($fullname, 'Full name');
+                    $validation->validateName($username, 'User Name');
+                    $validation->validateString($fullname, 'Full name');
                     $validation->validateEmail($email, 'Email');
                     $validation->validatePassword($password, 'Password');
                     $validation->matchPassword($password, $validPassword);
@@ -129,12 +129,39 @@
                         echo "<div>";
                     }else{
 
-                        // CREATE A NEW USER AND REIRECT IT TO HOME PAGE
-                        $stat = $db->prepare("INSERT INTO 
-                                                            users 
-                                                        (UserName, Password, Email, FullName, GroupID, TrustStatus, RegStatus, Date)
-                                                            VALUES
-                                                        (?, ?, ?, )");
+                        if(!checkItem('UserName', 'users', $username)){
+
+                            // CREATE A NEW USER AND REIRECT IT TO HOME PAGE
+                            $stat = $db->prepare("INSERT INTO 
+                                                                users 
+                                                            (UserId, UserName, Password, Email, FullName, GroupID, TrustStatus, RegStatus, Date)
+                                                                VALUES
+                                                            (null, ?, ?, ?, ?, '0', '0', '0', now())");
+
+                            $stat->execute(array($username, sha1($password), $email, $fullname));
+
+                            if($stat->rowCount()){
+
+                                // CREATE SESSION FOR THIS USER
+                                $_SESSION['user'] = $username;
+
+                                // REDIRECT HIM TO HOME PAGE
+                                header('Location: index.php');
+                                exit();
+
+                            }else{
+
+                                echo "<div class='alert alert-danger'>We Encounter Some Isseus Creating A New User !</div>";
+
+                            }
+
+                        }else{
+
+                            echo "<div class='alert alert-danger'>This User Already Exists Try Another One !</div>";
+
+                        }
+
+                        
 
                     }
                     

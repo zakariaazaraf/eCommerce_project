@@ -42,15 +42,6 @@
 
     /*
       =========================================================
-      === @name : getCategories
-      === @desc : get the categories And Return Them As Array
-                  Add The Limit Categories
-      === @version: v2.0
-      ========================================================= 
-    */
-
-    /*
-      =========================================================
       === @name : checkUserStatus
       === @desc : Check If The User Has The Ability To User All Functionalty
       === @version: v1.0
