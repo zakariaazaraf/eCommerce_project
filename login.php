@@ -17,8 +17,8 @@
     if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
         
-
-        if(in_array('Log In', $_POST)){
+        
+        if(in_array('Log In', $_POST)){ // You Could Samply Write isset($_POST['login'])
 
             $user = $_POST['user'];
             $userPassword = sha1($_POST['password']); // HASHING THE PASSWORD
