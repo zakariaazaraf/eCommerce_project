@@ -15,60 +15,6 @@
 
     require('form_validation.php');
 
-    if($_SERVER['REQUEST_METHOD'] == 'POST'){
-
-        // THE VALIDATION CLASS INSTANCE
-        $validation = new Validation($_POST);
-
-        
-        if(isset($_POST['login'])){ // You Could Samply Write isset($_POST['login'])
-
-            /* $user = $_POST['user'];
-            $userPassword = sha1($_POST['password']); // HASHING THE PASSWORD
-
-            $statement = $db->prepare("SELECT UserId, UserName, Password 
-                                            FROM 
-                                                users 
-                                            WHERE 
-                                                UserName = ? AND Password = ? LIMIT 1");
-
-            $statement->execute(array($user, $userPassword));
-            $data = $statement->fetch();
-
-            if($data){
-
-                // CREATE A SESSION FOR THIS USER
-                $_SESSION['user'] = $user; // FOR A USER YOU SOULD GET HIS DATA OR EDIT IT BY THE SESSION
-                header('Location: index.php');
-                exit();
-
-            }else{
-                echo 'There\'s no Data matched those values';
-            } */
-
-            // GET THE FORM INPUTS
-            $username = $_POST['user'];
-            $password = $_POST['password'];
-
-            $validation->validateString($username, 'User');
-            $validation->validatePassword($password, 'Password');
-            
-
-        }else{
-
-            // GET THE FORM INPUTS
-            $email = $_POST['email'];
-            $password = $_POST['password'];
-            $validPassword = $_POST['valid-password'];
-
-            $validation->validateEmail($email, 'Email');
-            $validation->validatePassword($password, 'Password');
-            $validation->matchPassword($password, $validPassword);
-            
-        }
-           
-    }
-
     
 ?>
 
@@ -102,16 +48,87 @@
     <?php 
         
             if($_SERVER['REQUEST_METHOD'] == 'POST'){
-                $errors = $validation->errors;
 
-                // SHOW ERRORS IF EXISTS
-                if($errors){
-                    echo "<div class='container'>";
-                    foreach($errors as $error){
-                        echo "<div class='alert alert-danger text-center'>".$error."</div>";
+                // THE VALIDATION CLASS INSTANCE
+                $validation = new Validation($_POST);
+
+                
+                if(isset($_POST['login'])){ 
+
+                    // GET THE FORM INPUTS
+                    $username = $_POST['user'];
+                    $password = $_POST['password'];
+
+                    // VALIDATE THE FIELDS
+                    $validation->validateString($username, 'User');
+                    $validation->validatePassword($password, 'Password');
+
+                    $errors = $validation->errors;
+
+                    // SHOW ERRORS IF EXISTS
+                    if($errors){
+
+                        echo "<div class='container'>";
+                        foreach($errors as $error){
+                            echo "<div class='alert alert-danger text-center'>".$error."</div>";
+                        }
+                        echo "<div>";
+
+                    }else{
+ 
+                        $user = $username;
+                        $userPassword = sha1($password); // HASHING THE PASSWORD
+
+                        $statement = $db->prepare("SELECT UserId, UserName, Password 
+                                                        FROM 
+                                                            users 
+                                                        WHERE 
+                                                            UserName = ? AND Password = ? LIMIT 1");
+
+                        $statement->execute(array($user, $userPassword));
+                        $data = $statement->fetch();
+
+                        // CHECK THE EXISTENS OF THIS USER IN DATABASE
+                        if($data){
+
+                            // CREATE A SESSION FOR THIS USER
+                            $_SESSION['user'] = $user; // FOR A USER YOU SOULD GET HIS DATA OR EDIT IT BY THE SESSION
+                            header('Location: index.php');
+                            exit();
+
+                        }else{
+                            echo 'There\'s no Data matched those values';
+                        } 
                     }
-                    echo "<div>";
+
+                }else{
+
+                    // GET THE FORM INPUTS
+                    $email = $_POST['email'];
+                    $password = $_POST['password'];
+                    $validPassword = $_POST['valid-password'];
+
+                    $validation->validateEmail($email, 'Email');
+                    $validation->validatePassword($password, 'Password');
+                    $validation->matchPassword($password, $validPassword);
+
+                    $errors = $validation->errors;
+
+                    // SHOW ERRORS IF EXISTS
+                    if($errors){
+                        echo "<div class='container'>";
+                        foreach($errors as $error){
+                            echo "<div class='alert alert-danger text-center'>".$error."</div>";
+                        }
+                        echo "<div>";
+                    }else{
+
+                        // CREATE A NEW USER AND REIRECT IT TO HOME PAGE
+
+                    }
+                    
                 }
+
             }
         
             
