@@ -40,6 +40,48 @@
             }
         }
 
+        public function validateEmail($field, $name){
+            $field = trim($field);
+            if(empty($field)){
+                $err = "The <strong>".$name."</strong> Souldn't Be Empty";
+                $this->addError($err);
+            }else{
+                if(!filter_var($field, FILTER_VALIDATE_EMAIL)){
+                    $err = "The <strong>".$name."</strong> Aren't Valid";
+                    $this->addError($err);
+                }
+            }
+        }
+
+        public function validatePassword($field, $name){
+            $field = trim($field);
+            if(!empty($field)){
+                if(!filter_var($field, FILTER_VALIDATE_STRING)){
+                    $err = "This <strong>$name</strong> Field Not Valid !!";
+                    $this->addError($err);
+                }
+            }else{
+                $err = "This <strong>$name</strong> Field Cannot Be Empty !!";
+                $this->addError($err);
+            }
+        }
+
+        public function matchPassword($pass1, $pass2){
+            $pass1 = trim($pass1);
+            $pass2 = trim($pass2);
+            if($pass1 && $pass2){
+                $hashedPass1 = sha1($pass1);
+                $hashedPass2 = sha1($pass2);
+                if($hashedPass1 !== $hashedPass2){
+                    $err = "This <strong>Passwords</strong> Doesn't Match";
+                    $this->addError($err);
+                }
+            }else{
+                $err = "This <strong>".$pass1."</strong> Cannot Be Empty !!";
+                $this->addError($err);
+            }
+        }
+
         public function addError($msg){
             array_push($this->errors, $msg);
         }
