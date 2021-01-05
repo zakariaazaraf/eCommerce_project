@@ -36,6 +36,8 @@
               method="POST">
 
             <h1>Sign Up</h1>
+            <input type="text" name="username" autocomplate="of" placeholder="User Name"  required/>
+            <input type="text" name="fullname" autocomplate="of" placeholder="Full Name"  required/>
             <input type="email" name="email" autocomplate="on" placeholder="Email"  required/>
             <input type="password" name="password" autocomplate="new-password" placeholder="password" required/>
             <input type="password" name="valid-password" autocomplate="newèpassword" placeholder="retype password" required/>
@@ -104,10 +106,14 @@
                 }else{
 
                     // GET THE FORM INPUTS
+                    $username = $_POST['username'];
+                    $fullname = $_POST['fullname'];
                     $email = $_POST['email'];
                     $password = $_POST['password'];
                     $validPassword = $_POST['valid-password'];
 
+                    $validation->validateEmail($username, 'User Name');
+                    $validation->validateEmail($fullname, 'Full name');
                     $validation->validateEmail($email, 'Email');
                     $validation->validatePassword($password, 'Password');
                     $validation->matchPassword($password, $validPassword);
@@ -116,7 +122,7 @@
 
                     // SHOW ERRORS IF EXISTS
                     if($errors){
-                        echo "<div class='container'>";
+                        echo "<div class='container errors'>";
                         foreach($errors as $error){
                             echo "<div class='alert alert-danger text-center'>".$error."</div>";
                         }
@@ -124,6 +130,11 @@
                     }else{
 
                         // CREATE A NEW USER AND REIRECT IT TO HOME PAGE
+                        $stat = $db->prepare("INSERT INTO 
+                                                            users 
+                                                        (UserName, Password, Email, FullName, GroupID, TrustStatus, RegStatus, Date)
+                                                            VALUES
+                                                        (?, ?, ?, )");
 
                     }
                     

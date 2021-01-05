@@ -168,6 +168,16 @@ form input[type="submit"] {
   display: none !important;
 }
 
+.errors {
+  flex-direction: column;
+  margin-bottom: 1rem;
+}
+
+.errors div {
+  max-width: 420px;
+  margin: 0.5rem auto;
+}
+
 /* START THE PROFIL */
 .profil-cards {
   margin-bottom: 1rem;
