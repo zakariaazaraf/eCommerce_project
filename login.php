@@ -78,19 +78,21 @@
         <form action="<?php echo $_SERVER['PHP_SELF'] ?>" class="login <?php echo $_SERVER['REQUEST_METHOD'] == 'POST' ? isset($_POST['login']) ? '' : 'hide' : ''?>" method='post'>
 
             <h1>Log In</h1>
-            <input type="text" name="user" autocomplate="off" placeholder="Username" />
-            <input type="password" name="password" autocomplate="new-password" placeholder="Password" />
+            <input type="text" name="user" autocomplate="off" placeholder="Username" required/>
+            <input type="password" name="password" autocomplate="new-password" placeholder="Password" required/>
             <p>create new acount?<span data-class='login'>sign up</span></p>
             <input type="submit" value="log in" name="login"/>
 
         </form>
 
-        <form action="" class="signup <?php echo $_SERVER['REQUEST_METHOD'] == 'POST' ? isset($_POST['sigiup']) ? '' : 'hide' : 'hide' ?>" method="POST">
+        <form action="" 
+              class="signup <?php echo $_SERVER['REQUEST_METHOD'] == 'POST' ? isset($_POST['signup']) ? '' : 'hide' : 'hide' ?>" 
+              method="POST">
 
             <h1>Sign Up</h1>
-            <input type="email" name="email" autocomplate="on" placeholder="Email"  />
-            <input type="password" name="password" autocomplate="new-password" placeholder="password" />
-            <input type="password" name="valid-password" autocomplate="newèpassword" placeholder="retype password" />
+            <input type="email" name="email" autocomplate="on" placeholder="Email"  required/>
+            <input type="password" name="password" autocomplate="new-password" placeholder="password" required/>
+            <input type="password" name="valid-password" autocomplate="newèpassword" placeholder="retype password" required/>
             <p>already a member?<span data-class='signup'>log in</span></p>
             <input type="submit" value="Sign Up" name="signup"/>
 
@@ -102,14 +104,14 @@
             if($_SERVER['REQUEST_METHOD'] == 'POST'){
                 $errors = $validation->errors;
 
-            // SHOW ERRORS IF EXISTS
-            if($errors){
-                echo "<div class='container'>";
-                foreach($errors as $error){
-                    echo "<div class='alert alert-danger text-center'>".$error."</div>";
+                // SHOW ERRORS IF EXISTS
+                if($errors){
+                    echo "<div class='container'>";
+                    foreach($errors as $error){
+                        echo "<div class='alert alert-danger text-center'>".$error."</div>";
+                    }
+                    echo "<div>";
                 }
-                echo "<div>";
-            }
             }
         
             
