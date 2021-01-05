@@ -11,7 +11,6 @@
 
     $titlePage = "Login";
 
-
     include "init.php";
 
     require('form_validation.php');
@@ -57,8 +56,6 @@
 
         }else{
 
-            echo 'Came Form The Signup Form';
-
             // GET THE FORM INPUTS
             $email = $_POST['email'];
             $password = $_POST['password'];
@@ -67,15 +64,7 @@
             $validation->validateEmail($email, 'Email');
             $validation->validatePassword($password, 'Password');
             $validation->matchPassword($password, $validPassword);
-            /* $errors = $validation->errors;
-
-            // SHOW ERRORS IF EXISTS
-            if($errors){
-                foreach($errors as $error){
-                    echo "<div class='alert alert-danger'>".$error."</div>";
-                }
-            } */
-
+            
         }
            
     }
@@ -86,7 +75,7 @@
     <div class="container">
         
 
-        <form action="<?php echo $_SERVER['PHP_SELF'] ?>" class="login" method='post'>
+        <form action="<?php echo $_SERVER['PHP_SELF'] ?>" class="login <?php echo $_SERVER['REQUEST_METHOD'] == 'POST' ? isset($_POST['login']) ? '' : 'hide' : ''?>" method='post'>
 
             <h1>Log In</h1>
             <input type="text" name="user" autocomplate="off" placeholder="Username" />
@@ -96,7 +85,7 @@
 
         </form>
 
-        <form action="" class="signup hide" method="POST">
+        <form action="" class="signup <?php echo $_SERVER['REQUEST_METHOD'] == 'POST' ? isset($_POST['sigiup']) ? '' : 'hide' : 'hide' ?>" method="POST">
 
             <h1>Sign Up</h1>
             <input type="email" name="email" autocomplate="on" placeholder="Email"  />
@@ -109,14 +98,21 @@
     </div>
 
     <?php 
-            $errors = $validation->errors;
+        
+            if($_SERVER['REQUEST_METHOD'] == 'POST'){
+                $errors = $validation->errors;
 
             // SHOW ERRORS IF EXISTS
             if($errors){
+                echo "<div class='container'>";
                 foreach($errors as $error){
-                    echo "<div class='alert alert-danger'>".$error."</div>";
+                    echo "<div class='alert alert-danger text-center'>".$error."</div>";
                 }
+                echo "<div>";
             }
+            }
+        
+            
     ?>
 
 
