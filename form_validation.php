@@ -55,12 +55,8 @@
 
         public function validatePassword($field, $name){
             $field = trim($field);
-            if(!empty($field)){
-                if(!filter_var($field, FILTER_VALIDATE_STRING)){
-                    $err = "This <strong>$name</strong> Field Not Valid !!";
-                    $this->addError($err);
-                }
-            }else{
+            $field = filter_var($field, FILTER_SANITIZE_STRING);
+            if(empty($field)){
                 $err = "This <strong>$name</strong> Field Cannot Be Empty !!";
                 $this->addError($err);
             }
@@ -77,7 +73,7 @@
                     $this->addError($err);
                 }
             }else{
-                $err = "This <strong>".$pass1."</strong> Cannot Be Empty !!";
+                $err = "This <strong>Password</strong> Cannot Be Empty !!";
                 $this->addError($err);
             }
         }

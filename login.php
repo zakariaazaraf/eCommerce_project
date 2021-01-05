@@ -14,13 +14,17 @@
 
     include "init.php";
 
+    require('form_validation.php');
+
     if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
-        
-        
-        if(in_array('Log In', $_POST)){ // You Could Samply Write isset($_POST['login'])
+        // THE VALIDATION CLASS INSTANCE
+        $validation = new Validation($_POST);
 
-            $user = $_POST['user'];
+        
+        if(isset($_POST['login'])){ // You Could Samply Write isset($_POST['login'])
+
+            /* $user = $_POST['user'];
             $userPassword = sha1($_POST['password']); // HASHING THE PASSWORD
 
             $statement = $db->prepare("SELECT UserId, UserName, Password 
@@ -41,20 +45,39 @@
 
             }else{
                 echo 'There\'s no Data matched those values';
-            }
+            } */
 
-        }elseif(in_array('Sign Up', $_POST)){
+            // GET THE FORM INPUTS
+            $username = $_POST['user'];
+            $password = $_POST['password'];
 
-            echo 'Came Form The Signup Form';
+            $validation->validateString($username, 'User');
+            $validation->validatePassword($password, 'Password');
+            
 
         }else{
 
-            echo 'We Dont Knew Where You Came From';
+            echo 'Came Form The Signup Form';
+
+            // GET THE FORM INPUTS
+            $email = $_POST['email'];
+            $password = $_POST['password'];
+            $validPassword = $_POST['valid-password'];
+
+            $validation->validateEmail($email, 'Email');
+            $validation->validatePassword($password, 'Password');
+            $validation->matchPassword($password, $validPassword);
+            /* $errors = $validation->errors;
+
+            // SHOW ERRORS IF EXISTS
+            if($errors){
+                foreach($errors as $error){
+                    echo "<div class='alert alert-danger'>".$error."</div>";
+                }
+            } */
 
         }
-        
-
-        
+           
     }
 
     
@@ -66,8 +89,8 @@
         <form action="<?php echo $_SERVER['PHP_SELF'] ?>" class="login" method='post'>
 
             <h1>Log In</h1>
-            <input type="text" name="user" autocomplate="off" placeholder="Username" required/>
-            <input type="password" name="password" autocomplate="new-password" placeholder="Password" required/>
+            <input type="text" name="user" autocomplate="off" placeholder="Username" />
+            <input type="password" name="password" autocomplate="new-password" placeholder="Password" />
             <p>create new acount?<span data-class='login'>sign up</span></p>
             <input type="submit" value="log in" name="login"/>
 
@@ -76,14 +99,25 @@
         <form action="" class="signup hide" method="POST">
 
             <h1>Sign Up</h1>
-            <input type="email" name="email" autocomplate="on" placeholder="Email" required />
-            <input type="password" name="password" autocomplate="new-password" placeholder="password" required/>
-            <input type="password" name="valid-password" autocomplate="newèpassword" placeholder="retype password" required/>
+            <input type="email" name="email" autocomplate="on" placeholder="Email"  />
+            <input type="password" name="password" autocomplate="new-password" placeholder="password" />
+            <input type="password" name="valid-password" autocomplate="newèpassword" placeholder="retype password" />
             <p>already a member?<span data-class='signup'>log in</span></p>
             <input type="submit" value="Sign Up" name="signup"/>
 
         </form>
     </div>
+
+    <?php 
+            $errors = $validation->errors;
+
+            // SHOW ERRORS IF EXISTS
+            if($errors){
+                foreach($errors as $error){
+                    echo "<div class='alert alert-danger'>".$error."</div>";
+                }
+            }
+    ?>
 
 
 <?php include $template . "footer.php"?>
