@@ -55,7 +55,7 @@
                                             echo "<div class='card-body'>";
                                                 echo "<h4 class='card-title'>".$item['Name']."</h4>";
                                                 echo "<p class='card-text'>".$item['Description']."</p>";
-                                                echo "<p class='card-text'><small class='text-muted'>".$item['Made_In']."</small></p>";
+                                                echo "<p class='card-text d-flex justify-content-between'><small class='text-muted'>".$item['Made_In']."</small><small class='text-muted'>".$item['Add_Date']."</small></p>";
                                                 echo "<span class='price'>".$item['Price']."</sapn>";
                                             echo "</div>";
                                         echo "</div>";

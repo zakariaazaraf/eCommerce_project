@@ -26,16 +26,18 @@
         echo "<div class='container'>";
     
             echo "<div class='cards'>";
+                $i = 0;
                 foreach($items as $item){
                     echo "<div class='card'>";
-                        echo "<img class='card-img-top img-fluid' src='./layout/images/item1.jpg' alt='".$item['Name']."'/>";
+                        echo "<img class='card-img-top img-fluid' src='./layout/images/item".++$i.".jpg' alt='".$item['Name']."'/>";
                         echo "<div class='card-body'>";
                             echo "<div class='card-title'>".$item['Name']."</div>";
                             echo "<div class='card-text'>".$item['Description']."</div>";
-                            echo "<div class='card-text'><small class='text-muted'>".$item['Made_In']."</small></div>";
+                            echo "<p class='card-text d-flex justify-content-between'><small class='text-muted'>".$item['Made_In']."</small><small class='text-muted'>".$item['Add_Date']."</small></p>";
                             echo "<span class='price'>".$item['Price']."</sapn>";
                         echo "</div>";
                     echo "</div>";
+                    $i = ($i === 9) ? 0 : $i;
                 }
             echo "</div>";
 
