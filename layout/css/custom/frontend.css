@@ -179,6 +179,14 @@ form input[type="submit"] {
 }
 
 /* START THE PROFIL */
+
+h1 {
+  color: #031e39;
+  font-size: 2.5rem;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
 .profil-cards {
   margin-bottom: 1rem;
   color: #fff;
@@ -187,6 +195,14 @@ form input[type="submit"] {
 .profil-cards .text-muted,
 .card-header {
   color: #fff !important;
+}
+
+.advertisements-card .card .card-body p.card-text {
+  margin-bottom: 0;
+}
+
+.information-card .card .card-text i {
+  font-size: 1.25rem;
 }
 
 .comments-card .card .card-body .comment {

@@ -17,21 +17,18 @@
         echo "<h1 class='text-center'>Welcome " . $sessionUser . " </h1>";
 
         ?>
-            <div class="inforamtion-card profil-cards">
+            <div class="information-card profil-cards">
                 <div class="container">
                     <div class="card bg-dark">
-                        <h5 class="card-header">Personal Info</h5>
+                        <h3 class="card-header">Personal Infos</h3>
                         <div class="card-body">                     
-                            <h4 class="card-title">
-                                Your Infotmation:  
-                            </h4>
-                            <p class="card-text">
-                                Name: <?php echo $userInfo['UserName'] . "<br />"?>
-                                Full Name: <?php echo $userInfo['FullName'] . "<br />"?>
-                                Email: <?php echo $userInfo['Email'] . "<br />"?>
-                                Registred Date: <?php echo $userInfo['Date'] . "<br />"?>
-                                Favorite Category: Games
-                            </p>                
+                            <h4 class="card-title">Your Infotmation:  </h4>
+                            <p class="card-text"><i class="fas fa-fingerprint pr-2"></i><strong>Name :</strong> <?php echo $userInfo['UserName'] ?></p>  
+                            <p class="card-text"><i class="fas fa-signature pr-2"></i><strong>Full Name :</strong> <?php echo $userInfo['FullName'] . "<br />"?></p>  
+                            <p class="card-text"><i class="fas fa-envelope pr-2"></i><strong>Email :</strong> <?php echo $userInfo['Email'] . "<br />"?></p>  
+                            <p class="card-text"><i class="fas fa-calendar-day pr-2"></i><strong>Registred Date :</strong> <?php echo $userInfo['Date'] . "<br />"?></p>  
+                            <p class="card-text"><i class="fas fa-crown pr-2"></i><strong>Favorite Category :</strong> Games
+                                          
                         </div>
                        <!--  <div class="card-footer text-center text-muted">    
                             2 Days
@@ -44,13 +41,13 @@
                 echo '<div class="advertisements-card mb-3">';
                     echo "<div class='container'>";
                         echo "<div class='card bg-dark'>";
-                            echo "<h5 class='card-header'>Ads Section</h5>";
+                            echo "<h3 class='card-header'>Advertisements</h3>";
                             echo "<div class='card-body cards'>";
                                 foreach(getItems('UserId', $userInfo['UserId']) as $item){
                                     echo "<div class='card'>";
                                         echo "<img class='card-img-top img-fluid' src='./layout/images/item1.jpg' alt='".$item['Name']."'/>";
                                         echo "<div class='card-body'>";
-                                            echo "<p class='card-title'>".$item['Name']."</p>";
+                                            echo "<h4 class='card-title'>".$item['Name']."</h4>";
                                             echo "<p class='card-text'>".$item['Description']."</p>";
                                             echo "<p class='card-text'><small class='text-muted'>".$item['Made_In']."</small></p>";
                                             echo "<span class='price'>".$item['Price']."</sapn>";
@@ -69,7 +66,7 @@
             <div class="comments-card profil-cards">
                 <div class="container">
                     <div class="card bg-dark">
-                        <h5 class="card-header">Latest Comments</h5>
+                        <h3 class="card-header">Latest Comments</h3>
                         <div class="card-body">                     
                             <?php 
                                 $stat = $db->prepare("SELECT 
