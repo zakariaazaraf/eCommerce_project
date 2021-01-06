@@ -71,16 +71,26 @@
                     <div class="card bg-dark">
                         <h5 class="card-header">Latest Comments</h5>
                         <div class="card-body">                     
-                            <h4 class="card-title">
-                                User Comments
-                            </h4>
                             <?php 
-                                $stat = $db->prepare("SELECT * FROM comments WHERE User_Id = ?");
+                                $stat = $db->prepare("SELECT 
+                                                            U.UserName as username, I.Name as itemName, C.Comment, C.Comment_Date 
+                                                        FROM 
+                                                                comments as C 
+                                                            INNER JOIN 
+                                                                items as I 
+                                                            On 
+                                                                C.Item_Id = I.Item_Id 
+                                                            INNER JOIN 
+                                                                users as U 
+                                                            ON 
+                                                                C.User_Id = U.UserId WHERE U.UserId = ?");
+
                                 $stat->execute(array($userInfo['UserId']));
                                 $userComments = $stat->fetchAll();
 
                                 if($userComments){
                                     foreach($userComments as $comment){
+                                        echo "<h4 class='card-title'>".$comment['itemName']."</h4>";
                                         echo "<p class='card-text'>" . $comment['Comment'] . "</p>";
                                         echo "<p class='card-text'><small class='text-muted'>".$comment['Comment_Date']."</small></p>";
                                     }    
