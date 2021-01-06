@@ -32,6 +32,8 @@
                 <?php echo !checkUserStatus($sessionUser) && ($sessionUser) ? '<a href="profil.php" class="logo">Profil</a>' : ''?> 
                 
                 <a href="logout.php" class="logo">LogOut</a>
+                <a href="newAd.php" class="logo">new ads</a>
+                
                 <div>
                     <a href="login.php" class="login">Login</a>
                     <a href="login.php" class="signup">Sigin up</a>

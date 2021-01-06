@@ -233,6 +233,10 @@ h1 {
   margin: 1rem 0;
 }
 
+form.ads-form .form-group {
+  justify-content: space-between;
+}
+
 form.ads-form input[type="password"],
 form.ads-form input[type="text"],
 form.ads-form input[type="email"],
@@ -242,7 +246,7 @@ form.ads-form textarea {
   border-radius: 0.25rem;
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
   padding: 0.5rem;
-  margin: 0;
+  margin: 0.5rem 0;
 }
 
 form.ads-form input[type="password"]:focus,
@@ -258,4 +262,15 @@ form.ads-form label {
   color: #fff;
   font-size: 1.4rem;
 }
+
+form.ads-form .btn {
+  width: auto;
+  padding: 0.2rem 1rem;
+  font-size: 1.25rem;
+}
+
+form.ads-form .btn i {
+  padding-right: 0.4rem;
+}
+
 /* END THE PROFIL */
