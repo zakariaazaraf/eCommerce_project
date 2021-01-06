@@ -95,6 +95,7 @@
 
                             // CREATE A SESSION FOR THIS USER
                             $_SESSION['user'] = $user; // FOR A USER YOU SOULD GET HIS DATA OR EDIT IT BY THE SESSION
+                            $_SESSION['userid'] = $data['UserId'];
                             header('Location: index.php');
                             exit();
 

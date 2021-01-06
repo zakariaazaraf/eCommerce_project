@@ -31,13 +31,17 @@
             $validation->validateString($description, 'description');
             $price = filter_var($price, FILTER_SANITIZE_NUMBER_INT);
             $validation->validateString($made, 'made');
-            $validation->validateString($status, 'status');
+            //$validation->validateString($status, 'status');
             $category = filter_var($category, FILTER_SANITIZE_NUMBER_INT);
 
             $errors = $validation->errors;
+            
+            if(!$price){$errors[] = "The <strong>Price</strong> Must Be A Number";}
+            if(!$category){$errors[] = "The <strong>Category</strong> Must Be A Number";}
+            
 
-            if(!empty($errors)){
-                /* $stat = $db->prepare("INSERT INRO items ()")
+            if(empty($errors)){
+                
                 $stmt = $db->prepare("INSERT INTO
                                             items
                                                 (Name, Description, Price, Add_Date, Made_In, Status, Cat_Id, UserId)
@@ -52,18 +56,20 @@
                         "pmade" => $made,
                         "pstatus" => $status,
                         "pid" => $category,
-                        "puser" => $user
+                        "puser" => $_SESSION['userid']
                     ));
 
                     $row = $stmt->rowCount();
 
                     if($row){
-                        $msg = "<div class='alert alert-success'>" . $row . " Member Inserted !!</div>";
-                        redirectHome($msg, 'back');
+                        $msg = "<div class='alert alert-success'>" . $row . " Item Inserted !!</div>";
+                        echo $msg;
+                        //redirectHome($msg, 'back');
                     }else{
-                        $msg = "<div class='alert alert-success'>" . $row . " Member Inserted !!</div>";
-                        redirectHome($msg, 'back');
-                    } */
+                        $msg = "<div class='alert alert-success'>" . $row . " Item Inserted !!</div>";
+                        echo $msg;
+                        //redirectHome($msg, 'back');
+                    }
             }
         }
 
@@ -161,8 +167,6 @@
 
     if(!empty($errors)){
         throughErrors($errors);
-    }else{
-        echo "<div class='alert alert-success'>Data Passed The Test Successfully !</div>";
     }
 
     include $template . 'footer.php';
