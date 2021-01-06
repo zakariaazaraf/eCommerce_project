@@ -1,4 +1,4 @@
-$(function(){ // JQUERY FUNCTION WHISH REMOVES PLACEHOLDER TEXT ON FOCUS
+$(()=>{ // JQUERY FUNCTION WHISH REMOVES PLACEHOLDER TEXT ON FOCUS
 
     $('[placeholder]').focus(function(){
 
@@ -38,6 +38,28 @@ $(function(){ // JQUERY FUNCTION WHISH REMOVES PLACEHOLDER TEXT ON FOCUS
         $('form.' + $(this).data('class')).addClass('hide').siblings().removeClass('hide');
         
     });
+
+    $(".ads-form input[name=item]").keyup((e)=>{
+        $(".card .card-body .card-title").text(e.target.value)
+    })
+
+    $(".ads-form textarea").keyup((e)=>{
+        $(".card .card-body .card-text:first").text(e.target.value)
+    })
+
+    $(".ads-form input[name=made]").keyup((e)=>{
+        $(".card .card-body .card-text .text-muted").text(e.target.value)
+    })
+
+    $(".ads-form input[name=price]").keyup((e)=>{
+        $(".card .price").text("$" + e.target.value)
+    })
+
+    
+    
+    
+    
+    
     
 });
 

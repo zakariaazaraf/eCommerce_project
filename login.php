@@ -21,7 +21,7 @@
     <div class="container">
         
 
-        <form action="<?php echo $_SERVER['PHP_SELF'] ?>" class="login <?php echo $_SERVER['REQUEST_METHOD'] == 'POST' ? isset($_POST['login']) ? '' : 'hide' : ''?>" method='post'>
+        <form action="<?php echo $_SERVER['PHP_SELF'] ?>" class="log-form login <?php echo $_SERVER['REQUEST_METHOD'] == 'POST' ? isset($_POST['login']) ? '' : 'hide' : ''?>" method='post'>
 
             <h1>Log In</h1>
             <input type="text" name="user" autocomplate="off" placeholder="Username" required/>
@@ -32,7 +32,7 @@
         </form>
 
         <form action="" 
-              class="signup <?php echo $_SERVER['REQUEST_METHOD'] == 'POST' ? isset($_POST['signup']) ? '' : 'hide' : 'hide' ?>" 
+              class="log-form signup <?php echo $_SERVER['REQUEST_METHOD'] == 'POST' ? isset($_POST['signup']) ? '' : 'hide' : 'hide' ?>" 
               method="POST">
 
             <h1>Sign Up</h1>
