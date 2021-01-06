@@ -189,4 +189,12 @@ form input[type="submit"] {
   color: #fff !important;
 }
 
+.comments-card .card .card-body .comment {
+  padding: 0.4rem 1rem;
+}
+
+.comments-card .card .card-body .comment:nth-child(odd) {
+  background-color: #252c33;
+}
+
 /* END THE PROFIL */

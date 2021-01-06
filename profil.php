@@ -66,7 +66,7 @@
 
          
 
-            <div class="Comments-card profil-cards">
+            <div class="comments-card profil-cards">
                 <div class="container">
                     <div class="card bg-dark">
                         <h5 class="card-header">Latest Comments</h5>
@@ -90,9 +90,13 @@
 
                                 if($userComments){
                                     foreach($userComments as $comment){
-                                        echo "<h4 class='card-title'>".$comment['itemName']."</h4>";
-                                        echo "<p class='card-text'>" . $comment['Comment'] . "</p>";
-                                        echo "<p class='card-text'><small class='text-muted'>".$comment['Comment_Date']."</small></p>";
+                                        echo "<div class='comment'>";
+                                            echo "<h4 class='card-title'>".$comment['itemName']."</h4>";
+                                            echo "<div class='d-flex justify-content-between'>";
+                                                echo "<p class='card-text'>" . $comment['Comment'] . "</p>";
+                                                echo "<small class='text-muted'>".$comment['Comment_Date']."</small>";
+                                            echo "</div>";
+                                        echo "</div>";
                                     }    
                                 }
                             ?>               
