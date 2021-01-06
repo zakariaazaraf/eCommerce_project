@@ -122,3 +122,19 @@ on
     comments.User_Id = users.UserId
 
 
+// GET THE COMMENT AND THIER USERS AND ITEMS BY JOINING THE users items And comments Tables
+
+ SELECT 
+    U.UserName, I.Name, C.Comment, C.Comment_Date 
+ FROM 
+        comments as C 
+    INNER JOIN 
+        items as I 
+    On 
+        C.Item_Id = I.Item_Id 
+    INNER JOIN 
+        users as U 
+    ON 
+        C.User_Id = U.UserId;
+
+
