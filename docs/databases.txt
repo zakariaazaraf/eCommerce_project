@@ -138,3 +138,9 @@ on
         C.User_Id = U.UserId;
 
 
+// INSERT INTI items TABLE
+INSERT INTO
+            items
+                (Name, Description, Price, Add_Date, Made_In, Status, Cat_Id, UserId)
+            values
+                (:pitem, :pdesc, :pprice, now(), :pmade, :pstatus, :pid, :puser)");

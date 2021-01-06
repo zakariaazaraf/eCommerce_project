@@ -2,21 +2,74 @@
     // START THE SESSION 
     session_start();
 
-    $titlePage = "Profil";
+    $titlePage = "Create New Item";
 
     include 'init.php';
+
+    require('./form_validation.php');
 
     if($sessionUser){
 
         // FETCH THE DATA RELATED TO THIS USER
-        $stat = $db->prepare("SELECT * FROM users WHERE UserName = ?");
+        /* $stat = $db->prepare("SELECT * FROM users WHERE UserName = ?");
         $stat->bindParam(1, $sessionUser);
         $stat->execute();
-        $userInfo = $stat->fetch();
+        $userInfo = $stat->fetch(); */
+
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            
+            $validation = new Validation($_POST);
+
+            $item = $_POST['item'];
+            $description = $_POST['description'];
+            $price = $_POST['price'];
+            $made = $_POST['made'];
+            $status = $_POST['status'];
+            $category = $_POST['category'];
+
+            $validation->validateString($item, 'item');
+            $validation->validateString($description, 'description');
+            $price = filter_var($price, FILTER_SANITIZE_NUMBER_INT);
+            $validation->validateString($made, 'made');
+            $validation->validateString($status, 'status');
+            $category = filter_var($category, FILTER_SANITIZE_NUMBER_INT);
+
+            $errors = $validation->errors;
+
+            if(!empty($errors)){
+                /* $stat = $db->prepare("INSERT INRO items ()")
+                $stmt = $db->prepare("INSERT INTO
+                                            items
+                                                (Name, Description, Price, Add_Date, Made_In, Status, Cat_Id, UserId)
+                                            values
+                                                (:pitem, :pdesc, :pprice, now(), :pmade, :pstatus, :pid, :puser)");
+
+                    
+                    $stmt->execute(array(
+                        "pitem" => $item,
+                        "pdesc" => $description,
+                        "pprice" => $price,
+                        "pmade" => $made,
+                        "pstatus" => $status,
+                        "pid" => $category,
+                        "puser" => $user
+                    ));
+
+                    $row = $stmt->rowCount();
+
+                    if($row){
+                        $msg = "<div class='alert alert-success'>" . $row . " Member Inserted !!</div>";
+                        redirectHome($msg, 'back');
+                    }else{
+                        $msg = "<div class='alert alert-success'>" . $row . " Member Inserted !!</div>";
+                        redirectHome($msg, 'back');
+                    } */
+            }
+        }
 
         ?>
 
-        <h1 class='text-center'>Create New Advertisement </h1>
+        <h1 class='text-center'>Create New Advertisement</h1>
             
                 <div class="advertisements-card mb-3">
                     <div class='container'>
@@ -38,7 +91,7 @@
                                          
                                     </div> 
 
-                                    <form class="ads-form col-10 col-sm-10 col-md-8" action="?do=insert" method='POST'>
+                                    <form class="ads-form col-10 col-sm-10 col-md-8" action="<?php echo $_SERVER['PHP_SELF'] ?>" method='POST'>
                                         <div class="form-group row ">
                                             <label class="col col-md-4" for="item">Item:</label>
                                             <input class="col col-md-7" type="text" name="item" id="item"  required placeholder="Item Name"/>
@@ -104,6 +157,12 @@
     }else{
         header('Location: login.php');
         exit();
+    }
+
+    if(!empty($errors)){
+        throughErrors($errors);
+    }else{
+        echo "<div class='alert alert-success'>Data Passed The Test Successfully !</div>";
     }
 
     include $template . 'footer.php';
