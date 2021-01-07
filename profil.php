@@ -50,7 +50,7 @@
                                     echo "<div class='card-body cards'>";
 
                                     foreach(getItems('UserId', $userInfo['UserId']) as $item){
-                                        echo "<div class='card'>";
+                                        echo "<div class='card'> <a class='card-item' href='item.php?itemid=".$item['Item_ID']."'>";
                                             
                                             echo "<img class='card-img-top img-fluid' src='./layout/images/item".++$i.".jpg' alt='".$item['Name']."'/>";    
                                             echo "<div class='card-body'>";
@@ -62,7 +62,7 @@
                                                 echo "</p>";
                                                 echo "<span class='price'>".$item['Price']."</span>";
                                             echo "</div>";
-                                        echo "</div>";
+                                        echo "</a></div>";
                                     }
 
                                     echo "</div>";

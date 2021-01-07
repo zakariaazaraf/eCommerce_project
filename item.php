@@ -30,12 +30,12 @@
                         echo "<img class='card-img col-md-4' src='./layout/images/item1.jpg' alt='Image'/>";
                         echo "<span class='price'>".$item['Price']."</span>";
                         echo "<div class='card-body col-md-7 py-4'>";
-                            echo "<h4 class='card-title'>".$item['Name']."</h4>";
+                            echo "<h2 class='card-title'>".$item['Name']."</h2>";
                             echo "<p class='card-text'>".$item['Description']."</p>";
                             echo "<p class='card-text'><i class='fas fa-calendar-day pr-2'></i><strong>Added Date :</strong>".$item['Add_Date']."</p>";
                             echo "<p class='card-text'><i class='fas fa-house-damage pr-2'></i><strong>Made In :</strong>".$item['Made_In']."</p>";
                             echo "<p class='card-text'><i class='fas fa-dollar-sign pr-2'></i><strong>Price :</strong>".$item['Price']."</p>";
-                            echo "<p class='card-text'><i class='fas fa-puzzle-piece pr-2'></i><strong>Category :</strong>".$item['category']."</p>";
+                            echo "<p class='card-text'><i class='fas fa-puzzle-piece pr-2'></i><strong>Category :</strong><a href='categories.php?categoryid=".$item['Cat_Id']."&catname=".$item['category']."'>".$item['category']."</a></p>";
                             echo "<p class='card-text'><i class='fas fa-signature pr-2'></i><strong>Added By :</strong>".$item['username']."</p>";
                             
                         echo "</div>";
@@ -44,9 +44,6 @@
 
             echo "</div>";
 
-            echo "<pre>";
-            print_r($item);
-            echo "</pre>";
         }else{
             $msg = "<div class='alert alert-danger'>This Item Doesn't Exists</div>";
             redirectHome($msg, 'index.php', 1);

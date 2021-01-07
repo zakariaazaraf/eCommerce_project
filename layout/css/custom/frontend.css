@@ -53,13 +53,18 @@ nav .container .collapse {
 }
 
 .item .card {
-  font-size: 1.3rem;
+  font-size: 1.2rem;
 }
 
 .item .card .card-body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+}
+
+.item .card .card-body .card-text a {
+  color: inherit;
+  text-decoration: underline;
 }
 
 .item .card .card-body .card-text strong {
