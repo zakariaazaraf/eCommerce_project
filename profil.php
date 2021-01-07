@@ -51,12 +51,16 @@
 
                                     foreach(getItems('UserId', $userInfo['UserId']) as $item){
                                         echo "<div class='card'>";
-                                            echo "<img class='card-img-top img-fluid' src='./layout/images/item".++$i.".jpg' alt='".$item['Name']."'/>";
+                                            
+                                            echo "<img class='card-img-top img-fluid' src='./layout/images/item".++$i.".jpg' alt='".$item['Name']."'/>";    
                                             echo "<div class='card-body'>";
                                                 echo "<h4 class='card-title'>".$item['Name']."</h4>";
                                                 echo "<p class='card-text'>".$item['Description']."</p>";
-                                                echo "<p class='card-text d-flex justify-content-between'><small class='text-muted'>".$item['Made_In']."</small><small class='text-muted'>".$item['Add_Date']."</small></p>";
-                                                echo "<span class='price'>".$item['Price']."</sapn>";
+                                                echo "<p class='card-text d-flex justify-content-between'>";
+                                                    echo "<small class='text-muted'>".$item['Made_In']."</small>";
+                                                    echo "<small class='text-muted'>".$item['Add_Date']."</small>";
+                                                echo "</p>";
+                                                echo "<span class='price'>".$item['Price']."</span>";
                                             echo "</div>";
                                         echo "</div>";
                                     }

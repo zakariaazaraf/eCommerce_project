@@ -52,6 +52,31 @@ nav .container .collapse {
   font-size: 1.4rem;
 }
 
+.item .card {
+  font-size: 1.3rem;
+}
+
+.item .card .card-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.item .card .card-body .card-text strong {
+  padding-right: 0.4rem;
+}
+
+.item .card span.price {
+  position: absolute;
+  top: 10px;
+  left: -1px;
+  color: #f9f9f9;
+  background-color: #111;
+  padding: 0 12px;
+  font-weight: bold;
+  font-size: 1.4rem;
+}
+
 @media (min-width: 576px) {
   .cards {
     max-width: 540px;
@@ -289,3 +314,9 @@ form.ads-form .btn i {
 }
 
 /* END THE PROFIL */
+
+/* START ITEM PAGE*/
+.item .card {
+  flex-direction: row;
+}
+/* END ITEM PAGE*/
