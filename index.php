@@ -10,20 +10,20 @@
 
     
 
-    if(isset($_SESSION['user'])){
+    /* if(isset($_SESSION['user'])){ */
 
-        if(!checkUserStatus($_SESSION['user'])){
+        /* if(!checkUserStatus($_SESSION['user'])){
             echo "<div class='aler alert-success'>You Have All The Functionalies !! :)</div>";
         }else{
             echo "<div class='alert alert-danger'>You Haven't All Functionalties !! :(</div>";
-        } 
+        } */ 
 
         // FETCH ALL ITEMS OR IMITED NUMBER
         $stat = $db->prepare("SELECT * FROM items");
         $stat->execute();
         $items = $stat->fetchAll();
 
-        echo "<div class='container'>";
+        echo "<div class='container my-4'>";
     
             echo "<div class='cards'>";
                 $i = 0;
@@ -44,10 +44,10 @@
         echo "</div>";
 
        
-    }else{
+   /*  }else{
         header('Location: login.php');
         exit();
-    }
+    } */
         
     
 

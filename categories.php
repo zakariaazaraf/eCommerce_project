@@ -12,9 +12,10 @@
         $cat_Id = $_GET['categoryid'];
 
         echo "<div class='cards'>";
+            $i = 3;
             foreach(getItems('Cat_Id', $cat_Id) as $item){
                 echo "<div class='card'><a class='card-item' href='item.php?itemid=".$item['Item_ID']."'>";
-                    echo "<img class='card-img-top img-fluid' src='./layout/images/item1.jpg' alt='".$item['Name']."'/>";
+                    echo "<img class='card-img-top img-fluid' src='./layout/images/item".++$i.".jpg' alt='".$item['Name']."'/>";
                     echo "<div class='card-body'>";
                         echo "<div class='card-title'>".$item['Name']."</div>";
                         echo "<div class='card-text'>".$item['Description']."</div>";
@@ -22,6 +23,7 @@
                         echo "<span class='price'>".$item['Price']."</sapn>";
                     echo "</div>";
                 echo "</a></div>";
+                $i = $i > 9 ? 0 : $i;
             }
         echo "</div>";
 
