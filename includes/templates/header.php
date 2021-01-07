@@ -26,7 +26,7 @@
     <body>
         <div class="container">
             <div class="log-bar d-flex justify-content-between">
-                <a href="#" class="logo">Logoo</a>
+                <a href="index.php" class="logo">Logoo</a>
 
                 <!-- CHECK THE PERMISSION OF THE USER -->
                 <?php echo !checkUserStatus($sessionUser) && ($sessionUser) ? '<a href="profil.php" class="logo">Profil</a>' : ''?> 
@@ -47,7 +47,7 @@
         <div class="container justify-content-between">
 
             <div>
-                <a class="navbar-brand" href="#">Logo Link</a>
+                <a class="navbar-brand" href="index.php">Logo Link</a>
                 <button class="navbar-toggler" 
                         type="button" 
                         data-toggle="collapse" 

@@ -24,6 +24,20 @@ nav .container .collapse {
 
 .cards .card {
   max-width: 300px;
+  transition: all 0.3 ease-in-out;
+}
+
+.cards .card:hover {
+  transform: scale(1.04);
+}
+
+.cards .card .card-item {
+  color: inherit;
+}
+
+.cards .card .card-item:hover {
+  text-decoration: none;
+  cursor: pointer;
 }
 
 .cards .card span.price,
