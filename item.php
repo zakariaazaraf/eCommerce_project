@@ -12,6 +12,11 @@
 
         if(checkItem('Item_ID', 'items', $itemId)){
             echo "<h1>The Item Info</h1>";
+
+            $item = getItems('Item_ID', $itemId);
+            echo "<pre>";
+            print_r($item);
+            echo "</pre>";
         }else{
             $msg = "<div class='alert alert-danger'>This Item Doesn't Exists</div>";
             redirectHome($msg, 'index.php', 1);
@@ -21,9 +26,7 @@
         redirectHome($msg, 'index.php', 1);
     }
 
-    echo "<pre>";
-    print_r($_GET);
-    echo "</pre>";
+    
 
 
     include $template . 'footer.php';
