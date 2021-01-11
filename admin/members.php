@@ -130,7 +130,7 @@
 
                             <div class="form-group row justify-content-center">
                                 <label class="col col-sm-4 col-md-3 col-lg-2" for="image">Image :</label>
-                                <input class="col col-sm-7 col-md-6 col-lg-5" type="file" name="image" id="image"/>
+                                <input class="col col-sm-7 col-md-6 col-lg-5" type="file" name="image" id="image" required/>
                             </div>
 
                             <div class="form-group row justify-content-center">
@@ -170,15 +170,21 @@
                 =================== Form Validation =======================*/
 
                 $validation = new UserValidator($_POST);
+                $validateImage = new Image(); // CALL THE IMAGE VALIDATION CLASS
+
+                $validateImage->validateImage($_FILES['image'], 'user image');
                 $validation->validateForm();
-                $errors = $validation->errors;
+
+                $errors [] = $validation->errors;
+                $imageError = $validateImage->errors;
+
 
                 /*==========================================================*/
 
                 if(count($errors) > 0){
 
                     // THROW THE ERRORS
-                    echo "<h3>Errors Encountered !!</h3></div>";
+                    echo "<h3>Errors Encountered !!</h3>";
 
                     $errors['username'] = isset($errors['username']) ? $errors['username'] : '';
                     $errors['password'] = isset($errors['password']) ? $errors['password'] : '';
@@ -189,6 +195,8 @@
                     echo "<div >" . $errors['password'] ?? '' . "</div>";
                     echo "<div >" . $errors['email'] ?? '' . "</div>";
                     echo "<div >" . $errors['fullname'] ?? '' . "</div>";
+
+                    echo "<div class='alert alert-danger'>" . $imageError ?? '' . "</div>";
                     
                 }else{
 
@@ -221,13 +229,7 @@
                         $msg = "<div class='alert alert-success'>" . $row . " Member Inserted !!</div>";
                         redirectHome($msg, 'members.php'); */
 
-                        echo "<pre>";
-                        print_r($_POST);
-                        echo "</pre>";
-
-
-                        $validateImage = new Image();
-                        $validateImage->validateImage($_FILES['image'], 'user image');
+                        
 
                     }else{
 

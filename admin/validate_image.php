@@ -1,9 +1,9 @@
 <?php 
 
 class Image {
-    
+
     private $data;
-    public $errors = [];
+    public $errors = '';
 
     public function validateImage($image, $name){
 
@@ -14,7 +14,7 @@ class Image {
 
             $imageName = $image['name'];
             $explodeType = explode(".", $image['name']);
-            $type = end($explodeType);
+            $type = strtolower(end($explodeType));
             $size = $image['size'];
 
             /* // GET THE IMAGE DIMENSIONS
@@ -28,13 +28,12 @@ class Image {
                 if(!($size < $sizeAllowed)){ // VERIFY THE IMAGE SIZE WHICH IS 2 MB
                     $msg = "The <strong>$name</strong> Is Much More Then 2 Mb";
                     $this->addError($msg);
-                    echo $msg;
                 }
 
             }else{
                 $msg = "The <strong>$name</strong> Types Denied, Try ";
-                foreach($validTypes as $valid){ $msg .= "<strong>$valid</strong> "; }
-                echo $msg .= 'Types';
+                foreach($validTypes as $valid){ $msg .= "<strong>$valid</strong>, "; }
+                $msg .= 'Types';
                 $this->addError($msg);
                 
             }
@@ -42,13 +41,12 @@ class Image {
         }else{
             $msg = "The <strong>$name</strong> Can't Be Empty";
             $this->addError($msg);
-            echo $msg;
         }
     
     }
 
     private function addError($msg){
-        array_push($this->errors, $msg);
+        $this->errors = $msg;
     }
 }
 
