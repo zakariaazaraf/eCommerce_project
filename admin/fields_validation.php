@@ -44,6 +44,5 @@
             array_push($this->errors, $msg);
         }
 
-
     }
 ?>

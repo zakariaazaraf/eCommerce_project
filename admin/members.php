@@ -22,6 +22,8 @@
         // Validation Class
         require('form_validation.php');
 
+        require('validate_image.php');
+
         // CHECK THE GET ACTION
         if(isset($_GET['do'])){
             $do = $_GET['do'];
@@ -128,7 +130,7 @@
 
                             <div class="form-group row justify-content-center">
                                 <label class="col col-sm-4 col-md-3 col-lg-2" for="image">Image :</label>
-                                <input class="col col-sm-7 col-md-6 col-lg-5" type="file" name="image" id="image" required/>
+                                <input class="col col-sm-7 col-md-6 col-lg-5" type="file" name="image" id="image"/>
                             </div>
 
                             <div class="form-group row justify-content-center">
@@ -223,15 +225,9 @@
                         print_r($_POST);
                         echo "</pre>";
 
-                        echo "<pre>";
-                        print_r($_FILES);
-                        echo "</pre>";
-                        $imageInfo = explode("/", $_FILES['image']['type']);
-                        echo "<pre>";
-                        print_r($imageInfo);
-                        echo "</pre>";
-                        $type = end($imageInfo);
-                        echo "<h3>Image Type : ".$type."</h3>";
+
+                        $validateImage = new Image();
+                        $validateImage->validateImage($_FILES['image'], 'user image');
 
                     }else{
 
