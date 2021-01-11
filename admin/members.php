@@ -107,7 +107,7 @@
 
                     <div class="container members">
                     <h1 class="text-center">add member</h1>
-                        <form action="?do=insert" method='POST'>
+                        <form action="?do=insert" method='POST' enctype="multipart/form-data">
                             <div class="form-group row justify-content-center">
                                 <label class="col col-sm-4 col-md-3 col-lg-2" for="username">Username:</label>
                                 <input class="col col-sm-7 col-md-6 col-lg-5" type="text" name="username" id="username"  required autocomplete="off" placeholder="Member Username"/>
@@ -124,6 +124,11 @@
                             <div class="form-group row justify-content-center">
                                 <label class="col col-sm-4 col-md-3 col-lg-2" for="fullname">Full Name:</label>
                                 <input class="col col-sm-7 col-md-6 col-lg-5" type="text" name="fullname" id="fullname" required placeholder="Member Fullname"/>
+                            </div>
+
+                            <div class="form-group row justify-content-center">
+                                <label class="col col-sm-4 col-md-3 col-lg-2" for="image">Image :</label>
+                                <input class="col col-sm-7 col-md-6 col-lg-5" type="file" name="image" id="image" required/>
                             </div>
 
                             <div class="form-group row justify-content-center">
@@ -204,7 +209,7 @@
 
 
                         // INSERT A NEW MEMBER WITH THE BINDING METHOD I DATABASE
-                        $stmt = $db->prepare("INSERT INTO users (UserName, Password, Email, FullName, RegStatus, Date) VALUES (?, ?, ?, ?, 1, now())");     
+                        /* $stmt = $db->prepare("INSERT INTO users (UserName, Password, Email, FullName, RegStatus, Date) VALUES (?, ?, ?, ?, 1, now())");     
                         
                         $stmt->execute(array($username, $hashpassword, $email, $fullname));
                         
@@ -212,7 +217,21 @@
                         $row = $stmt->rowCount();
 
                         $msg = "<div class='alert alert-success'>" . $row . " Member Inserted !!</div>";
-                        redirectHome($msg, 'members.php');
+                        redirectHome($msg, 'members.php'); */
+
+                        echo "<pre>";
+                        print_r($_POST);
+                        echo "</pre>";
+
+                        echo "<pre>";
+                        print_r($_FILES);
+                        echo "</pre>";
+                        $imageInfo = explode("/", $_FILES['image']['type']);
+                        echo "<pre>";
+                        print_r($imageInfo);
+                        echo "</pre>";
+                        $type = end($imageInfo);
+                        echo "<h3>Image Type : ".$type."</h3>";
 
                     }else{
 
