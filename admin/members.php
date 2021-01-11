@@ -285,7 +285,7 @@
 
                     <div class="container members">
                     <h1 class="text-center">edit member</h1>
-                        <form action="?do=update" method='POST'>
+                        <form action="?do=update" method='POST' enctype="multipart/form-data">
                             <!-- HIDDEN INPUT FIELD TO SEND userid -->
                             <input type="hidden" name="userid" value="<?php echo $userid?>">
                             <div class="form-group row justify-content-center">
@@ -309,7 +309,7 @@
 
                             <div class="form-group row justify-content-center">
                                 <label class="col col-sm-4 col-md-3 col-lg-2" for="image">Image:</label>
-                                <input class="col col-sm-5 col-md-2 col-lg-3" type="file" name="image" id="image" required value="<?php echo $data["FullName"]?>"/>
+                                <input class="col col-sm-5 col-md-2 col-lg-3" type="file" name="image" id="image"/>
                                 <img class="col col-sm-2 col-md-2 col-lg-2" src="./layout/images/upload/<?php echo $data['Image']?>" alt="<?php echo $data['UserName']?>"/>
                             </div>
 
@@ -359,8 +359,15 @@
                 =================== Form Validation =======================*/
 
                 $validation = new UserValidator($_POST);
+                $validateImage = new Image();
+
+                $validateImage->validateImage($_FILES['image'], 'member image');
                 $validation->validateForm();
+
                 $errors = $validation->errors;
+                $imageError = $validateImage->errors;
+
+                isset($imageError) ? array_push($errors, $imageError) : '';
 
                 /*==========================================================*/
 
@@ -376,10 +383,12 @@
 
                     echo "<div class='alert alert-danger'>";
 
-                    echo  $errors['username'] ?? '' . "<br />";
-                    echo  $errors['password'] ?? '' . "<br />";
-                    echo  $errors['email'] ?? '' . "<br />";
-                    echo  $errors['fullname'] ?? '' . "<br />";
+                    echo  "<p>" . $errors['username'] ?? '' . "</p>";
+                    echo  "<p>" . $errors['password'] ?? '' . "</p>";
+                    echo  "<p>" . $errors['email'] ?? '' . "</p>";
+                    echo  "<p>" . $errors['fullname'] ?? '' . "</p>";
+
+                    echo "<p>" . $imageError ?? '' . "</p>";
 
                     echo "</div>";
 
@@ -388,15 +397,22 @@
                     
                 }else{
 
+                    // GENERATE A NAME FOR THE IMAGE
+                    $image = rand(1, 100000) . "_" . $_FILES['image']['name'];
+
+                    // MOVE IMAGES TO UPLOAD FILE IN THE PROJECT
+                    move_uploaded_file($_FILES['image']['tmp_name'], "./layout/images/upload/" . $image);
+
                     // UPDATE THE IFORMATION BY SENDING A QUERY TO DATABASE
-                    $stmt = $db->prepare("UPDATE users SET UserName = ?, Email = ?, FullName = ?, Password = ? WHERE userId = ?");
+                    $stmt = $db->prepare("UPDATE users SET UserName = ?, Email = ?, FullName = ?, Password = ?, Image = ? WHERE userId = ?");
                     // PASS THE PARAMS AND EXECUTE THE QUERY
-                    $stmt->execute(array($username, $email, $fullname, $pass, $id)); 
+                    $stmt->execute(array($username, $email, $fullname, $pass, $image, $id)); 
 
                     $row = $stmt->rowCount();
 
                     $msg = "<div class='alert alert-success'>" .$row . " of records updated !!</div>" ;
                     redirectHome($msg, 'members.php');
+
                 }
 
 
