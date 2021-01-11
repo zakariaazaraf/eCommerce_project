@@ -1,6 +1,7 @@
 <?php 
 
-class Image{
+class Image {
+    
     private $data;
     public $errors = [];
 
@@ -9,31 +10,22 @@ class Image{
         $validTypes = array('peng', 'png', 'jpg', 'gif');
         $sizeAllowed = 1024 * 1024 * 2; // 2 MB
 
-        echo "<pre>";
-        print_r($image);
-        echo "</pre>";
-
-        if(isset($image)){
+        if(file_exists($image['tmp_name'])){ // VERIFY THE EXISTENT OF THE PAGE
 
             $imageName = $image['name'];
             $explodeType = explode(".", $image['name']);
             $type = end($explodeType);
             $size = $image['size'];
 
-            echo '<br />Name : ' . $imageName;
-            echo '<br />Type : ' . $type;
-            echo '<br />Size : ' . $size;
-            echo '<br />Tmp_namp: '. $image['tmp_name'] . '<br />';
-
-            // GET THE IMAGE DIMENSIONS
+            /* // GET THE IMAGE DIMENSIONS
             echo "<pre>";
             print_r(@getimagesize($image['tmp_name']));
-            echo "<Pre>";
+            echo "<Pre>"; */
             
 
-            if(in_array($type, $validTypes)){
+            if(in_array($type, $validTypes)){ // VERIFY THE IMAGE TYPE
 
-                if(!($size < $sizeAllowed)){
+                if(!($size < $sizeAllowed)){ // VERIFY THE IMAGE SIZE WHICH IS 2 MB
                     $msg = "The <strong>$name</strong> Is Much More Then 2 Mb";
                     $this->addError($msg);
                     echo $msg;
