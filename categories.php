@@ -3,6 +3,8 @@
     // STARTING THE SESSION
     session_start();
 
+    $titlePage = 'categories';
+
     // Include Init.php File
     include "init.php";
     

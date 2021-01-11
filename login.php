@@ -31,7 +31,7 @@
 
         </form>
 
-        <form action="" 
+        <form action="<?php echo $_SERVER['PHP_SELF'] ?>" 
               class="log-form signup <?php echo $_SERVER['REQUEST_METHOD'] == 'POST' ? isset($_POST['signup']) ? '' : 'hide' : 'hide' ?>" 
               method="POST">
 

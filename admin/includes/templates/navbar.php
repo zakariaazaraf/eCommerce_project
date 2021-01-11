@@ -32,7 +32,7 @@
             Zakaria
           </a>
           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="../../../index.php">Shop</a>
+            <a class="dropdown-item" href="../index.php">Shop</a>
             <a class="dropdown-item" href="members.php?do=edit&userid=<?php echo $_SESSION['userID']; ?>">Edit Profile</a>
             <a class="dropdown-item" href="#">Settings</a>
             <a class="dropdown-item" href="logout.php">Logout</a>

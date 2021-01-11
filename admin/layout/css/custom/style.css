@@ -169,7 +169,7 @@ form .form-group button i {
 }
 
 .members form .form-group img {
-  width: 80px;
+  max-width: 80px;
 }
 
 .categories form fieldset {
