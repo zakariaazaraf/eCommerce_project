@@ -168,6 +168,10 @@ form .form-group button i {
   margin-bottom: 2rem;
 }
 
+.members form .form-group img {
+  width: 80px;
+}
+
 .categories form fieldset {
   padding: 0.35em 0em 0.625em;
   margin: 0;
@@ -225,6 +229,10 @@ form textarea:focus {
 .container .table {
   min-width: 600px;
   box-shadow: 0 3px 8px #ced4da;
+}
+
+.container .table img {
+  width: 100px;
 }
 
 .container .table td,

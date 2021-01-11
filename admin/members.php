@@ -60,6 +60,7 @@
                         <thead class="thead-dark">
                             <tr>
                                 <th>ID</th>
+                                <th>Image</th>
                                 <th>User Name</th>
                                 <th>Email</th>
                                 <th>Full Name</th>
@@ -75,6 +76,7 @@
 
                                     echo "<tr>";
                                         echo "<th>" . $row['UserId'] . "</th>";
+                                        echo "<th> <img src='./layout/images/upload/" . $row['Image'] ."' alt='".$row['UserName']."'/></th>";
                                         echo "<td>" . $row['UserName'] . "</td>";
                                         echo "<td>" . $row['Email'] . "</td>";
                                         echo "<td>" . $row['FullName'] . "</td>";
@@ -115,9 +117,10 @@
                                 <input class="col col-sm-7 col-md-6 col-lg-5" type="text" name="username" id="username"  required autocomplete="off" placeholder="Member Username"/>
                             </div>
                             <div class="form-group row justify-content-center">
-                                <label class="col col-sm-4 col-md-3 col-lg-2" for="password">Password:</label>
+                                <label class="col col-sm-4 col-md-3 col-lg-2" for="password">Password:</label>    
                                 <input class="col col-sm-7 col-md-6 col-lg-5 password" type="password" name="password" id="password" required autocomplete="new-password" placeholder="Enter Strong Password"/>
                                 <i class="show-pass fas fa-eye fa-x"></i>
+                                
                             </div>
                             <div class="form-group row justify-content-center">
                                 <label class="col col-sm-4 col-md-3 col-lg-2" for="email">Email:</label>
@@ -175,8 +178,11 @@
                 $validateImage->validateImage($_FILES['image'], 'user image');
                 $validation->validateForm();
 
-                $errors [] = $validation->errors;
+                $errors = $validation->errors;
                 $imageError = $validateImage->errors;
+                isset($imageError) ? array_push($errors, $imageError) : '';
+
+                
 
 
                 /*==========================================================*/
@@ -197,6 +203,7 @@
                     echo "<div >" . $errors['fullname'] ?? '' . "</div>";
 
                     echo "<div class='alert alert-danger'>" . $imageError ?? '' . "</div>";
+
                     
                 }else{
 
@@ -204,8 +211,8 @@
                     if(!checkItem('UserName', 'users', $username)){
 
                         // INSERT A NEW MEMBER IN DATABASE WITH PREPARE STETMENT METHOS
-                        /* $stmt = $db->prepare("INSERT INTO users(UserName, Password, Email, FullName) 
-                                                VALUES (:zuser, :zpass, :zemail, :zfullname)"); */
+                        /* $stmt = $db->prepare("INSERT INTO users(UserName, Password, Email, FullName, Image) 
+                                                VALUES (:zuser, :zpass, :zemail, :zfullname, zimage)"); */
 
                         // PASS THE PARAMS AND EXECUTE THE QUERY
                         /* $stmt->execute(
@@ -213,21 +220,30 @@
                                 'zuser' => $username,
                                 'zpass' => $hashpassword, 
                                 'zemail' => $email, 
-                                'zfullname' => $fullname
+                                'zfullname' => $fullname,
+                                'zimage' => $image
                             )
                         );  */
 
 
-                        // INSERT A NEW MEMBER WITH THE BINDING METHOD I DATABASE
-                        /* $stmt = $db->prepare("INSERT INTO users (UserName, Password, Email, FullName, RegStatus, Date) VALUES (?, ?, ?, ?, 1, now())");     
-                        
-                        $stmt->execute(array($username, $hashpassword, $email, $fullname));
-                        
+                        // GENERATE A NAME FOR THE IMAGE
+                        $image = rand(1, 100000) . "_" . $_FILES['image']['name'];
 
+                        // MOVE IMAGES TO UPLOAD FILE IN THE PROJECT
+                        move_uploaded_file($_FILES['image']['tmp_name'], "./layout/images/upload/" . $image);
+
+
+                        // INSERT A NEW MEMBER WITH THE BINDING METHOD I DATABASE
+                        $stmt = $db->prepare("INSERT INTO users (UserName, Password, Email, FullName, RegStatus, Date, Image) VALUES (?, ?, ?, ?, 1, now(), ?)");     
+                        
+                        $stmt->execute(array($username, $hashpassword, $email, $fullname, $image));
+                        
                         $row = $stmt->rowCount();
 
                         $msg = "<div class='alert alert-success'>" . $row . " Member Inserted !!</div>";
-                        redirectHome($msg, 'members.php'); */
+                        redirectHome($msg, 'members.php');
+
+                        
 
                         
 
@@ -292,8 +308,14 @@
                             </div>
 
                             <div class="form-group row justify-content-center">
+                                <label class="col col-sm-4 col-md-3 col-lg-2" for="image">Image:</label>
+                                <input class="col col-sm-5 col-md-2 col-lg-3" type="file" name="image" id="image" required value="<?php echo $data["FullName"]?>"/>
+                                <img class="col col-sm-2 col-md-2 col-lg-2" src="./layout/images/upload/<?php echo $data['Image']?>" alt="<?php echo $data['UserName']?>"/>
+                            </div>
+
+                            <div class="form-group row justify-content-center">
                                 <div class="col-12 col-sm-11 col-md-9 col-lg-7">    
-                                    <button type="submit" class="btn btn-primary"><i class="fas fa-plus"></i>Add Item</button>
+                                    <button type="submit" class="btn btn-primary"><i class="fas fa-plus"></i>Edit Item</button>
                                 </div>
                             </div>
                             <!-- <input type="submit" value="save" class="btn btn-primary"> -->

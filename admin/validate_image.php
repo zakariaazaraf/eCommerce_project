@@ -1,53 +1,53 @@
 <?php 
 
-class Image {
+    class Image {
 
-    private $data;
-    public $errors = '';
+        private $data;
+        public $errors;
 
-    public function validateImage($image, $name){
+        public function validateImage($image, $name){
 
-        $validTypes = array('peng', 'png', 'jpg', 'gif');
-        $sizeAllowed = 1024 * 1024 * 2; // 2 MB
+            $validTypes = array('peng', 'png', 'jpg', 'gif');
+            $sizeAllowed = 1024 * 1024 * 2; // 2 MB
 
-        if(file_exists($image['tmp_name'])){ // VERIFY THE EXISTENT OF THE PAGE
+            if(file_exists($image['tmp_name'])){ // VERIFY THE EXISTENT OF THE PAGE
 
-            $imageName = $image['name'];
-            $explodeType = explode(".", $image['name']);
-            $type = strtolower(end($explodeType));
-            $size = $image['size'];
+                $imageName = $image['name'];
+                $explodeType = explode(".", $image['name']);
+                $type = strtolower(end($explodeType));
+                $size = $image['size'];
 
-            /* // GET THE IMAGE DIMENSIONS
-            echo "<pre>";
-            print_r(@getimagesize($image['tmp_name']));
-            echo "<Pre>"; */
-            
+                /* // GET THE IMAGE DIMENSIONS
+                echo "<pre>";
+                print_r(@getimagesize($image['tmp_name']));
+                echo "<Pre>"; */
+                
 
-            if(in_array($type, $validTypes)){ // VERIFY THE IMAGE TYPE
+                if(in_array($type, $validTypes)){ // VERIFY THE IMAGE TYPE
 
-                if(!($size < $sizeAllowed)){ // VERIFY THE IMAGE SIZE WHICH IS 2 MB
-                    $msg = "The <strong>$name</strong> Is Much More Then 2 Mb";
+                    if(!($size < $sizeAllowed)){ // VERIFY THE IMAGE SIZE WHICH IS 2 MB
+                        $msg = "The <strong>$name</strong> Is Much More Then 2 Mb";
+                        $this->addError($msg);
+                    }
+
+                }else{
+                    $msg = "The <strong>$name</strong> Types Denied, Try ";
+                    foreach($validTypes as $valid){ $msg .= "<strong>$valid</strong>, "; }
+                    $msg .= 'Types';
                     $this->addError($msg);
+                    
                 }
 
             }else{
-                $msg = "The <strong>$name</strong> Types Denied, Try ";
-                foreach($validTypes as $valid){ $msg .= "<strong>$valid</strong>, "; }
-                $msg .= 'Types';
+                $msg = "The <strong>$name</strong> Can't Be Empty";
                 $this->addError($msg);
-                
             }
-
-        }else{
-            $msg = "The <strong>$name</strong> Can't Be Empty";
-            $this->addError($msg);
+        
         }
-    
-    }
 
-    private function addError($msg){
-        $this->errors = $msg;
+        private function addError($msg){
+            $this->errors = $msg;
+        }
     }
-}
 
 ?>
